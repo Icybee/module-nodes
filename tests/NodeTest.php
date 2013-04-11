@@ -48,4 +48,14 @@ class NodeTest extends \PHPUnit_Framework_TestCase
 		$this->assertArrayNotHasKey('slug', $node->to_array());
 		$this->assertNotContains('slug', $node->__sleep());
 	}
+
+	public function testCSSClass()
+	{
+		$node = new Node;
+		$node->nid = 13;
+		$node->slug = "quick-brown-fox";
+		$node->constructor = "news";
+
+		$this->assertEquals('node node-13 node-slug-quick-brown-fox constructor-news', $node->css_class);
+	}
 }

@@ -23,6 +23,9 @@
 		"icanboogie/activerecord": "*",
 		"brickrouge/css-class-names": "*"
 	},
+	"require-dev": {
+		"icanboogie/event": "*"
+	},
 	"autoload": {
 		"classmap": [ "lib" ]
 	}

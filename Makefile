@@ -13,7 +13,7 @@ composer.phar:
 
 vendor: composer.phar
 	@if [ ! -d "vendor" ] ; then \
-		php composer.phar install ; \
+		php composer.phar install --dev ; \
 	fi
 	
 test: vendor
