@@ -174,7 +174,7 @@ class Node extends \ICanBoogie\ActiveRecord implements \Brickrouge\CSSClassNames
 	 */
 	protected function get_previous()
 	{
-		return $this->_model->own->visible->where('nid != ? AND created <= ?', $this->nid, $this->created)->order('created DESC')->one;
+		return $this->model->own->visible->where('nid != ? AND created <= ?', $this->nid, $this->created)->order('created DESC')->one;
 	}
 
 	/**
@@ -184,7 +184,7 @@ class Node extends \ICanBoogie\ActiveRecord implements \Brickrouge\CSSClassNames
 	*/
 	protected function get_next()
 	{
-		return $this->_model->own->visible->where('nid != ? AND created > ?', $this->nid, $this->created)->order('created')->one;
+		return $this->model->own->visible->where('nid != ? AND created > ?', $this->nid, $this->created)->order('created')->one;
 	}
 
 	/**
@@ -279,7 +279,7 @@ class Node extends \ICanBoogie\ActiveRecord implements \Brickrouge\CSSClassNames
 
 			if (isset($translations[$language]))
 			{
-				return $this->_model->find($translations[$language]);
+				return $this->model->find($translations[$language]);
 			}
 		}
 
@@ -300,7 +300,7 @@ class Node extends \ICanBoogie\ActiveRecord implements \Brickrouge\CSSClassNames
 			return;
 		}
 
-		return $this->_model->find(array_keys($translations));
+		return $this->model->find(array_keys($translations));
 	}
 
 	/**
@@ -309,7 +309,7 @@ class Node extends \ICanBoogie\ActiveRecord implements \Brickrouge\CSSClassNames
 	 */
 	protected function get_native()
 	{
-		return $this->nativeid ? $this->_model[$this->nativeid] : $this;
+		return $this->nativeid ? $this->model[$this->nativeid] : $this;
 	}
 
 	/**
