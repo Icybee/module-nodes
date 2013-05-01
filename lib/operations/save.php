@@ -20,10 +20,8 @@ use Icybee\Modules\Nodes\Node;
  *
  * Adds the "display" save mode.
  */
-class SaveOperation extends \Icybee\SaveOperation
+class SaveOperation extends \ICanBoogie\SaveOperation
 {
-	const MODE_DISPLAY = 'display';
-
 	/**
 	 * Overrides the method to handle the following properties:
 	 *
@@ -36,8 +34,6 @@ class SaveOperation extends \Icybee\SaveOperation
 	 *
 	 * `siteid`: If the user is creating a new record or the user has no permission to choose the
 	 * record's site, the property is set to the value of the working site's id.
-	 *
-	 * @see Icybee\SaveOperation::get_properties()
 	 */
 	protected function get_properties()
 	{
@@ -66,10 +62,7 @@ class SaveOperation extends \Icybee\SaveOperation
 	}
 
 	/**
-	 * Overrides the method to provide a nicer log message, and change the operation location to
-	 * the node URL if the save mode is "display".
-	 *
-	 * @see Icybee\SaveOperation::process()
+	 * Overrides the method to provide a nicer log message.
 	 */
 	protected function process()
 	{
@@ -84,16 +77,6 @@ class SaveOperation extends \Icybee\SaveOperation
 				'module' => $this->module->title
 			)
 		);
-
-		if ($this->mode == self::MODE_DISPLAY)
-		{
-			$url = $record->url;
-
-			if ($url{0} != '#')
-			{
-				$this->response->location = $record->url;
-			}
-		}
 
 		return $rc;
 	}

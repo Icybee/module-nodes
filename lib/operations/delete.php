@@ -13,12 +13,10 @@ namespace Icybee\Modules\Nodes;
 
 use ICanBoogie\I18n\FormattedString;
 
-class DeleteOperation extends \Icybee\DeleteOperation
+class DeleteOperation extends \ICanBoogie\DeleteOperation
 {
 	/**
 	 * Overrides the method to create a nicer log entry.
-	 *
-	 * @see ICanBoogie\DeleteOperation::process()
 	 */
 	protected function process()
 	{
