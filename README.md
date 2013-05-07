@@ -1,4 +1,4 @@
-# The Nodes module [![Build Status](https://travis-ci.org/Icybee/modules-nodes.png?branch=master)](https://travis-ci.org/Icybee/modules-nodes)
+# The Nodes module [![Build Status](https://travis-ci.org/Icybee/module-nodes.png?branch=master)](https://travis-ci.org/Icybee/module-nodes)
 
 The Nodes module (`nodes`) introduces the "Node" content type to the CMS
 [Icybee](http://icybee.org). Most modules introducing content types inherit from it, this
@@ -70,7 +70,7 @@ directory can later be cleaned with the `make clean` command.
 
 The package is continuously tested by [Travis CI](http://about.travis-ci.org/).
 
-[![Build Status](https://travis-ci.org/Icybee/modules-nodes.png?branch=master)](https://travis-ci.org/Icybee/modules-nodes)
+[![Build Status](https://travis-ci.org/Icybee/module-nodes.png?branch=master)](https://travis-ci.org/Icybee/module-nodes)
 
 
 
@@ -127,7 +127,7 @@ module (constructor).
 
 
 
-### ICanBoogie\Modules\Users\DeleteOperation::process:before
+### `ICanBoogie\Modules\Users\DeleteOperation::process:before`
 
 Checks if the user being deleted is used by any node. If the user is used and error
 with the `uid` key is added to the error collector.
@@ -142,7 +142,7 @@ with the `uid` key is added to the error collector.
 
 
 
-### node:navigation
+### `node:navigation`
 
 The markup creates a navigation block with links to the list, the next record and the
 previous record.
