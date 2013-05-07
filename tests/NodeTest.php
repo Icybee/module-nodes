@@ -14,6 +14,40 @@ namespace Icybee\Modules\Nodes;
 class NodeTest extends \PHPUnit_Framework_TestCase
 {
 	/**
+	 * Checks that the defined constructor is returned and not created from the model identifier,
+	 * and that the constructor is exported by {@link Node::to_array()} and `__sleep`.
+	 */
+	public function testDefinedConstructor()
+	{
+		$node = new Node;
+		$node->constructor = 'images';
+		$this->assertEquals('images', $node->constructor);
+		$this->assertArrayHasKey('constructor', $node->to_array());
+		$this->assertContains('constructor', $node->__sleep());
+
+		$node = Node::from(array('constructor' => 'images'));
+		$this->assertEquals('images', $node->constructor);
+		$this->assertArrayHasKey('constructor', $node->to_array());
+		$this->assertContains('constructor', $node->__sleep());
+	}
+
+	/**
+	 * The `constructor` getter MUST NOT create the property.
+	 */
+	public function testUndefinedConstructor()
+	{
+		$node = new Node;
+		$this->assertEquals('nodes', $node->constructor);
+		$this->assertArrayNotHasKey('constructor', $node->to_array());
+		$this->assertNotContains('constructor', $node->__sleep());
+
+		$node = Node::from(array());
+		$this->assertEquals('nodes', $node->constructor);
+		$this->assertArrayNotHasKey('constructor', $node->to_array());
+		$this->assertNotContains('constructor', $node->__sleep());
+	}
+
+	/**
 	 * Checks that the defined slug is returned and not created from the title, and that the
 	 * slug is exported by {@link Node::to_array()} and `__sleep`.
 	 */

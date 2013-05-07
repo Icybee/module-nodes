@@ -79,11 +79,33 @@ class Node extends \ICanBoogie\ActiveRecord implements \Brickrouge\CSSClassNames
 	public $slug;
 
 	/**
+	 * Returns a slug created from the {@link $title} property if the {@link $slug} property is not
+	 * accessible.
+	 *
+	 * @return string
+	 */
+	protected function volatile_get_slug()
+	{
+		return \ICanBoogie\normalize($this->title);
+	}
+
+	/**
 	 * Constructor of the node.
 	 *
 	 * @var string
 	 */
 	public $constructor;
+
+	/**
+	 * Returns constructor created from the {@link $model_id} property if the {@link $constructor}
+	 * property is not accessible.
+	 *
+	 * @return string
+	 */
+	protected function volatile_get_constructor()
+	{
+		return $this->model_id;
+	}
 
 	/**
 	 * Date the node was created.
@@ -127,11 +149,20 @@ class Node extends \ICanBoogie\ActiveRecord implements \Brickrouge\CSSClassNames
 	/**
 	 * Creates a Node instance.
 	 *
-	 * The {@link $slug} property is unset if it is empty but the {@link $title} property is
-	 * defined. The slug will be created on the fly when the {@link $slug} property is accessed.
+	 * The {@link $constructor} property is unset if it is empty. A magic constructor is created
+	 * from the {@link $model_id} property when the {@link $constructor} property it is not
+	 * accessible.
+	 *
+	 * The {@link $slug} property is unset if it is empty. A magic slug is created from the
+	 * {@link title} property when the {@link $slug} property is not accessible.
 	 */
 	public function __construct($model='nodes')
 	{
+		if (empty($this->constructor))
+		{
+			unset($this->constructor);
+		}
+
 		if (empty($this->slug))
 		{
 			unset($this->slug);
@@ -154,17 +185,6 @@ class Node extends \ICanBoogie\ActiveRecord implements \Brickrouge\CSSClassNames
 		}
 
 		return $value;
-	}
-
-	/**
-	 * Returns a slug created from the {@link $title} property if the {@link $slug} property is not
-	 * accessible.
-	 *
-	 * @return string
-	 */
-	protected function volatile_get_slug()
-	{
-		return \ICanBoogie\normalize($this->title);
 	}
 
 	/**

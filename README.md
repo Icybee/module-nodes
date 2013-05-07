@@ -1,10 +1,10 @@
-# The Nodes module (nodes)
+# The Nodes module
 
-The Nodes module (nodes) introduces the "Node" content type to the CMS
+The Nodes module (`nodes`) introduces the "Node" content type to the CMS
 [Icybee](http://icybee.org). Most modules introducing content types inherit from it, this
 includes the [Contents](https://github.com/Icybee/Icybee/tree/master/modules/contents)
-module (contents) as well as the [Pages](https://github.com/Icybee/Icybee/tree/master/modules/pages)
-module (pages).
+module (`contents`) as well as the [Pages](https://github.com/Icybee/Icybee/tree/master/modules/pages)
+module (`pages`).
 
 
 
@@ -12,8 +12,7 @@ module (pages).
 
 ## Requirement
 
-The package requires PHP 5.3 or later.  
-The package also requires an installation of [Icybee](http://icybee.org).
+The package requires PHP 5.3 or later.
 
 
 
@@ -33,6 +32,8 @@ Create a `composer.json` file and run `php composer.phar install` command to ins
 	}
 }
 ```
+
+This package is part of the packages required by [Icybee](http://icybee.org/).
 
 
 
