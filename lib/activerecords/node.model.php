@@ -105,8 +105,6 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 	 */
 	protected function scope_visible(Query $query)
 	{
-		global $core;
-
 		return $query->online->similar_site->similar_language;
 	}
 

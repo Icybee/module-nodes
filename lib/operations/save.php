@@ -13,8 +13,6 @@ namespace Icybee\Modules\Nodes;
 
 use ICanBoogie\I18n\FormattedString;
 
-use Icybee\Modules\Nodes\Node;
-
 /**
  * Saves a node.
  *
@@ -53,10 +51,12 @@ class SaveOperation extends \ICanBoogie\SaveOperation
 			$properties[Node::SITEID] = $core->site_id;
 		}
 
+		/*
 		if (!empty($properties[Node::SITEID]))
 		{
 			$properties[Node::LANGUAGE] = $core->models['sites'][$properties[Node::SITEID]]->language;
 		}
+		*/
 
 		return $properties;
 	}
@@ -71,7 +71,7 @@ class SaveOperation extends \ICanBoogie\SaveOperation
 
 		$this->response->message = new FormattedString
 		(
-			$rc['mode'] == 'update' ? '%title has been updated in :module.' : '%title has been created in %module.', array
+			$rc['mode'] == 'update' ? '%title has been updated in :module.' : '%title has been created in :module.', array
 			(
 				'title' => \ICanBoogie\shorten($record->title),
 				'module' => $this->module->title

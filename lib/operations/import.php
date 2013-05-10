@@ -38,8 +38,6 @@ class ImportOperation extends Operation
 
 	protected function process()
 	{
-		global $core;
-
 		$data = $this->preparse_data();
 		$data = $this->parse_data($data);
 

@@ -125,13 +125,9 @@ class ManageBlock extends \Icybee\ManageBlock
 	/**
 	 * Alters the query with the 'is_online' and 'uid' filters. Also adds a condition on the
 	 * siteid, which must be the same as the current site or zero.
-	 *
-	 * @see Icybee.Manager::alter_query()
 	 */
 	protected function alter_query(Query $query, array $filters)
 	{
-		global $core;
-
 		$query = parent::alter_query($query, $filters);
 
 		if (isset($filters['is_online']))
@@ -252,7 +248,7 @@ class ManageBlock extends \Icybee\ManageBlock
 
 		foreach ($translations_by_records as $nid => $nt)
 		{
-			foreach ($nt as $nativeid => $dummy)
+			foreach (array_keys($nt) as $nativeid)
 			{
 				$translation = $translations[$nativeid];
 				$translation['site'] = $sites[$translation['siteid']];
@@ -471,8 +467,6 @@ class ManageBlock extends \Icybee\ManageBlock
 
 	protected function render_cell_translations(Node $record)
 	{
-		global $core;
-
 		if (empty($this->translations_by_records[$record->nid]))
 		{
 			return;

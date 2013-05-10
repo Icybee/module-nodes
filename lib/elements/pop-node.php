@@ -108,9 +108,7 @@ class PopNode extends \Brickrouge\Widget
 			return '';
 		}
 
-		$value = $entry->nid;
 		$title = $entry->title;
-
 		$label = \ICanBoogie\shorten($title, 32, .75, $shortened);
 
 		$rc  = '<span class="title"' . ($shortened ? ' title="' . \Brickrouge\escape($title) . '"' : '') . '>';

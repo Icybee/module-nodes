@@ -80,6 +80,11 @@ return array
 		'modify belonging site' => "Modifier le site d'appartenance"
 	),
 
+	# operation/save
+
+	'%title has been updated in :module.' => '%title a été mis à jour dans :module.',
+	'%title has been created in :module.' => '%title a été créé dans :module.',
+
 	'The requested record was not found.' => "L'enregistrement demandé n'a pu être trouvé.",
 	'Next: :title' => 'Suivant : :title', // il y a un espace non sécable ici
 	'Previous: :title' => 'Précédent : :title', // il y a un espace non sécable ici
