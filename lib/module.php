@@ -43,7 +43,7 @@ class Module extends \Icybee\Module
 
 				'list' => array
 				(
-					'title' => 'Records list',
+					'title' => "Records list",
 					'provider' => __NAMESPACE__ . '\ViewProvider',
 					'assets' => array(),
 					'renders' => \Icybee\Modules\Views\View::RENDERS_MANY
@@ -51,7 +51,7 @@ class Module extends \Icybee\Module
 
 				'home' => array
 				(
-					'title' => 'Records home',
+					'title' => "Records home",
 					'provider' => __NAMESPACE__ . '\ViewProvider',
 					'assets' => array(),
 					'renders' => \Icybee\Modules\Views\View::RENDERS_MANY

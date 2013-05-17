@@ -55,7 +55,7 @@ class ImportOperation extends Operation
 		# override form
 		#
 
-		Event\attach(function(Operation\GetFormEvent $event, SaveOperation $operation) use($save) {
+		$core->events->attach(function(Operation\GetFormEvent $event, SaveOperation $operation) use($save) {
 
 			if ($event->request !== $save)
 			{
