@@ -62,18 +62,35 @@ class SaveOperation extends \ICanBoogie\SaveOperation
 	}
 
 	/**
+	 * Returns the form from the `edit` block if the getter wasn't able to retrieve the form. This
+	 * is currently used to create records using XHR.
+	 */
+	protected function get_form()
+	{
+		$form = parent::get_form();
+
+		if ($form)
+		{
+			return $form;
+		}
+
+		$block = $this->module->getBlock('edit', $this->key);
+
+		return $block->element;
+	}
+
+	/**
 	 * Overrides the method to provide a nicer log message.
 	 */
 	protected function process()
 	{
 		$rc = parent::process();
-		$record = $this->module->model[$rc['key']];
 
 		$this->response->message = new FormattedString
 		(
 			$rc['mode'] == 'update' ? '%title has been updated in :module.' : '%title has been created in :module.', array
 			(
-				'title' => \ICanBoogie\shorten($record->title),
+				'title' => \ICanBoogie\shorten($this->record->title),
 				'module' => $this->module->title
 			)
 		);

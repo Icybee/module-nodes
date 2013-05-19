@@ -40,8 +40,8 @@ class ManageBlock extends \Icybee\ManageBlock
 	{
 		parent::add_assets($document);
 
-		$document->css->add('manage.css');
-		$document->js->add('manage.js');
+		$document->css->add(DIR . 'public/admin.css');
+		$document->js->add(DIR . 'public/admin.js');
 	}
 
 	protected function columns()
@@ -53,10 +53,25 @@ class ManageBlock extends \Icybee\ManageBlock
 
 			),
 
+			'url' => array
+			(
+				'label' => null,
+				'sortable' => false
+			),
+
 			Node::IS_ONLINE => array
 			(
 				'label' => null,
 				'class' => 'is_online',
+				'filters' => array
+				(
+					'options' => array
+					(
+						'=1' => 'En ligne',
+						'=0' => 'Hors ligne'
+					)
+				),
+
 				'orderable' => false
 			),
 
@@ -177,8 +192,6 @@ class ManageBlock extends \Icybee\ManageBlock
 			$site_translations_ids[] = $site_translation->siteid;
 		}
 
-//		var_dump($site_translations_ids, $site_translations);
-
 		if ($site->nativeid)
 		{
 			foreach ($records as $record)
@@ -260,25 +273,6 @@ class ManageBlock extends \Icybee\ManageBlock
 		$this->translations_by_records = $translations_by_records;
 	}
 
-	protected function extend_column_is_online(array $column, $id, array $fields)
-	{
-		return array
-		(
-			'filters' => array
-			(
-				'options' => array
-				(
-					'=1' => 'En ligne',
-					'=0' => 'Hors ligne'
-				)
-			),
-
-			'orderable' => false
-		)
-
-		+ parent::extend_column($column, $id, $fields);
-	}
-
 	/**
 	 * Extends the "uid" column by providing users filters.
 	 *
@@ -337,10 +331,11 @@ class ManageBlock extends \Icybee\ManageBlock
 
 		return new A
 		(
-			'Display', $url, array
+			'', $url, array
 			(
 				'title' => $this->t('View this entry on the website'),
-				'class' => 'view'
+				'class' => 'icon-external-link',
+				'target' => '_blank'
 			)
 		);
 	}
@@ -358,14 +353,15 @@ class ManageBlock extends \Icybee\ManageBlock
 		}
 
 		$title = $record->$property;
-		$label = $title ? \ICanBoogie\escape(\ICanBoogie\shorten($title, 52, .75, $shortened)) : $this->t->__invoke('<em>no title</em>');
+		$label = $title ? \ICanBoogie\escape(\ICanBoogie\shorten($title, 52, .75, $shortened)) : $this->t('<em>no title</em>');
 
 		if ($shortened)
 		{
 			$label = str_replace('…', '<span class="light">…</span>', $label);
 		}
 
-		$rc = $this->render_cell_url($record);
+		$rc = '';
+// 		$rc = $this->render_cell_url($record);
 
 		if ($rc)
 		{
@@ -380,7 +376,7 @@ class ManageBlock extends \Icybee\ManageBlock
 
 				'class' => 'edit',
 				'href' => \ICanBoogie\Routing\contextualize('/admin/' . $record->constructor . '/' . $record->nid . '/edit'),
-				'title' => $shortened ? $this->t->__invoke('manager.edit_named', array(':title' => $title ? $title : 'unnamed')) : $this->t->__invoke('manager.edit'),
+				'title' => $shortened ? $this->t('manager.edit_named', array(':title' => $title ? $title : 'unnamed')) : $this->t->__invoke('manager.edit'),
 			)
 		);
 

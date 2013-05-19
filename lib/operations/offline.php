@@ -18,8 +18,6 @@ class OfflineOperation extends Operation
 {
 	/**
 	 * Controls for the operation: permission(maintain), record and ownership.
-	 *
-	 * @see ICanBoogie.Operation::get_controls()
 	 */
 	protected function get_controls()
 	{
@@ -40,8 +38,6 @@ class OfflineOperation extends Operation
 
 	/**
 	 * Changes the target record is_online property to false and updates the record.
-	 *
-	 * @see ICanBoogie.Operation::process()
 	 */
 	protected function process()
 	{
