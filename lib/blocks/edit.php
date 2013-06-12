@@ -16,8 +16,6 @@ use Icybee\Modules\Nodes\Node;
 use Brickrouge\Element;
 use Brickrouge\Form;
 
-use Brickrouge\Widget\TitleSlugCombo;
-
 /**
  * A block used to edit a node.
  */

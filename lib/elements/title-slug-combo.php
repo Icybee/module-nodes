@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Brickrouge\Widget;
+namespace Icybee\Modules\Nodes;
 
 use ICanBoogie\I18n;
 
@@ -22,19 +22,32 @@ class TitleSlugCombo extends \Brickrouge\Widget
 	const T_NODEID = '#node-id';
 	const T_SLUG_NAME = '#slug-name';
 
+	static protected function add_assets(\Brickrouge\Document $document)
+	{
+		parent::add_assets($document);
+
+		$document->css->add('title-slug-combo.css');
+		$document->js->add('title-slug-combo.js');
+	}
+
 	private $title_el;
 	private $slug_tease;
 	private $slug_el;
 
-	public function __construct($tags=array(), $dummy=null)
+	public function __construct(array $attributes=array())
 	{
-		$slugname = isset($tags[self::T_SLUG_NAME]) ? $tags[self::T_SLUG_NAME] : null;
-		$label = isset($tags[Element::LABEL]) ? $tags[Element::LABEL] : null;
-		$label_position = isset($tags[Element::LABEL_POSITION]) ? $tags[Element::LABEL_POSITION] : 'before';
+		$attributes += array
+		(
+			self::T_SLUG_NAME => null,
+			Element::LABEL => null,
+			Element::LABEL_POSITION => 'before'
+		);
+
+		$label = $attributes[Element::LABEL];
 
 		parent::__construct
 		(
-			'div', $tags + array
+			'div', $attributes + array
 			(
 				Element::CHILDREN => array
 				(
@@ -42,7 +55,7 @@ class TitleSlugCombo extends \Brickrouge\Widget
 					(
 						array
 						(
-							Element::LABEL_POSITION => $label_position,
+							Element::LABEL_POSITION => $attributes[Element::LABEL_POSITION],
 							Element::REQUIRED => true
 						)
 					),
@@ -69,7 +82,7 @@ class TitleSlugCombo extends \Brickrouge\Widget
 							Element::LABEL_POSITION => 'above',
 							Element::DESCRIPTION => 'slug',
 
-							'name' => $slugname
+							'name' => $attributes[self::T_SLUG_NAME]
 						)
 					),
 
@@ -94,14 +107,6 @@ class TitleSlugCombo extends \Brickrouge\Widget
 		}
 
 		parent::offsetSet($offset, $value);
-	}
-
-	static protected function add_assets(\Brickrouge\Document $document)
-	{
-		parent::add_assets($document);
-
-		$document->css->add('title-slug-combo.css');
-		$document->js->add('title-slug-combo.js');
 	}
 
 	protected function render_inner_html()
