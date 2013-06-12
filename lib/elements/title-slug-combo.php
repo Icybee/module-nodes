@@ -26,8 +26,8 @@ class TitleSlugCombo extends \Brickrouge\Widget
 	{
 		parent::add_assets($document);
 
-		$document->css->add('title-slug-combo.css');
-		$document->js->add('title-slug-combo.js');
+		$document->css->add(DIR . 'public/module.css');
+		$document->js->add(DIR . 'public/module.js');
 	}
 
 	private $title_el;

@@ -21,7 +21,8 @@ class PopNode extends \Brickrouge\Widget
 	{
 		parent::add_assets($document);
 
-		$document->js->add('pop-node.js');
+		$document->css->add(DIR . 'public/module.css');
+		$document->js->add(DIR . 'public/module.js');
 	}
 
 	public function __construct(array $attributes=array())

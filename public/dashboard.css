@@ -1,12 +1,4 @@
-@CHARSET "UTF-8";
-
-/*
-**
-
-NOW
-
-**
-*/
+/* NOW */
 
 #system-nodes-now div.panel-contents
 {
@@ -41,13 +33,7 @@ NOW
 	width: 20ex;
 }
 
-/*
-**
-
-USER MODIFIED
-
-**
-*/
+/* USER MODIFIED */
 
 #system-nodes-user-modified div.panel-contents
 {
@@ -61,8 +47,8 @@ USER MODIFIED
 	padding: 0 1ex;
 	background: white;
 	border-right: 1px solid #CCC;
-	font-size: .8571em;  
-	white-space: nowrap;  
+	font-size: .8571em;
+	white-space: nowrap;
 }
 
 #system-nodes-user-modified td.title

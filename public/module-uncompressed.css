@@ -126,4 +126,62 @@
 
 .contrast .widget-adjust-node .pagination .disabled a[href] {
 	color: hsl(0, 0%, 27%)
+}.widget-title-slug-combo .slug-reminder,
+.widget-title-slug-combo a[href="#slug-collapse"] {
+	margin-left: 1ex;
+}
+
+.widget-title-slug-combo a[href="#slug-collapse"],
+.widget-title-slug-combo div.slug {
+	display: none;
+}
+
+.widget-title-slug-combo div.slug {
+	margin: 1em 0;
+}
+
+.widget-title-slug-combo .slug-reminder span {
+	display: none;
+}
+
+.widget-title-slug-combo p {
+	margin-top: .5em;
+}#manager .cell--title {
+	width: 35%;
+}
+
+#manager .cell--title .icon-external-link-sign {
+	font-size: 19px;
+	vertical-align: middle;
+	margin-right: 4px;
+	line-height: 1em;
+}
+
+#manager td.cell--url,
+#manager td.cell--is-online {
+	width: 20px;
+	text-align: center;
+}
+
+#manager td.cell--url a {
+	text-decoration: none;
+	vertical-align: middle;
+}
+
+#manager .cell--is-online .checkbox-wrapper {
+	margin: auto;
+}
+
+#manager .cell--is-online .checkbox-wrapper.checked {
+	background-color: #cfc;
+	border-color: #9c9;
+}
+
+#manager span.translations {
+	color: #808080;
+	font-size: .8571em;
+}
+
+#manager span.translations a {
+	color: #404040;
 }

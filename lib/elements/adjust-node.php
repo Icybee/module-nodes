@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Brickrouge\Widget;
+namespace Icybee\Modules\Nodes;
 
 use ICanBoogie\ActiveRecord\Query;
 use ICanBoogie\I18n;
@@ -19,38 +19,48 @@ use Brickrouge\Element;
 use Brickrouge\Pager;
 use Brickrouge\Text;
 
-class AdjustNode extends \Brickrouge\Widget
+class AdjustNode extends Element
 {
 	const T_CONSTRUCTOR = '#adjust-constructor';
-
-	public function __construct($tags=array(), $dummy=null)
-	{
-		parent::__construct
-		(
-			'div', $tags + array
-			(
-				self::T_CONSTRUCTOR => 'nodes',
-
-				'class' => 'adjust',
-				'data-adjust' => 'adjust-node',
-				'data-widget-constructor' => 'AdjustNode'
-			)
-		);
-
-// 		$this->dataset['adjust'] = 'adjust-node';
-	}
 
 	static protected function add_assets(\Brickrouge\Document $document)
 	{
 		parent::add_assets($document);
 
-		$document->css->add('adjust-node.css');
-		$document->js->add('adjust-node.js');
+		$document->css->add(DIR . 'public/module.css');
+		$document->js->add(DIR . 'public/module.js');
+	}
+
+	public function __construct(array $attributes=array())
+	{
+		parent::__construct
+		(
+			'div', $attributes + array
+			(
+				self::T_CONSTRUCTOR => 'nodes',
+				self::WIDGET_CONSTRUCTOR => 'AdjustNode',
+
+				'data-adjust' => 'adjust-node'
+			)
+		);
+	}
+
+	/**
+	 * Adds the `widget-adjust-node` class name.
+	 */
+	protected function alter_class_names(array $class_names)
+	{
+		return parent::alter_class_names($class_names) + array
+		(
+			'widget-adjust-node' => true
+		);
 	}
 
 	protected function render_inner_html()
 	{
-		$rc = parent::render_inner_html();
+		$rc = new Element('input', array('type' => 'hidden', 'name' => $this['name'], 'value' => $this['value']))
+		. parent::render_inner_html();
+
 		$constructor = $this[self::T_CONSTRUCTOR];
 
 		$rc .= '<div class="search">';
@@ -160,13 +170,12 @@ class AdjustNode extends \Brickrouge\Widget
 
 		if ($n < $limit)
 		{
-			$rc .= str_repeat('<li class="empty">&nbsp;</li>', $limit - $n);
+			$rc .= str_repeat('<li class="empty"></li>', $limit - $n);
 		}
 
 		$rc .= '</ul>';
 
 		$rc .= new Element\Nodes\Pager
-// 		$rc .= new Brickrouge\Pager
 		(
 			'div', $range + array
 			(
@@ -195,7 +204,7 @@ class AdjustNode extends \Brickrouge\Widget
 	{
 		$search = $options['search'];
 
-		return '<p class="no-response">' .
+		return '<div class="no-response alert undissmisable">' .
 
 		(
 			$search
@@ -203,6 +212,13 @@ class AdjustNode extends \Brickrouge\Widget
 			: I18n\t("Il n'y a pas d'enregistrements")
 		)
 
-		. '</p>';
+		. '</div>';
 	}
+}
+
+namespace Brickrouge\Widget;
+
+class AdjustNode extends \Icybee\Modules\Nodes\AdjustNode
+{
+
 }

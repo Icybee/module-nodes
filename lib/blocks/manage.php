@@ -24,6 +24,14 @@ use Brickrouge\Element;
  */
 class ManageBlock extends \Icybee\ManageBlock
 {
+	static protected function add_assets(Document $document)
+	{
+		parent::add_assets($document);
+
+		$document->css->add(DIR . 'public/module.css');
+		$document->js->add(DIR . 'public/module.js');
+	}
+
 	public function __construct(Module $module, array $attributes=array())
 	{
 		parent::__construct
@@ -34,14 +42,6 @@ class ManageBlock extends \Icybee\ManageBlock
 				self::T_ORDER_BY => array(Node::MODIFIED, 'desc')
 			)
 		);
-	}
-
-	static protected function add_assets(Document $document)
-	{
-		parent::add_assets($document);
-
-		$document->css->add(DIR . 'public/admin.css');
-		$document->js->add(DIR . 'public/admin.js');
 	}
 
 	protected function columns()
