@@ -141,7 +141,11 @@ Brickrouge.Widget.AdjustNode = new Class
 	{
 		this.setValue(selected)
 	}
-});Brickrouge.Widget.PopNode = new Class
+});/**
+ * @property bool opening `true` if the popover is being opened. While the property is `true` calls
+ * to `open()` are discarted.
+ */
+Brickrouge.Widget.PopNode = new Class
 ({
 
 	Extends: Brickrouge.Widget.Spinner,
@@ -158,8 +162,9 @@ Brickrouge.Widget.AdjustNode = new Class
 	initialize: function(el, options)
 	{
 		this.parent(el, options)
-
+		this.opening = false
 		this.popover = null
+
 		this.fetchAdjustOperation = new Request.Widget
 		(
 			this.options.adjust + '/popup', this.setupAdjust.bind(this)
@@ -168,13 +173,19 @@ Brickrouge.Widget.AdjustNode = new Class
 
 	open: function()
 	{
+		if (this.opening) return
+
+		this.opening = true
+
 		var value = this.getValue()
 
 		this.resetValue = value
 
 		if (this.popover)
 		{
-			this.popover.show({ selected: value })
+			this.popover.getAdjust().setValue(value)
+			this.popover.show()
+			this.opening = false
 
 			return
 		}
@@ -191,6 +202,7 @@ Brickrouge.Widget.AdjustNode = new Class
 		})
 
 		this.popover.show()
+		this.opening = false
 
 		/*
 		 * The adjust object is available after the `brickrouge.construct` event has been fired.

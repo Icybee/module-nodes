@@ -37,12 +37,15 @@ return array
 		'user' => 'User'
 	),
 
-	'manager.label' => array
+	'nodes.manage.column' => array
 	(
 		'constructor' => 'Constructor',
 		'created' => 'Date created',
+		'date' => 'Date',
 		'is_online' => 'Published',
 		'modified' => 'Date modified',
+		'title' => 'Title',
+		'translations' => 'Translations',
 		'uid' => 'User'
 	),
 

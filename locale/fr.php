@@ -47,15 +47,12 @@ return array
 		'user' => 'Utilisateur'
 	),
 
-	'manager.title' => array
+	'nodes.manage.column' => array
 	(
 		'constructor' => 'Constructeur',
-		'created' => 'Crée le',
-		'is_online' => 'Publié',
-		'modified' => 'Modifié le',
 		'uid' => 'Utilisateur',
-
-		'Translations' => 'Traductions'
+		'title' => 'Titre',
+		'translations' => 'Traductions'
 	),
 
 	'module_category.other' => 'Autre',
