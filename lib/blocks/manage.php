@@ -121,7 +121,7 @@ class ManageBlock extends \Icybee\ManageBlock
 	}
 
 	// TODO-20130629: refactor this
-	protected function render_cell_title($record, $property)
+	protected function __deprecated__render_cell_title($record, $property)
 	{
 		global $core;
 		static $languages;
