@@ -12,15 +12,32 @@
 use ICanBoogie\Core;
 use ICanBoogie\Errors;
 
+use Icybee\Modules\Sites\Site;
 use Icybee\Modules\Users\User;
 
-global $core;
+#
+# Create the repository for Vars
+#
+
+define('ICanBoogie\REPOSITORY', __DIR__ . DIRECTORY_SEPARATOR . 'repository' . DIRECTORY_SEPARATOR);
+
+if (!file_exists(\ICanBoogie\REPOSITORY))
+{
+	mkdir(\ICanBoogie\REPOSITORY);
+}
+
+if (!file_exists(\ICanBoogie\REPOSITORY . 'vars'))
+{
+	mkdir(\ICanBoogie\REPOSITORY . 'vars');
+}
 
 require __DIR__ . '/../vendor/autoload.php';
 
 #
 # Create the _core_ instance used for the tests.
 #
+
+global $core;
 
 $core = new Core(array(
 
@@ -66,5 +83,5 @@ foreach (array_keys($core->modules->enabled_modules_descriptors) as $module_id)
 # Create a user
 #
 
-$user = User::from(array('username' => 'admin', 'email' => 'test@example.com'));
-$user->save();
+User::from(array('username' => 'admin', 'email' => 'test@example.com'))->save();
+Site::from(array('title' => 'example'))->save();

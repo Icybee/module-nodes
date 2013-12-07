@@ -11,14 +11,82 @@
 
 namespace Icybee\Modules\Nodes;
 
+use Icybee\Modules\Sites\Site;
+
 class NodeTest extends \PHPUnit_Framework_TestCase
 {
-	public function test_get_user()
+	/**
+	 * @dataProvider provide_test_fallback_properties
+	 */
+	public function test_fallback_properties($property, $fixture, $expected)
 	{
+		$node = Node::from($fixture);
+		$this->assertSame($expected, $node->$property);
+
+		if (array_key_exists($property, $fixture))
+		{
+			$this->assertArrayHasKey($property, $node->to_array());
+			$this->assertArrayHasKey($property, $node->__sleep());
+		}
+		else
+		{
+			$this->assertArrayNotHasKey($property, $node->to_array());
+			$this->assertArrayNotHasKey($property, $node->__sleep());
+		}
+	}
+
+	public function provide_test_fallback_properties()
+	{
+		return array
+		(
+			array('constructor', array(), 'nodes'),
+			array('constructor', array('constructor' => 'images'), 'images'),
+
+			array('language', array('site' => null), null),
+			array('language', array('site' => Site::from(array('language' => 'fr'))), 'fr'),
+			array('language', array('site' => Site::from(array('language' => 'fr')), 'language' => 'en'), 'en'),
+
+			array('slug', array(), ''),
+			array('slug', array('title' => 'The quick brown fox'), 'the-quick-brown-fox'),
+			array('slug', array('title' => 'The quick brown fox', 'slug' => 'quick-fox'), 'quick-fox'),
+		);
+	}
+
+	/**
+	 * @dataProvider provide_test_get_property
+	 */
+	public function test_get_property($property, $fixture, $expected)
+	{
+		$this->assertSame($expected, Node::from($fixture)->$property);
+	}
+
+	public function provide_test_get_property()
+	{
+		global $core;
+
+		return array
+		(
+			array('css_class', array(), 'node constructor-nodes'),
+			array('css_class', array('nid' => 13), 'node node-13 constructor-nodes'),
+			array('css_class', array('nid' => 13, 'slug' => 'quick-brown-fox'), 'node node-13 node-slug-quick-brown-fox constructor-nodes'),
+			array('css_class', array('nid' => 13, 'slug' => 'quick-brown-fox', 'constructor' => 'news'), 'node node-13 node-slug-quick-brown-fox constructor-news'),
+
+			array('site', array(), null),
+			array('site', array('siteid' => 1), $core->models['sites'][1]),
+
+			array('user', array(), null),
+			array('user', array('uid' => 1), $core->models['users'][1])
+		);
+	}
+
+	public function test_set_site()
+	{
+		global $core;
+
 		$node = new Node;
-		$this->assertNull($node->user);
-		$node->uid = 1;
-		$this->assertInstanceOf('Icybee\Modules\Users\User', $node->user);
+		$node->site = $core->models['sites'][1];
+		$this->assertInstanceOf('Icybee\Modules\Sites\Site', $node->site);
+		$this->assertEquals(1, $node->siteid);
 	}
 
 	public function test_set_user()
@@ -29,85 +97,5 @@ class NodeTest extends \PHPUnit_Framework_TestCase
 		$node->user = $core->models['users'][1];
 		$this->assertInstanceOf('Icybee\Modules\Users\User', $node->user);
 		$this->assertEquals(1, $node->uid);
-	}
-
-	/**
-	 * Checks that the defined constructor is returned and not created from the model identifier,
-	 * and that the constructor is exported by {@link Node::to_array()} and `__sleep`.
-	 */
-	public function testDefinedConstructor()
-	{
-		$node = new Node;
-		$node->constructor = 'images';
-		$this->assertEquals('images', $node->constructor);
-		$this->assertArrayHasKey('constructor', $node->to_array());
-		$this->assertContains('constructor', $node->__sleep());
-
-		$node = Node::from(array('constructor' => 'images'));
-		$this->assertEquals('images', $node->constructor);
-		$this->assertArrayHasKey('constructor', $node->to_array());
-		$this->assertContains('constructor', $node->__sleep());
-	}
-
-	/**
-	 * The `constructor` getter MUST NOT create the property.
-	 */
-	public function testUndefinedConstructor()
-	{
-		$node = new Node;
-		$this->assertEquals('nodes', $node->constructor);
-		$this->assertArrayNotHasKey('constructor', $node->to_array());
-		$this->assertNotContains('constructor', $node->__sleep());
-
-		$node = Node::from(array());
-		$this->assertEquals('nodes', $node->constructor);
-		$this->assertArrayNotHasKey('constructor', $node->to_array());
-		$this->assertNotContains('constructor', $node->__sleep());
-	}
-
-	/**
-	 * Checks that the defined slug is returned and not created from the title, and that the
-	 * slug is exported by {@link Node::to_array()} and `__sleep`.
-	 */
-	public function testDefinedSlug()
-	{
-		$node = new Node;
-		$node->title = 'The quick brown fox';
-		$node->slug = 'madonna';
-		$this->assertEquals('madonna', $node->slug);
-		$this->assertArrayHasKey('slug', $node->to_array());
-		$this->assertContains('slug', $node->__sleep());
-
-		$node = Node::from(array('title' => 'The quick brown fox', 'slug' => 'madonna'));
-		$this->assertEquals('madonna', $node->slug);
-		$this->assertArrayHasKey('slug', $node->to_array());
-		$this->assertContains('slug', $node->__sleep());
-	}
-
-	/**
-	 * The `slug` getter MUST NOT create the property.
-	 */
-	public function testUndefinedSlug()
-	{
-		$node = new Node;
-		$node->title = 'The quick brown fox';
-		$this->assertEquals('the-quick-brown-fox', $node->slug);
-		$this->assertArrayNotHasKey('slug', $node->to_array());
-		$this->assertNotContains('slug', $node->__sleep());
-
-		$node = Node::from(array('title' => 'The quick brown fox'));
-		$this->assertEquals('the-quick-brown-fox', $node->slug);
-		$this->assertArrayNotHasKey('slug', $node->to_array());
-		$this->assertNotContains('slug', $node->__sleep());
-	}
-
-	public function testCSSClass()
-	{
-		$node = new Node;
-		$node->nid = 13;
-		$node->slug = "quick-brown-fox";
-		$node->constructor = "news";
-
-		$this->assertEquals('node node-13 node-slug-quick-brown-fox constructor-news', $node->css_class);
 	}
 }

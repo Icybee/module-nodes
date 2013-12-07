@@ -22,7 +22,8 @@
 		"icanboogie/module-installer": "*",
 		"icanboogie/activerecord": "2.x",
 		"brickrouge/css-class-names": "*",
-		"icybee/module-users": "2.x"
+		"icybee/module-users": "2.x",
+		"icybee/module-sites": "2.x"
 	},
 	"require-dev": {
 		"icanboogie/icanboogie": "2.x",
