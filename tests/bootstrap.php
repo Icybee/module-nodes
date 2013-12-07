@@ -9,10 +9,62 @@
  * file that was distributed with this source code.
  */
 
-use ICanBoogie\Events;
+use ICanBoogie\Core;
+use ICanBoogie\Errors;
+
+use Icybee\Modules\Users\User;
+
+global $core;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$events = new Events();
+#
+# Create the _core_ instance used for the tests.
+#
 
-Events::patch('get', function() use($events) { return $events; });
+$core = new Core(array(
+
+	'connections' => array
+	(
+		'primary' => array
+		(
+			'dsn' => 'sqlite::memory:'
+		)
+	),
+
+	'modules paths' => array
+	(
+		__DIR__ . '/../',
+		__DIR__ . '/../vendor/icanboogie-modules'
+	)
+
+));
+
+$core();
+
+#
+# Install modules
+#
+
+$errors = new Errors();
+
+foreach (array_keys($core->modules->enabled_modules_descriptors) as $module_id)
+{
+	#
+	# The index on the `constructor` column of the `nodes` module clashes with SQLite, we don't
+	# care right now, so the exception is discarted.
+	#
+
+	try
+	{
+		$core->modules[$module_id]->install($errors);
+	}
+	catch (\Exception $e) {}
+}
+
+#
+# Create a user
+#
+
+$user = User::from(array('username' => 'admin', 'email' => 'test@example.com'));
+$user->save();

@@ -33,11 +33,11 @@ class SaveOperation extends \ICanBoogie\SaveOperation
 	 * `siteid`: If the user is creating a new record or the user has no permission to choose the
 	 * record's site, the property is set to the value of the working site's id.
 	 */
-	protected function get_properties()
+	protected function lazy_get_properties()
 	{
 		global $core;
 
-		$properties = parent::get_properties();
+		$properties = parent::lazy_get_properties();
 
 		$user = $core->user;
 
@@ -65,9 +65,9 @@ class SaveOperation extends \ICanBoogie\SaveOperation
 	 * Returns the form from the `edit` block if the getter wasn't able to retrieve the form. This
 	 * is currently used to create records using XHR.
 	 */
-	protected function get_form()
+	protected function lazy_get_form()
 	{
-		$form = parent::get_form();
+		$form = parent::lazy_get_form();
 
 		if ($form)
 		{

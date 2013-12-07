@@ -84,7 +84,7 @@ class Node extends \ICanBoogie\ActiveRecord implements \Brickrouge\CSSClassNames
 	 *
 	 * @return string
 	 */
-	protected function volatile_get_slug()
+	protected function get_slug()
 	{
 		return \ICanBoogie\normalize($this->title);
 	}
@@ -102,7 +102,7 @@ class Node extends \ICanBoogie\ActiveRecord implements \Brickrouge\CSSClassNames
 	 *
 	 * @return string
 	 */
-	protected function volatile_get_constructor()
+	protected function get_constructor()
 	{
 		return $this->model_id;
 	}
@@ -192,7 +192,7 @@ class Node extends \ICanBoogie\ActiveRecord implements \Brickrouge\CSSClassNames
 	 *
 	 * @return Node|bool
 	 */
-	protected function get_previous()
+	protected function lazy_get_previous()
 	{
 		return $this->model->own->visible->where('nid != ? AND created <= ?', $this->nid, $this->created)->order('created DESC')->one;
 	}
@@ -202,7 +202,7 @@ class Node extends \ICanBoogie\ActiveRecord implements \Brickrouge\CSSClassNames
 	*
 	* @return Node|bool
 	*/
-	protected function get_next()
+	protected function lazy_get_next()
 	{
 		return $this->model->own->visible->where('nid != ? AND created > ?', $this->nid, $this->created)->order('created')->one;
 	}
@@ -212,11 +212,9 @@ class Node extends \ICanBoogie\ActiveRecord implements \Brickrouge\CSSClassNames
 	 *
 	 * @return User
 	 */
-	protected function volatile_get_user()
+	protected function get_user()
 	{
-		global $core;
-
-		return $core->models['users'][$this->uid];
+		return $this->uid ? \ICanBoogie\ActiveRecord\get_model('users')->find($this->uid) : null;
 	}
 
 	/**
@@ -224,14 +222,14 @@ class Node extends \ICanBoogie\ActiveRecord implements \Brickrouge\CSSClassNames
 	 *
 	 * @param User $user
 	 */
-	protected function volatile_set_user(User $user)
+	protected function set_user(User $user)
 	{
 		$this->uid = $user->uid;
 	}
 
 	private static $translations_keys;
 
-	protected function get_translations_keys()
+	protected function lazy_get_translations_keys()
 	{
 		global $core;
 
@@ -306,12 +304,12 @@ class Node extends \ICanBoogie\ActiveRecord implements \Brickrouge\CSSClassNames
 		return $this;
 	}
 
-	protected function get_translation()
+	protected function lazy_get_translation()
 	{
 		return $this->translation();
 	}
 
-	protected function get_translations()
+	protected function lazy_get_translations()
 	{
 		$translations = $this->translations_keys;
 
@@ -327,7 +325,7 @@ class Node extends \ICanBoogie\ActiveRecord implements \Brickrouge\CSSClassNames
 	 *
 	 * Return the native node for this translated node.
 	 */
-	protected function get_native()
+	protected function lazy_get_native()
 	{
 		return $this->nativeid ? $this->model[$this->nativeid] : $this;
 	}
@@ -337,7 +335,7 @@ class Node extends \ICanBoogie\ActiveRecord implements \Brickrouge\CSSClassNames
 	 *
 	 * @return string
 	 */
-	protected function get_css_class()
+	protected function lazy_get_css_class()
 	{
 		return $this->css_class();
 	}
@@ -347,7 +345,7 @@ class Node extends \ICanBoogie\ActiveRecord implements \Brickrouge\CSSClassNames
 	 *
 	 * @return array[string]mixed
 	 */
-	protected function get_css_class_names()
+	protected function lazy_get_css_class_names()
 	{
 		return array
 		(

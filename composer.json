@@ -20,12 +20,13 @@
 	"require": {
 		"php": ">=5.3.0",
 		"icanboogie/module-installer": "*",
-		"icanboogie/activerecord": "*",
+		"icanboogie/activerecord": "2.x",
 		"brickrouge/css-class-names": "*",
-		"icybee/module-users": "*"
+		"icybee/module-users": "2.x"
 	},
 	"require-dev": {
-		"icanboogie/event": "*"
+		"icanboogie/icanboogie": "2.x",
+		"icybee/core": "*"
 	},
 	"autoload": {
 		"classmap": [ "lib" ]

@@ -13,6 +13,24 @@ namespace Icybee\Modules\Nodes;
 
 class NodeTest extends \PHPUnit_Framework_TestCase
 {
+	public function test_get_user()
+	{
+		$node = new Node;
+		$this->assertNull($node->user);
+		$node->uid = 1;
+		$this->assertInstanceOf('Icybee\Modules\Users\User', $node->user);
+	}
+
+	public function test_set_user()
+	{
+		global $core;
+
+		$node = new Node;
+		$node->user = $core->models['users'][1];
+		$this->assertInstanceOf('Icybee\Modules\Users\User', $node->user);
+		$this->assertEquals(1, $node->uid);
+	}
+
 	/**
 	 * Checks that the defined constructor is returned and not created from the model identifier,
 	 * and that the constructor is exported by {@link Node::to_array()} and `__sleep`.

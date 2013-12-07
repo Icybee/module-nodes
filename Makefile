@@ -49,8 +49,11 @@ composer.phar:
 vendor: composer.phar
 	@php composer.phar install --prefer-source --dev
 
-update:
+update: vendor
 	@php composer.phar update --prefer-source --dev
+
+autoload: vendor
+	@php composer.phar dump-autoload
 
 test: vendor
 	@phpunit

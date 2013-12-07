@@ -27,11 +27,11 @@ class Module extends \Icybee\Module
 	/**
 	 * Defines the "view", "list" and "home" views.
 	 */
-	protected function get_views()
+	protected function lazy_get_views()
 	{
 		return \ICanBoogie\array_merge_recursive
 		(
-			parent::get_views(), array
+			parent::lazy_get_views(), array
 			(
 				'view' => array
 				(
@@ -163,28 +163,6 @@ class Module extends \Icybee\Module
 		$export = var_export($routes,true);
 
 		$core->vars['default_nodes_routes'] = "<?php\n\nreturn " . $export . ';';
-	}
-}
-
-namespace Brickrouge\Element\Nodes;
-
-class Pager extends \Brickrouge\Pager
-{
-	public function __construct($type, array $attributes=array())
-	{
-		parent::__construct
-		(
-			$type, $attributes + array
-			(
-				self::BROWSE_NEXT_LABEL => '<i class="icon-arrow-right"></i>',
-				self::BROWSE_PREVIOUS_LABEL => '<i class="icon-arrow-left"></i>',
-			)
-		);
-	}
-
-	protected function getURL($n)
-	{
-		return '#' . $n;
 	}
 }
 

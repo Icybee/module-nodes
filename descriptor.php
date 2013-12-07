@@ -25,7 +25,7 @@ return array
 					'title' => 'varchar',
 					'slug' => array('varchar', 80, 'indexed' => true),
 					'language' => array('varchar', 8, 'indexed' => true),
-					'created' => array('timestamp', 'default' => 'current_timestamp()'),
+					'created' => array('timestamp', 'default' => 'CURRENT_TIMESTAMP'),
 					'modified' => 'timestamp',
 					'is_online' => array('boolean', 'indexed' => true)
 				)
@@ -43,10 +43,10 @@ return array
 	Module::T_REQUIRED => true,
 	Module::T_REQUIRES => array
 	(
-		'sites' => 'x.x',
-		'users' => 'x.x'
+		'sites' => '2.0',
+		'users' => '2.0'
 	),
 
 	Module::T_TITLE => 'Nodes',
-	Module::T_VERSION => '1.0'
+	Module::T_VERSION => '2.0'
 );
