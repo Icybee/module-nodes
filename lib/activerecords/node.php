@@ -12,6 +12,7 @@
 namespace Icybee\Modules\Nodes;
 
 use ICanBoogie\ActiveRecord;
+use ICanBoogie\DateTime;
 
 use Icybee\Modules\Sites\Site;
 use Icybee\Modules\Users\User;
@@ -19,6 +20,8 @@ use Icybee\Modules\Users\User;
 /**
  * A node representation.
  *
+ * @property DateTime $created_at The date and time at which the node was created.
+ * @property DateTime $updated_at The date and time at which the node was updated.
  * @property Node $native
  * @property User $user The user owning the node.
  * @property Site $site The site associated with the node.
@@ -38,8 +41,8 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	const TITLE = 'title';
 	const SLUG = 'slug';
 	const CONSTRUCTOR = 'constructor';
-	const CREATED = 'created';
-	const MODIFIED = 'modified';
+	const CREATED_AT = 'created_at';
+	const UPDATED_AT = 'updated_at';
 	const IS_ONLINE = 'is_online';
 	const LANGUAGE = 'language';
 	const NATIVEID = 'nativeid';
@@ -155,18 +158,72 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	}
 
 	/**
-	 * Date the node was created.
+	 * The date and time the node was created.
 	 *
-	 * @var string
+	 * @var \ICanBoogie\DateTime
 	 */
-	public $created;
+	private $created_at;
 
 	/**
-	 * Date the node was modified.
+	 * Returns the date and time the node was created.
 	 *
-	 * @var string
+	 * @return \ICanBoogie\DateTime
 	 */
-	public $modified;
+	protected function get_created_at()
+	{
+		$datetime = $this->created_at;
+
+		if ($datetime instanceof DateTime)
+		{
+			return $datetime;
+		}
+
+		return $this->created_at = ($datetime === null) ? DateTime::none() : new DateTime($datetime, 'utc');
+	}
+
+	/**
+	 * Sets the date and time the node was created.
+	 *
+	 * @param \DateTime|string $datetime
+	 */
+	protected function set_created_at($datetime)
+	{
+		$this->created_at = $datetime;
+	}
+
+	/**
+	 * The date and time the node was updated.
+	 *
+	 * @var \ICanBoogie\DateTime
+	 */
+	private $updated_at;
+
+	/**
+	 * Returns the date and time the node was updated.
+	 *
+	 * @return \ICanBoogie\DateTime
+	 */
+	protected function get_updated_at()
+	{
+		$datetime = $this->updated_at;
+
+		if ($datetime instanceof DateTime)
+		{
+			return $datetime;
+		}
+
+		return $this->updated_at = ($datetime === null) ? DateTime::none() : new DateTime($datetime, 'utc');
+	}
+
+	/**
+	 * Sets the date and time the node was updated.
+	 *
+	 * @param \DateTime|string $datetime
+	 */
+	protected function set_updated_at($datetime)
+	{
+		$this->updated_at = $datetime;
+	}
 
 	/**
 	 * Whether the node is online or not.
@@ -259,7 +316,10 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	 */
 	protected function lazy_get_previous()
 	{
-		return $this->model->own->visible->where('nid != ? AND created <= ?', $this->nid, $this->created)->order('created DESC')->one;
+		return $this->model->own->visible
+		->where('nid != ? AND created_at <= ?', $this->nid, $this->created_at)
+		->order('created_at DESC')
+		->one;
 	}
 
 	/**
@@ -269,7 +329,10 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	*/
 	protected function lazy_get_next()
 	{
-		return $this->model->own->visible->where('nid != ? AND created > ?', $this->nid, $this->created)->order('created')->one;
+		return $this->model->own->visible
+		->where('nid != ? AND created_at > ?', $this->nid, $this->created_at)
+		->order('created_at')
+		->one;
 	}
 
 	static private $translations_keys;

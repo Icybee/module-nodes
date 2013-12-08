@@ -69,7 +69,7 @@ class Hooks
 		$nodes = $core->models['nodes']
 		->select('nid, constructor, title')
 		->filter_by_uid($target->uid)
-		->order('created DESC')
+		->order('created_at DESC')
 		->all(\PDO::FETCH_OBJ);
 
 		/* @var $nodes Node */
@@ -297,7 +297,7 @@ EOT;
 
 		$entries = $model
 		->where('uid = ? AND (siteid = 0 OR siteid = ?)', array($core->user_id, $core->site_id))
-		->order('modified desc')
+		->order('updated_at desc')
 		->limit(10)
 		->all;
 
@@ -313,7 +313,7 @@ EOT;
 
 		foreach ($entries as $record)
 		{
-			$date = \ICanBoogie\I18n\date_period($record->modified);
+			$date = \ICanBoogie\I18n\date_period($record->updated_at);
 
 			if ($date === $last_date)
 			{

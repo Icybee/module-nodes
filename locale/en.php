@@ -40,13 +40,13 @@ return array
 	'nodes.manage.column' => array
 	(
 		'constructor' => 'Constructor',
-		'created' => 'Date created',
+		'created_at' => 'Date created',
 		'date' => 'Date',
 		'is_online' => 'Published',
-		'modified' => 'Date modified',
 		'title' => 'Title',
 		'translations' => 'Translations',
-		'uid' => 'User'
+		'uid' => 'User',
+		'updated_at' => 'Date updated'
 	),
 
 	'module_category.other' => 'Other',

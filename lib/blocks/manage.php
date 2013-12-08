@@ -40,7 +40,7 @@ class ManageBlock extends \Icybee\ManageBlock
 		(
 			$module, $attributes + array
 			(
-				self::T_ORDER_BY => array(Node::MODIFIED, 'desc')
+				self::T_ORDER_BY => array(Node::UPDATED_AT, 'desc')
 			)
 		);
 	}
@@ -52,8 +52,8 @@ class ManageBlock extends \Icybee\ManageBlock
 	 * - `url`: An instance of {@link ManageBlock\URLColumn}.
 	 * - `is_online`: An instance of {@link ManageBlock\IsOnlineColumn}.
 	 * - `uid`: An instance of {@link \Icybee\Modules\Users\ManageBlock\UserColumn}.
-	 * - `created`: An instance of {@link \Icybee\ManageBlock\DateTimeColumn}.
-	 * - `modified`: An instance of {@link \Icybee\ManageBlock\DateTimeColumn}.
+	 * - `created_at`: An instance of {@link \Icybee\ManageBlock\DateTimeColumn}.
+	 * - `updated_at`: An instance of {@link \Icybee\ManageBlock\DateTimeColumn}.
 	 */
 	protected function get_available_columns()
 	{
@@ -63,8 +63,8 @@ class ManageBlock extends \Icybee\ManageBlock
 			'url' => __CLASS__ . '\URLColumn',
 			Node::IS_ONLINE => __CLASS__ . '\IsOnlineColumn',
 			Node::UID => 'Icybee\Modules\Users\ManageBlock\UserColumn',
-			Node::CREATED => 'Icybee\ManageBlock\DateTimeColumn',
-			Node::MODIFIED => 'Icybee\ManageBlock\DateTimeColumn'
+			Node::CREATED_AT => 'Icybee\ManageBlock\DateTimeColumn',
+			Node::UPDATED_AT => 'Icybee\ManageBlock\DateTimeColumn'
 		));
 	}
 

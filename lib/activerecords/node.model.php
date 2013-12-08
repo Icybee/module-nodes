@@ -13,6 +13,7 @@ namespace Icybee\Modules\Nodes;
 
 use ICanBoogie\ActiveRecord;
 use ICanBoogie\ActiveRecord\Query;
+use ICanBoogie\DateTime;
 use ICanBoogie\Exception;
 
 /**
@@ -21,7 +22,7 @@ use ICanBoogie\Exception;
 class Model extends \Icybee\ActiveRecord\Model\Constructor
 {
 	/**
-	 * If the {@link Node::$modified} property is not defined it is set to the current datetime.
+	 * If the {@link Node::$updated_at} property is not defined it is set to the current datetime.
 	 *
 	 * If the {@link Node::$slug} property is empty but the {@link Node::$title} property is
 	 * defined its value is used.
@@ -39,7 +40,7 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 
 		$properties += array
 		(
-			Node::MODIFIED => gmdate('Y-m-d H:i:s')
+			Node::UPDATED_AT => DateTime::now()
 		);
 
 		if (empty($properties[Node::SLUG]) && isset($properties[Node::TITLE]))

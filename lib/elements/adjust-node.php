@@ -130,7 +130,7 @@ class AdjustNode extends Element
 
 		if ($selected && $page === null)
 		{
-			$ids = $query->select('nid')->order('modified DESC')->all(\PDO::FETCH_COLUMN);
+			$ids = $query->select('nid')->order('updated_at DESC')->all(\PDO::FETCH_COLUMN);
 			$positions = array_flip($ids);
 			$pos = isset($positions[$selected]) ? $positions[$selected] : 0;
 			$page = floor($pos / $limit);
@@ -139,7 +139,7 @@ class AdjustNode extends Element
 		}
 		else
 		{
-			$records = $query->order('modified DESC')->limit($page * $limit, $limit)->all;
+			$records = $query->order('updated_at DESC')->limit($page * $limit, $limit)->all;
 		}
 
 		return array

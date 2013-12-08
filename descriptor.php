@@ -25,8 +25,8 @@ return array
 					'title' => 'varchar',
 					'slug' => array('varchar', 80, 'indexed' => true),
 					'language' => array('varchar', 8, 'indexed' => true),
-					'created' => array('timestamp', 'default' => 'CURRENT_TIMESTAMP'),
-					'modified' => 'timestamp',
+					'created_at' => array('timestamp', 'default' => 'CURRENT_TIMESTAMP'),
+					'updated_at' => 'timestamp',
 					'is_online' => array('boolean', 'indexed' => true)
 				)
 			)

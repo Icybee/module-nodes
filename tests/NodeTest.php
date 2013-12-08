@@ -98,4 +98,30 @@ class NodeTest extends \PHPUnit_Framework_TestCase
 		$this->assertInstanceOf('Icybee\Modules\Users\User', $node->user);
 		$this->assertEquals(1, $node->uid);
 	}
+
+	public function test_created_at()
+	{
+		$node = new Node;
+		$this->assertInstanceOf('ICanBoogie\DateTime', $node->created_at);
+		$this->assertTrue($node->created_at->is_empty);
+
+		$node->created_at = 'now';
+		$this->assertInstanceOf('ICanBoogie\DateTime', $node->created_at);
+
+		$this->assertArrayHasKey('created_at', $node->__sleep());
+		$this->assertArrayHasKey('created_at', $node->to_array());
+	}
+
+	public function test_updated_at()
+	{
+		$node = new Node;
+		$this->assertInstanceOf('ICanBoogie\DateTime', $node->updated_at);
+		$this->assertTrue($node->updated_at->is_empty);
+
+		$node->updated_at = 'now';
+		$this->assertInstanceOf('ICanBoogie\DateTime', $node->updated_at);
+
+		$this->assertArrayHasKey('updated_at', $node->__sleep());
+		$this->assertArrayHasKey('updated_at', $node->to_array());
+	}
 }
