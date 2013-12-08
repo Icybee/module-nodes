@@ -28,12 +28,10 @@ class EditBlock extends \Icybee\EditBlock
 	 * record on the site e.g. online status, view exclusion, navigation exclusion...
 	 *
 	 * The visibility group is created with an initial weight of 400.
-	 *
-	 * @see Icybee.EditBlock::get_attributes()
 	 */
-	protected function get_attributes()
+	protected function lazy_get_attributes()
 	{
-		$attributes = parent::get_attributes();
+		$attributes = parent::lazy_get_attributes();
 
 		$attributes[Element::GROUPS]['visibility'] = array
 		(
@@ -48,16 +46,14 @@ class EditBlock extends \Icybee\EditBlock
 	 * Adds the `title`, `is_online`, `uid` and `siteid` elements.
 	 *
 	 * The `uid` and `siteid` elements are added according to the context.
-	 *
-	 * @see Icybee.EditBlock::get_children()
 	 */
-	protected function get_children()
+	protected function lazy_get_children()
 	{
 		$values = $this->values;
 
 		return array_merge
 		(
-			parent::get_children(), array
+			parent::lazy_get_children(), array
 			(
 				Node::TITLE => new TitleSlugCombo
 				(
