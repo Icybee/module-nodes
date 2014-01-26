@@ -35,6 +35,8 @@ use Icybee\Modules\Users\User;
  */
 class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 {
+	use \Brickrouge\CSSClassNamesProperty;
+
 	const NID = 'nid';
 	const UID = 'uid';
 	const SITEID = 'siteid';
@@ -438,21 +440,11 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	}
 
 	/**
-	 * Returns the CSS class of the node.
-	 *
-	 * @return string
-	 */
-	protected function lazy_get_css_class()
-	{
-		return $this->css_class();
-	}
-
-	/**
 	 * Returns the CSS class names of the node.
 	 *
 	 * @return array[string]mixed
 	 */
-	protected function lazy_get_css_class_names()
+	protected function get_css_class_names()
 	{
 		$nid = $this->nid;
 		$slug = $this->slug;
@@ -464,17 +456,5 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 			'slug' => $slug ? "node-slug-{$slug}" : null,
 			'constructor' => 'constructor-' . \ICanBoogie\normalize($this->constructor)
 		);
-	}
-
-	/**
-	 * Return the CSS class of the node.
-	 *
-	 * @param string|array $modifiers CSS class names modifiers
-	 *
-	 * @return string
-	 */
-	public function css_class($modifiers=null)
-	{
-		return \Brickrouge\render_css_class($this->css_class_names, $modifiers);
 	}
 }

@@ -90,7 +90,7 @@ category. The other displays a list of the last nodes updated by the user.
 
 ## Requirement
 
-The package requires PHP 5.3 or later.
+The package requires PHP 5.4 or later.
 
 
 
@@ -106,7 +106,7 @@ Create a `composer.json` file and run `php composer.phar install` command to ins
 	"minimum-stability": "dev",
 	"require":
 	{
-		"icybee/module-nodes": "*"
+		"icybee/module-nodes": "2.x"
 	}
 }
 ```
