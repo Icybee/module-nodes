@@ -30,8 +30,8 @@ use Icybee\Modules\Users\User;
  * @property-read Node $translation
  * @property-read array[string]Node $translations
  * @property-read array[string]int $translations_keys
- * @property array[string]mixed $css_class_names {@see Node::lazy_get_css_class_names}.
- * @property string $css_class {@see Node::lazy_get_css_class}.
+ * @property array[string]mixed $css_class_names {@see Node::get_css_class_names}.
+ * @property string $css_class {@see Node::get_css_class}.
  */
 class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 {
