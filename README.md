@@ -148,7 +148,7 @@ directory can later be cleaned with the `make clean` command.
 
 The package is continuously tested by [Travis CI](http://about.travis-ci.org/).
 
-[![Build Status](https://travis-ci.org/Icybee/module-nodes.png?branch=master)](https://travis-ci.org/Icybee/module-nodes)
+[![Build Status](https://travis-ci.org/Icybee/module-nodes.png?branch=2.0)](https://travis-ci.org/Icybee/module-nodes)
 
 
 
