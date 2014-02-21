@@ -1,4 +1,4 @@
-# The Nodes module [![Build Status](https://travis-ci.org/Icybee/module-nodes.png?branch=master)](https://travis-ci.org/Icybee/module-nodes)
+# The Nodes module [![Build Status](https://travis-ci.org/Icybee/module-nodes.png?branch=2.0)](https://travis-ci.org/Icybee/module-nodes)
 
 The Nodes module (`nodes`) introduces the _Node_ content type to the CMS
 [Icybee](http://icybee.org). Most modules introducing content types inherit from it, this
