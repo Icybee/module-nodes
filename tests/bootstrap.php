@@ -39,23 +39,19 @@ require __DIR__ . '/../vendor/autoload.php';
 
 global $core;
 
-$core = new Core(array(
+$core = new Core(\ICanBoogie\array_merge_recursive(\ICanBoogie\get_autoconfig(), array(
 
-	'connections' => array
+	'config-path' => array
 	(
-		'primary' => array
-		(
-			'dsn' => 'sqlite::memory:'
-		)
+		__DIR__ . DIRECTORY_SEPARATOR . 'config'
 	),
 
-	'modules paths' => array
+	'module-path' => array
 	(
-		__DIR__ . '/../',
-		__DIR__ . '/../vendor/icanboogie-modules'
+		__DIR__ . '/../'
 	)
 
-));
+)));
 
 $core();
 

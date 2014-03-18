@@ -31,5 +31,8 @@
 	},
 	"autoload": {
 		"classmap": [ "lib" ]
+	},
+	"scripts": {
+		"post-autoload-dump": "ICanBoogie\\AutoConfig\\Generator::on_autoload_dump"
 	}
 }
