@@ -1,8 +1,44 @@
 <?php
 
-if (file_exists(ICanBoogie\REPOSITORY . 'vars/default_nodes_routes'))
+namespace Icybee\Modules\Nodes;
+
+use ICanBoogie\Operation;
+
+$node_routes = [];
+
+$pathname = \ICanBoogie\REPOSITORY . 'vars/default_nodes_routes';
+
+if (file_exists($pathname))
 {
-	return require ICanBoogie\REPOSITORY . 'vars/default_nodes_routes';
+	$node_routes = require $pathname;
 }
 
-return array();
+return [
+
+	'api:nodes/online' => [
+
+		'pattern' => '/api/:constructor/<nid:\d+>/is_online',
+		'controller' =>__NAMESPACE__ . '\OnlineOperation',
+		'via' => 'PUT',
+		'param_translation_list' => [
+
+			'constructor' => Operation::DESTINATION,
+			'nid' => Operation::KEY
+
+		]
+	],
+
+	'api:nodes/offline' => [
+
+		'pattern' => '/api/:constructor/<nid:\d+>/is_online',
+		'controller' =>__NAMESPACE__ . '\OfflineOperation',
+		'via' => 'DELETE',
+		'param_translation_list' => [
+
+			'constructor' => Operation::DESTINATION,
+			'nid' => Operation::KEY
+
+		]
+	]
+
+] + $node_routes;
