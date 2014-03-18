@@ -1,14 +1,15 @@
 <?php
 
-return array
-(
-	'element.title' => array
-	(
-		'is_online' => "Include or exclude the record from the site"
-	),
+return [
 
-	'element.description' => array
-	(
+	'element.title' => [
+
+		'is_online' => "Include or exclude the record from the site"
+
+	],
+
+	'element.description' => [
+
 		'is_online' => "Only published records are available to visitors. However, unpublished
 		records may be available to users who have permission.",
 
@@ -21,24 +22,27 @@ return array
 		site.",
 
 		'user' => "Because you have permission, you can choose the user owner of the record."
-	),
 
-	'title' => array
-	(
+	],
+
+	'title' => [
+
 		'visibility' => 'Visibility'
-	),
 
-	'label' => array
-	(
+	],
+
+	'label' => [
+
 		'is_online' => 'Published',
 		'siteid' => 'Belonging site',
 		'slug' => 'Slug',
 		'title' => 'Title',
 		'user' => 'User'
-	),
 
-	'nodes.manage.column' => array
-	(
+	],
+
+	'nodes.manage.column' => [
+
 		'constructor' => 'Constructor',
 		'created_at' => 'Date created',
 		'date' => 'Date',
@@ -47,50 +51,58 @@ return array
 		'translations' => 'Translations',
 		'uid' => 'User',
 		'updated_at' => 'Date updated'
-	),
+
+	],
 
 	'module_category.other' => 'Other',
 	'module_title.nodes' => 'Nodes',
 
-	'offline.operation' => array
-	(
+	'offline.operation' => [
+
 		'title' => 'Put records offline',
 		'short_title' => 'Offline',
 		'continue' => 'Put offline',
 		'cancel' => "Don't put offline",
 
-		'confirm' => array
-		(
+		'confirm' => [
+
 			'one' => 'Are you sure you want to put the selected record offline?',
 			'other' => 'Are you sure you want to put the :count selected records offline?'
-		)
-	),
 
-	'online.operation' => array
-	(
+		]
+
+	],
+
+	'online.operation' => [
+
 		'title' => 'Put records online',
 		'short_title' => 'Online',
 		'continue' => 'Put online',
 		'cancel' => "Don't put online",
 
-		'confirm' => array
-		(
+		'confirm' => [
+
 			'one' => 'Are you sure you want to put the selected record online?',
 			'other' => 'Are you sure you want to put the :count selected records online?'
-		)
-	),
 
-	'option' => array
-	(
+		]
+
+	],
+
+	'option' => [
+
 		'save_mode_display' => 'Save and display'
-	),
 
-	'titleslugcombo.element' => array
-	(
+	],
+
+	'titleslugcombo.element' => [
+
 		'auto' => 'auto',
 		'edit' => 'Click to edit',
 		'fold' => 'Hide the <q>slug</q> input field',
 		'reset' => 'Reset',
 		'view' => 'View on website'
-	)
-);
+
+	]
+
+];

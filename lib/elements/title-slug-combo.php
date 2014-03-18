@@ -34,64 +34,57 @@ class TitleSlugCombo extends \Brickrouge\Widget
 	private $slug_tease;
 	private $slug_el;
 
-	public function __construct(array $attributes=array())
+	public function __construct(array $attributes=[])
 	{
-		$attributes += array
-		(
+		$attributes += [
+
 			self::T_SLUG_NAME => null,
 			Element::LABEL => null,
 			Element::LABEL_POSITION => 'before'
-		);
+
+		];
 
 		$label = $attributes[Element::LABEL];
 
-		parent::__construct
-		(
-			'div', $attributes + array
-			(
-				Element::CHILDREN => array
-				(
-					$this->title_el = new Text
-					(
-						array
-						(
-							Element::LABEL_POSITION => $attributes[Element::LABEL_POSITION],
-							Element::REQUIRED => true
-						)
-					),
+		parent::__construct('div', $attributes + [
 
-					$this->slug_tease = new Element
-					(
-						'span', array
-						(
-							self::INNER_HTML => '&nbsp;',
+			Element::CHILDREN => [
 
-							'class' => 'slug-reminder small'
-						)
-					),
+				$this->title_el = new Text([
 
-					'<a href="#slug-collapse" class="small">' . I18n\t('fold', array(), array('scope' => 'titleslugcombo.element')) . '</a>',
+					Element::LABEL_POSITION => $attributes[Element::LABEL_POSITION],
+					Element::REQUIRED => true
 
-					'<div class="slug">',
+				]),
 
-					$this->slug_el = new Text
-					(
-						array
-						(
-							Element::LABEL => 'slug',
-							Element::LABEL_POSITION => 'above',
-							Element::DESCRIPTION => 'slug',
+				$this->slug_tease = new Element('span', [
 
-							'name' => $attributes[self::T_SLUG_NAME]
-						)
-					),
+					self::INNER_HTML => '&nbsp;',
 
-					'</div>'
-				),
+					'class' => 'slug-reminder small'
 
-				'data-auto-label' => '<em>' . I18n\t('auto', array(), array('scope' => 'titleslugcombo.element')) . '</em>'
-			)
-		);
+				]),
+
+				'<a href="#slug-collapse" class="small">' . I18n\t('fold', [], [ 'scope' => 'titleslugcombo.element' ]) . '</a>',
+
+				'<div class="slug">',
+
+				$this->slug_el = new Text([
+
+					Element::LABEL => 'slug',
+					Element::LABEL_POSITION => 'above',
+					Element::DESCRIPTION => 'slug',
+
+					'name' => $attributes[self::T_SLUG_NAME]
+
+				]),
+
+				'</div>'
+			],
+
+			'data-auto-label' => '<em>' . I18n\t('auto', [], [ 'scope' => 'titleslugcombo.element' ]) . '</em>'
+
+		]);
 	}
 
 	public function offsetSet($offset, $value)
@@ -116,8 +109,8 @@ class TitleSlugCombo extends \Brickrouge\Widget
 		$slug = $this->slug_el['value'];
 
 		$tease = '<strong>Slug&nbsp;:</strong> ';
-		$tease .= '<a href="#slug-edit" title="' . I18n\t('edit', array(), array('scope' => 'titleslugcombo.element')) . '">' . ($slug ? \ICanBoogie\escape(\ICanBoogie\shorten($slug)) : $this->dataset['auto-label']) . '</a>';
-		$tease .= ' <span>&ndash; <a href="slug-delete" class="warn">' . I18n\t('reset', array(), array('scope' => 'titleslugcombo.element')) . '</a></span>';
+		$tease .= '<a href="#slug-edit" title="' . I18n\t('edit', [], [ 'scope' => 'titleslugcombo.element' ]) . '">' . ($slug ? \ICanBoogie\escape(\ICanBoogie\shorten($slug)) : $this->dataset['auto-label']) . '</a>';
+		$tease .= ' <span>&ndash; <a href="slug-delete" class="warn">' . I18n\t('reset', [], [ 'scope' => 'titleslugcombo.element' ]) . '</a></span>';
 
 		$this->slug_tease->inner_html = $tease;
 

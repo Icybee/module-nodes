@@ -21,14 +21,13 @@ class OfflineOperation extends Operation
 	 */
 	protected function get_controls()
 	{
-		return array
-		(
+		return [
+
 			self::CONTROL_PERMISSION => Module::PERMISSION_MAINTAIN,
 			self::CONTROL_RECORD => true,
 			self::CONTROL_OWNERSHIP => true
-		)
 
-		+ parent::get_controls();
+		] + parent::get_controls();
 	}
 
 	protected function validate(\ICanboogie\Errors $errors)
@@ -45,7 +44,7 @@ class OfflineOperation extends Operation
 		$record->is_online = false;
 		$record->save();
 
-		$this->response->message = new FormattedString('!title is now offline', array('!title' => $record->title));
+		$this->response->message = new FormattedString('!title is now offline', [ '!title' => $record->title ]);
 
 		return true;
 	}

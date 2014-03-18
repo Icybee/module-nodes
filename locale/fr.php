@@ -1,20 +1,22 @@
 <?php
 
-return array
-(
-	'dashboard.title' => array
-	(
+return [
+
+	'dashboard.title' => [
+
 		'system-nodes-now' => "D'un coup d'oeil",
 		'system-nodes-user-modified' => "Vos dernières modifications"
-	),
 
-	'element.title' => array
-	(
+	],
+
+	'element.title' => [
+
 		'is_online' => "Inclure ou exclure l'enregistrement du site"
-	),
 
-	'element.description' => array
-	(
+	],
+
+	'element.description' => [
+
 		'is_online' => "Seuls les enregistrements publiés sont disponibles pour les visiteurs.
 		Cependant, les enregistrements non publiés peuvent être disponibles pour les utilisateurs
 		qui en ont l'autorisation.",
@@ -30,52 +32,59 @@ return array
 
 		'user' => "Parce que vous en avez la permission, vous pouvez choisir l'utilisateur
 		propriétaire de cet enregistrement."
-	),
 
-	'group.legend' => array
-	(
+	],
+
+	'group.legend' => [
+
 		'Admin' => 'Administration',
 		'Advanced' => 'Options avancées',
 		'Visibility' => 'Visibilité'
-	),
 
-	'label' => array
-	(
+	],
+
+	'label' => [
+
 		'is_online' => 'Publié',
 		'siteid' => "Site d'appartenance",
 		'title' => 'Titre',
 		'user' => 'Utilisateur'
-	),
 
-	'nodes.manage.column' => array
-	(
+	],
+
+	'nodes.manage.column' => [
+
 		'constructor' => 'Constructeur',
 		'uid' => 'Utilisateur',
 		'title' => 'Titre',
 		'translations' => 'Traductions'
-	),
+
+	],
 
 	'module_category.other' => 'Autre',
 	'module_title.nodes' => 'Nœuds',
 
-	'option' => array
-	(
-		'save_mode_display' => 'Enregistrer et afficher'
-	),
+	'option' => [
 
-	'titleslugcombo.element' => array
-	(
+		'save_mode_display' => 'Enregistrer et afficher'
+
+	],
+
+	'titleslugcombo.element' => [
+
 		'auto' => 'auto',
 		'edit' => 'Cliquer pour éditer',
 		'fold' => 'Cacher le champ de saisie du <q>slug</q>',
 		'reset' => 'Mettre à zéro',
 		'view' => 'Voir sur le site'
-	),
 
-	'permission' => array
-	(
+	],
+
+	'permission' => [
+
 		'modify belonging site' => "Modifier le site d'appartenance"
-	),
+
+	],
 
 	# operation/save
 
@@ -85,4 +94,5 @@ return array
 	'The requested record was not found.' => "L'enregistrement demandé n'a pu être trouvé.",
 	'Next: :title' => 'Suivant : :title', // il y a un espace non sécable ici
 	'Previous: :title' => 'Précédent : :title', // il y a un espace non sécable ici
-);
+
+];

@@ -1,4 +1,4 @@
-# The Nodes module [![Build Status](https://travis-ci.org/Icybee/module-nodes.png?branch=master)](https://travis-ci.org/Icybee/module-nodes)
+# The Nodes module [![Build Status](https://travis-ci.org/Icybee/module-nodes.png?branch=2.0)](https://travis-ci.org/Icybee/module-nodes)
 
 The Nodes module (`nodes`) introduces the _Node_ content type to the CMS
 [Icybee](http://icybee.org). Most modules introducing content types inherit from it, this
@@ -88,9 +88,15 @@ category. The other displays a list of the last nodes updated by the user.
 
 
 
+----------
+
+
+
+
+
 ## Requirement
 
-The package requires PHP 5.3 or later.
+The package requires PHP 5.4 or later.
 
 
 
@@ -106,7 +112,7 @@ Create a `composer.json` file and run `php composer.phar install` command to ins
 	"minimum-stability": "dev",
 	"require":
 	{
-		"icybee/module-nodes": "*"
+		"icybee/module-nodes": "2.x"
 	}
 }
 ```
@@ -148,7 +154,7 @@ directory can later be cleaned with the `make clean` command.
 
 The package is continuously tested by [Travis CI](http://about.travis-ci.org/).
 
-[![Build Status](https://travis-ci.org/Icybee/module-nodes.png?branch=master)](https://travis-ci.org/Icybee/module-nodes)
+[![Build Status](https://travis-ci.org/Icybee/module-nodes.png?branch=2.0)](https://travis-ci.org/Icybee/module-nodes)
 
 
 
@@ -157,4 +163,4 @@ The package is continuously tested by [Travis CI](http://about.travis-ci.org/).
 
 ## License
 
-The module is licensed under the New BSD License - See the LICENSE file for details.
+This package is licensed under the New BSD License - See the [LICENSE](LICENSE) file for details.

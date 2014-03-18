@@ -7,8 +7,7 @@ MODULE_NAME = "Icybee/Modules/Nodes"
 JS_FILES = \
 	lib/elements/adjust-node.js \
 	lib/elements/pop-node.js \
-	lib/elements/title-slug-combo.js \
-	lib/blocks/manage.js
+	lib/elements/title-slug-combo.js
 
 CSS_FILES = \
 	lib/elements/adjust-node.css \

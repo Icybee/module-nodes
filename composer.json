@@ -18,10 +18,10 @@
 	},
 	"minimum-stability": "dev",
 	"require": {
-		"php": ">=5.3.0",
+		"php": ">=5.4.0",
 		"icanboogie/module-installer": "*",
 		"icanboogie/activerecord": "2.x",
-		"brickrouge/css-class-names": "*",
+		"brickrouge/css-class-names": "2.x",
 		"icybee/module-users": "2.x",
 		"icybee/module-sites": "2.x"
 	},
@@ -31,5 +31,8 @@
 	},
 	"autoload": {
 		"classmap": [ "lib" ]
+	},
+	"scripts": {
+		"post-autoload-dump": "ICanBoogie\\AutoConfig\\Generator::on_autoload_dump"
 	}
 }

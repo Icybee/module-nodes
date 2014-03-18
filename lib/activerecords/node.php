@@ -30,11 +30,13 @@ use Icybee\Modules\Users\User;
  * @property-read Node $translation
  * @property-read array[string]Node $translations
  * @property-read array[string]int $translations_keys
- * @property array[string]mixed $css_class_names {@see Node::lazy_get_css_class_names}.
- * @property string $css_class {@see Node::lazy_get_css_class}.
+ * @property array[string]mixed $css_class_names {@see Node::get_css_class_names}.
+ * @property string $css_class {@see Node::get_css_class}.
  */
 class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 {
+	use \Brickrouge\CSSClassNamesProperty;
+
 	const NID = 'nid';
 	const UID = 'uid';
 	const SITEID = 'siteid';
@@ -157,73 +159,8 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 		return $this->model_id;
 	}
 
-	/**
-	 * The date and time the node was created.
-	 *
-	 * @var \ICanBoogie\DateTime
-	 */
-	private $created_at;
-
-	/**
-	 * Returns the date and time the node was created.
-	 *
-	 * @return \ICanBoogie\DateTime
-	 */
-	protected function get_created_at()
-	{
-		$datetime = $this->created_at;
-
-		if ($datetime instanceof DateTime)
-		{
-			return $datetime;
-		}
-
-		return $this->created_at = ($datetime === null) ? DateTime::none() : new DateTime($datetime, 'utc');
-	}
-
-	/**
-	 * Sets the date and time the node was created.
-	 *
-	 * @param \DateTime|string $datetime
-	 */
-	protected function set_created_at($datetime)
-	{
-		$this->created_at = $datetime;
-	}
-
-	/**
-	 * The date and time the node was updated.
-	 *
-	 * @var \ICanBoogie\DateTime
-	 */
-	private $updated_at;
-
-	/**
-	 * Returns the date and time the node was updated.
-	 *
-	 * @return \ICanBoogie\DateTime
-	 */
-	protected function get_updated_at()
-	{
-		$datetime = $this->updated_at;
-
-		if ($datetime instanceof DateTime)
-		{
-			return $datetime;
-		}
-
-		return $this->updated_at = ($datetime === null) ? DateTime::none() : new DateTime($datetime, 'utc');
-	}
-
-	/**
-	 * Sets the date and time the node was updated.
-	 *
-	 * @param \DateTime|string $datetime
-	 */
-	protected function set_updated_at($datetime)
-	{
-		$this->updated_at = $datetime;
-	}
+	use ActiveRecord\CreatedAtProperty;
+	use ActiveRecord\UpdatedAtProperty;
 
 	/**
 	 * Whether the node is online or not.
@@ -346,7 +283,7 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 		if (!self::$translations_keys)
 		{
 			$groups = $core->models['nodes']->select('nativeid, nid, language')->where('nativeid != 0')->order('language')->all(\PDO::FETCH_GROUP | \PDO::FETCH_NUM);
-			$keys = array();
+			$keys = [];
 
 			foreach ($groups as $native_id => $group)
 			{
@@ -360,7 +297,7 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 
 			foreach ($keys as $native_id => $translations)
 			{
-				$all = array($native_id => $native_language) + $translations;
+				$all = [ $native_id => $native_language ] + $translations;
 
 				foreach ($translations as $nativeid => $tlanguage)
 				{
@@ -438,43 +375,22 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	}
 
 	/**
-	 * Returns the CSS class of the node.
-	 *
-	 * @return string
-	 */
-	protected function lazy_get_css_class()
-	{
-		return $this->css_class();
-	}
-
-	/**
 	 * Returns the CSS class names of the node.
 	 *
 	 * @return array[string]mixed
 	 */
-	protected function lazy_get_css_class_names()
+	protected function get_css_class_names()
 	{
 		$nid = $this->nid;
 		$slug = $this->slug;
 
-		return array
-		(
+		return [
+
 			'type' => 'node',
 			'id' => $nid ? "node-{$nid}" : null,
 			'slug' => $slug ? "node-slug-{$slug}" : null,
 			'constructor' => 'constructor-' . \ICanBoogie\normalize($this->constructor)
-		);
-	}
 
-	/**
-	 * Return the CSS class of the node.
-	 *
-	 * @param string|array $modifiers CSS class names modifiers
-	 *
-	 * @return string
-	 */
-	public function css_class($modifiers=null)
-	{
-		return \Brickrouge\render_css_class($this->css_class_names, $modifiers);
+		];
 	}
 }

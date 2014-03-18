@@ -39,23 +39,21 @@ require __DIR__ . '/../vendor/autoload.php';
 
 global $core;
 
-$core = new Core(array(
+$core = new Core(\ICanBoogie\array_merge_recursive(\ICanBoogie\get_autoconfig(), [
 
-	'connections' => array
-	(
-		'primary' => array
-		(
-			'dsn' => 'sqlite::memory:'
-		)
-	),
+	'config-path' => [
 
-	'modules paths' => array
-	(
-		__DIR__ . '/../',
-		__DIR__ . '/../vendor/icanboogie-modules'
-	)
+		__DIR__ . DIRECTORY_SEPARATOR . 'config'
 
-));
+	],
+
+	'module-path' => [
+
+		__DIR__ . '/../'
+
+	]
+
+]));
 
 $core();
 
@@ -83,5 +81,5 @@ foreach (array_keys($core->modules->enabled_modules_descriptors) as $module_id)
 # Create a user
 #
 
-User::from(array('username' => 'admin', 'email' => 'test@example.com'))->save();
-Site::from(array('title' => 'example'))->save();
+User::from([ 'username' => 'admin', 'email' => 'test@example.com' ])->save();
+Site::from([ 'title' => 'example' ])->save();
