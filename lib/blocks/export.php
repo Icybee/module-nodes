@@ -18,23 +18,22 @@ use Brickrouge\Form;
 
 class ExportBlock extends Form
 {
-	public function __construct(Module $module, array $attributes=array())
+	public function __construct(Module $module, array $attributes=[])
 	{
-		parent::__construct
-		(
-			$attributes + array
-			(
-				Form::HIDDENS => array
-				(
-					Operation::DESTINATION => $module->id,
-					Operation::NAME => 'export'
-				),
+		parent::__construct($attributes + [
 
-				Form::ACTIONS => new Button('Export', array('class' => 'btn-primary', 'type' => 'submit')),
+			Form::HIDDENS => [
 
-				'class' => 'form-primary'
-			)
-		);
+				Operation::DESTINATION => $module->id,
+				Operation::NAME => 'export'
+
+			],
+
+			Form::ACTIONS => new Button('Export', [ 'class' => 'btn-primary', 'type' => 'submit' ]),
+
+			'class' => 'form-primary'
+
+		]);
 	}
 
 	protected function render_inner_html()

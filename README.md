@@ -88,6 +88,12 @@ category. The other displays a list of the last nodes updated by the user.
 
 
 
+----------
+
+
+
+
+
 ## Requirement
 
 The package requires PHP 5.4 or later.
@@ -157,4 +163,4 @@ The package is continuously tested by [Travis CI](http://about.travis-ci.org/).
 
 ## License
 
-The module is licensed under the New BSD License - See the LICENSE file for details.
+This package is licensed under the New BSD License - See the [LICENSE](LICENSE) file for details.

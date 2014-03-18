@@ -13,16 +13,14 @@ namespace Brickrouge\Element\Nodes;
 
 class Pager extends \Brickrouge\Pager
 {
-	public function __construct($type, array $attributes=array())
+	public function __construct($type, array $attributes=[])
 	{
-		parent::__construct
-		(
-			$type, $attributes + array
-			(
-				self::BROWSE_NEXT_LABEL => '<i class="icon-arrow-right"></i>',
-				self::BROWSE_PREVIOUS_LABEL => '<i class="icon-arrow-left"></i>',
-			)
-		);
+		parent::__construct($type, $attributes + [
+
+			self::BROWSE_NEXT_LABEL => '<i class="icon-arrow-right"></i>',
+			self::BROWSE_PREVIOUS_LABEL => '<i class="icon-arrow-left"></i>',
+
+		]);
 	}
 
 	protected function getURL($n)

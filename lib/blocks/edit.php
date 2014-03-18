@@ -33,11 +33,12 @@ class EditBlock extends \Icybee\EditBlock
 	{
 		$attributes = parent::lazy_get_attributes();
 
-		$attributes[Element::GROUPS]['visibility'] = array
-		(
+		$attributes[Element::GROUPS]['visibility'] = [
+
 			'title' => 'Visibility',
 			'weight' => 400
-		);
+
+		];
 
 		return $attributes;
 	}
@@ -51,34 +52,27 @@ class EditBlock extends \Icybee\EditBlock
 	{
 		$values = $this->values;
 
-		return array_merge
-		(
-			parent::lazy_get_children(), array
-			(
-				Node::TITLE => new TitleSlugCombo
-				(
-					array
-					(
-						Form::LABEL => 'title',
-						Element::REQUIRED => true,
-						TitleSlugCombo::T_NODEID => $values[Node::NID],
-						TitleSlugCombo::T_SLUG_NAME => 'slug'
-					)
-				),
+		return array_merge(parent::lazy_get_children(), [
 
-				Node::UID => $this->get_control__user(),
-				Node::SITEID => $this->get_control__site(),	// TODO-20100906: this should be added by the "sites" modules using the alter event.
-				Node::IS_ONLINE => new Element
-				(
-					Element::TYPE_CHECKBOX, array
-					(
-						Element::LABEL => 'is_online',
-						Element::DESCRIPTION => 'is_online',
-						Element::GROUP => 'visibility'
-					)
-				)
-			)
-		);
+			Node::TITLE => new TitleSlugCombo([
+
+				Form::LABEL => 'title',
+				Element::REQUIRED => true,
+				TitleSlugCombo::T_NODEID => $values[Node::NID],
+				TitleSlugCombo::T_SLUG_NAME => 'slug'
+
+			]),
+
+			Node::UID => $this->get_control__user(),
+			Node::SITEID => $this->get_control__site(),	// TODO-20100906: this should be added by the "sites" modules using the alter event.
+			Node::IS_ONLINE => new Element(Element::TYPE_CHECKBOX, [
+
+				Element::LABEL => 'is_online',
+				Element::DESCRIPTION => 'is_online',
+				Element::GROUP => 'visibility'
+
+			])
+		]);
 	}
 
 	/**
@@ -105,18 +99,16 @@ class EditBlock extends \Icybee\EditBlock
 			return;
 		}
 
-		return new Element
-		(
-			'select', array
-			(
-				Form::LABEL => 'User',
-				Element::OPTIONS => array(null => '') + $users,
-				Element::REQUIRED => true,
-				Element::DEFAULT_VALUE => $core->user->uid,
-				Element::GROUP => 'admin',
-				Element::DESCRIPTION => 'user'
-			)
-		);
+		return new Element('select', [
+
+			Form::LABEL => 'User',
+			Element::OPTIONS => [ null => '' ] + $users,
+			Element::REQUIRED => true,
+			Element::DEFAULT_VALUE => $core->user->uid,
+			Element::GROUP => 'admin',
+			Element::DESCRIPTION => 'user'
+
+		]);
 	}
 
 	/**
@@ -145,15 +137,13 @@ class EditBlock extends \Icybee\EditBlock
 			return;
 		}
 
-		return new Element
-		(
-			'select', array
-			(
-				Form::LABEL => 'siteid',
-				Element::OPTIONS => array(null => '') + $sites,
-				Element::GROUP => 'admin',
-				Element::DESCRIPTION => 'siteid'
-			)
-		);
+		return new Element('select', [
+
+			Form::LABEL => 'siteid',
+			Element::OPTIONS => [ null => '' ] + $sites,
+			Element::GROUP => 'admin',
+			Element::DESCRIPTION => 'siteid'
+
+		]);
 	}
 }

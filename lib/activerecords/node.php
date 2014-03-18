@@ -283,7 +283,7 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 		if (!self::$translations_keys)
 		{
 			$groups = $core->models['nodes']->select('nativeid, nid, language')->where('nativeid != 0')->order('language')->all(\PDO::FETCH_GROUP | \PDO::FETCH_NUM);
-			$keys = array();
+			$keys = [];
 
 			foreach ($groups as $native_id => $group)
 			{
@@ -297,7 +297,7 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 
 			foreach ($keys as $native_id => $translations)
 			{
-				$all = array($native_id => $native_language) + $translations;
+				$all = [ $native_id => $native_language ] + $translations;
 
 				foreach ($translations as $nativeid => $tlanguage)
 				{
@@ -384,12 +384,13 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 		$nid = $this->nid;
 		$slug = $this->slug;
 
-		return array
-		(
+		return [
+
 			'type' => 'node',
 			'id' => $nid ? "node-{$nid}" : null,
 			'slug' => $slug ? "node-slug-{$slug}" : null,
 			'constructor' => 'constructor-' . \ICanBoogie\normalize($this->constructor)
-		);
+
+		];
 	}
 }

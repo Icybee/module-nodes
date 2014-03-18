@@ -19,16 +19,15 @@ use Brickrouge\Form;
 
 class ImportOperation extends Operation
 {
-	protected $keys_translations = array();
+	protected $keys_translations = [];
 
 	protected function get_controls()
 	{
-		return array
-		(
-			self::CONTROL_PERMISSION => Module::PERMISSION_ADMINISTER
-		)
+		return [
 
-		+ parent::get_controls();
+			self::CONTROL_PERMISSION => Module::PERMISSION_ADMINISTER
+
+		] + parent::get_controls();
 	}
 
 	protected function validate(\ICanboogie\Errors $errors)
@@ -41,15 +40,11 @@ class ImportOperation extends Operation
 		$data = $this->preparse_data();
 		$data = $this->parse_data($data);
 
-		$save = Request::from
-		(
-			array
-			(
-				'path' => Operation::encode("{$this->module}/save")
-			),
+		$save = Request::from([
 
-			array($_SERVER)
-		);
+			'path' => Operation::encode("{$this->module}/save")
+
+		], [ $_SERVER ] );
 
 		#
 		# override form
@@ -72,9 +67,9 @@ class ImportOperation extends Operation
 
 		if ($keys)
 		{
-			$core->models['nodes']->where(array('nid' => $keys))->delete();
-			$core->models['pages']->where(array('nid' => $keys))->delete();
-			$core->models['pages/contents']->where(array('pageid' => $keys))->delete();
+			$core->models['nodes']->where([ 'nid' => $keys ])->delete();
+			$core->models['pages']->where([ 'nid' => $keys ])->delete();
+			$core->models['pages/contents']->where([ 'pageid' => $keys ])->delete();
 		}
 		*/
 
@@ -92,7 +87,7 @@ class ImportOperation extends Operation
 
 		if (!$data)
 		{
-			throw new \ICanBoogie\Exception("Failed to decode JSON: !json", array('json' => $json));
+			throw new \ICanBoogie\Exception("Failed to decode JSON: !json", [ 'json' => $json ]);
 		}
 
 		return (array) $data->rc;

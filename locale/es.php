@@ -1,9 +1,11 @@
 <?php
 
-return array
-(
-	'label' => array
-	(
+return [
+
+	'label' => [
+
 		'title' => 'Titulo'
-	)
-);
+
+	]
+
+];

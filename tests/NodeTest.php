@@ -37,19 +37,20 @@ class NodeTest extends \PHPUnit_Framework_TestCase
 
 	public function provide_test_fallback_properties()
 	{
-		return array
-		(
-			array('constructor', array(), 'nodes'),
-			array('constructor', array('constructor' => 'images'), 'images'),
+		return [
 
-			array('language', array('site' => null), null),
-			array('language', array('site' => Site::from(array('language' => 'fr'))), 'fr'),
-			array('language', array('site' => Site::from(array('language' => 'fr')), 'language' => 'en'), 'en'),
+			[ 'constructor', [], 'nodes' ],
+			[ 'constructor', [ 'constructor' => 'images' ], 'images' ],
 
-			array('slug', array(), ''),
-			array('slug', array('title' => 'The quick brown fox'), 'the-quick-brown-fox'),
-			array('slug', array('title' => 'The quick brown fox', 'slug' => 'quick-fox'), 'quick-fox'),
-		);
+			[ 'language', [ 'site' => null ], null ],
+			[ 'language', [ 'site' => Site::from([ 'language' => 'fr' ]) ], 'fr' ],
+			[ 'language', [ 'site' => Site::from([ 'language' => 'fr' ]), 'language' => 'en' ], 'en' ],
+
+			[ 'slug', [], '' ],
+			[ 'slug', [ 'title' => 'The quick brown fox' ], 'the-quick-brown-fox' ],
+			[ 'slug', [ 'title' => 'The quick brown fox', 'slug' => 'quick-fox' ], 'quick-fox' ],
+
+		];
 	}
 
 	/**
@@ -64,19 +65,20 @@ class NodeTest extends \PHPUnit_Framework_TestCase
 	{
 		global $core;
 
-		return array
-		(
-			array('css_class', array(), 'node constructor-nodes'),
-			array('css_class', array('nid' => 13), 'node node-13 constructor-nodes'),
-			array('css_class', array('nid' => 13, 'slug' => 'quick-brown-fox'), 'node node-13 node-slug-quick-brown-fox constructor-nodes'),
-			array('css_class', array('nid' => 13, 'slug' => 'quick-brown-fox', 'constructor' => 'news'), 'node node-13 node-slug-quick-brown-fox constructor-news'),
+		return [
 
-			array('site', array(), null),
-			array('site', array('siteid' => 1), $core->models['sites'][1]),
+			[ 'css_class', [], 'node constructor-nodes' ],
+			[ 'css_class', [ 'nid' => 13 ], 'node node-13 constructor-nodes' ],
+			[ 'css_class', [ 'nid' => 13, 'slug' => 'quick-brown-fox' ], 'node node-13 node-slug-quick-brown-fox constructor-nodes' ],
+			[ 'css_class', [ 'nid' => 13, 'slug' => 'quick-brown-fox', 'constructor' => 'news' ], 'node node-13 node-slug-quick-brown-fox constructor-news' ],
 
-			array('user', array(), null),
-			array('user', array('uid' => 1), $core->models['users'][1])
-		);
+			[ 'site', [], null ],
+			[ 'site', [ 'siteid' => 1 ], $core->models['sites'][1] ],
+
+			[ 'user', [], null ],
+			[ 'user', [ 'uid' => 1 ], $core->models['users'][1] ]
+
+		];
 	}
 
 	public function test_set_site()

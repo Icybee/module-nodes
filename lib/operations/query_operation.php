@@ -15,23 +15,27 @@ class QueryOperationOperation extends \Icybee\Operation\Module\QueryOperation
 {
 	protected function query_online()
 	{
-		return array
-		(
-			'params' => array
-			(
+		return [
+
+			'params' => [
+
 				'keys' => $this->request['keys']
-			)
-		);
+
+			]
+
+		];
 	}
 
 	protected function query_offline()
 	{
-		return array
-		(
-			'params' => array
-			(
+		return [
+
+			'params' => [
+
 				'keys' => $this->request['keys']
-			)
-		);
+
+			]
+
+		];
 	}
 }

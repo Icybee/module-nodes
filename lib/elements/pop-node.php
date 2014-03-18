@@ -25,32 +25,28 @@ class PopNode extends \Brickrouge\Widget
 		$document->js->add(DIR . 'public/module.js');
 	}
 
-	public function __construct(array $attributes=array())
+	public function __construct(array $attributes=[])
 	{
-		parent::__construct
-		(
-			'div', $attributes + array
-			(
-				self::T_CONSTRUCTOR => 'nodes',
+		parent::__construct('div', $attributes + [
 
-				'placeholder' => 'Sélectionner un enregistrement',
-				'class' => 'spinner',
-				'data-adjust' => 'adjust-node',
-				'tabindex' => 0,
-			)
-		);
+			self::T_CONSTRUCTOR => 'nodes',
+
+			'placeholder' => 'Sélectionner un enregistrement',
+			'class' => 'spinner',
+			'data-adjust' => 'adjust-node',
+			'tabindex' => 0
+
+		]);
 	}
 
 	protected function alter_dataset(array $dataset)
 	{
-		return parent::alter_dataset
-		(
-			$dataset + array
-			(
-				'constructor' => $this[self::T_CONSTRUCTOR],
-				'placeholder' => $this['placeholder']
-			)
-		);
+		return parent::alter_dataset($dataset + [
+
+			'constructor' => $this[self::T_CONSTRUCTOR],
+			'placeholder' => $this['placeholder']
+
+		]);
 	}
 
 	protected function render_inner_html()
@@ -73,7 +69,7 @@ class PopNode extends \Brickrouge\Widget
 			}
 			catch (\Exception $e)
 			{
-				\ICanBoogie\log_error('Missing record %nid', array('%nid' => $value));
+				\ICanBoogie\log_error('Missing record %nid', [ '%nid' => $value ]);
 			}
 		}
 
@@ -83,7 +79,7 @@ class PopNode extends \Brickrouge\Widget
 			$value = null;
 		}
 
-		$rc .= new Element('input', array('type' => 'hidden', 'name' => $this['name'], 'value' => $value));
+		$rc .= new Element('input', [ 'type' => 'hidden', 'name' => $this['name'], 'value' => $value ]);
 
 		$placeholder = $this['placeholder'];
 

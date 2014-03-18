@@ -1,12 +1,15 @@
 <?php
 
-return array
-(
-	'connections' => array
-	(
-		'primary' => array
-		(
+return [
+
+	'connections' => [
+
+		'primary' => [
+
 			'dsn' => 'sqlite::memory:'
-		)
-	)
-);
+
+		]
+
+	]
+
+];

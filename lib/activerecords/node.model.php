@@ -29,7 +29,7 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 	 *
 	 * The {@link Node:$slug} property is always slugized.
 	 */
-	public function save(array $properties, $key=null, array $options=array())
+	public function save(array $properties, $key=null, array $options=[])
 	{
 		global $core;
 
@@ -38,10 +38,7 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 			$properties[Node::UID] = $core->user_id;
 		}
 
-		$properties += array
-		(
-			Node::UPDATED_AT => DateTime::now()
-		);
+		$properties += [ Node::UPDATED_AT => DateTime::now() ];
 
 		if (empty($properties[Node::SLUG]) && isset($properties[Node::TITLE]))
 		{
@@ -158,7 +155,7 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 	 */
 	public function including_user(array $records)
 	{
-		$keys = array();
+		$keys = [];
 
 		foreach ($records as $record)
 		{

@@ -34,15 +34,13 @@ class ManageBlock extends \Icybee\ManageBlock
 		$document->js->add(DIR . 'public/module.js');
 	}
 
-	public function __construct(Module $module, array $attributes=array())
+	public function __construct(Module $module, array $attributes=[])
 	{
-		parent::__construct
-		(
-			$module, $attributes + array
-			(
-				self::T_ORDER_BY => array(Node::UPDATED_AT, 'desc')
-			)
-		);
+		parent::__construct($module, $attributes + [
+
+			self::T_ORDER_BY => [ Node::UPDATED_AT, 'desc' ]
+
+		]);
 	}
 
 	/**
@@ -57,15 +55,16 @@ class ManageBlock extends \Icybee\ManageBlock
 	 */
 	protected function get_available_columns()
 	{
-		return array_merge(parent::get_available_columns(), array
-		(
+		return array_merge(parent::get_available_columns(), [
+
 			Node::TITLE => __CLASS__ . '\TitleColumn',
 			'url' => __CLASS__ . '\URLColumn',
 			Node::IS_ONLINE => __CLASS__ . '\IsOnlineColumn',
 			Node::UID => 'Icybee\Modules\Users\ManageBlock\UserColumn',
 			Node::CREATED_AT => 'Icybee\ManageBlock\DateTimeColumn',
 			Node::UPDATED_AT => 'Icybee\ManageBlock\DateTimeColumn'
-		));
+
+		]);
 	}
 
 	/**
@@ -76,11 +75,12 @@ class ManageBlock extends \Icybee\ManageBlock
 	 */
 	protected function get_available_jobs()
 	{
-		return array_merge(parent::get_available_jobs(), array
-		(
+		return array_merge(parent::get_available_jobs(), [
+
 			'online' => I18n\t('online.operation.short_title'),
 			'offline' => I18n\t('offline.operation.short_title')
-		));
+
+		]);
 	}
 
 	/*
@@ -148,17 +148,15 @@ class ManageBlock extends \Icybee\ManageBlock
 			$rc .= ' ';
 		}
 
-		$rc .= new Element
-		(
-			'a', array
-			(
-				Element::INNER_HTML => $label,
+		$rc .= new Element('a', [
 
-				'class' => 'edit',
-				'href' => \ICanBoogie\Routing\contextualize("/admin/{$record->constructor}/{$record->nid}/edit"),
-				'title' => $shortened ? $this->t('edit_named', array(':title' => $title ? $title : 'unnamed')) : $this->t('edit'),
-			)
-		);
+			Element::INNER_HTML => $label,
+
+			'class' => 'edit',
+			'href' => \ICanBoogie\Routing\contextualize("/admin/{$record->constructor}/{$record->nid}/edit"),
+			'title' => $shortened ? $this->t('edit_named', [ ':title' => $title ? $title : 'unnamed' ]) : $this->t('edit'),
+
+		]);
 
 		$metas = '';
 
@@ -212,7 +210,7 @@ class EditDecorator extends \Icybee\ManageBlock\EditDecorator
 		}
 
 		$element[Element::INNER_HTML] = str_replace('…', '<span class="light">…</span>', $html);
-		$element['title'] = I18n\t('manage.edit_named', array(':title' => $component ? $component : 'unnamed'));
+		$element['title'] = I18n\t('manage.edit_named', [ ':title' => $component ? $component : 'unnamed' ]);
 
 		return $element;
 	}
@@ -223,15 +221,13 @@ class EditDecorator extends \Icybee\ManageBlock\EditDecorator
  */
 class TitleColumn extends Column
 {
-	public function __construct(\Icybee\ManageBlock $manager, $id, array $options=array())
+	public function __construct(\Icybee\ManageBlock $manager, $id, array $options=[])
 	{
-		parent::__construct
-		(
-			$manager, $id, array
-			(
-				'discreet' => false
-			)
-		);
+		parent::__construct($manager, $id, [
+
+			'discreet' => false
+
+		]);
 	}
 
 	public function render_cell($record)
@@ -245,17 +241,15 @@ class TitleColumn extends Column
  */
 class URLColumn extends Column
 {
-	public function __construct(\Icybee\ManageBlock $manager, $id, array $options=array())
+	public function __construct(\Icybee\ManageBlock $manager, $id, array $options=[])
 	{
-		parent::__construct
-		(
-			$manager, $id, array
-			(
-				'title' => null,
-				'class' => 'cell-fitted',
-				'orderable' => false
-			)
-		);
+		parent::__construct($manager, $id, [
+
+			'title' => null,
+			'class' => 'cell-fitted',
+			'orderable' => false
+
+		]);
 	}
 
 	public function render_cell($record)
@@ -267,15 +261,13 @@ class URLColumn extends Column
 			return;
 		}
 
-		return new A
-		(
-			'', $url, array
-			(
-				'title' => $this->manager->t('View this entry on the website'),
-				'class' => 'icon-external-link',
-				'target' => '_blank'
-			)
-		);
+		return new A('', $url, [
+
+			'title' => $this->manager->t('View this entry on the website'),
+			'class' => 'icon-external-link',
+			'target' => '_blank'
+
+		]);
 	}
 }
 
@@ -284,24 +276,24 @@ class URLColumn extends Column
  */
 class IsOnlineColumn extends \Icybee\ManageBlock\BooleanColumn
 {
-	public function __construct(\Icybee\ManageBlock $manager, $id, array $options=array())
+	public function __construct(\Icybee\ManageBlock $manager, $id, array $options=[])
 	{
-		parent::__construct
-		(
-			$manager, $id, $options + array
-			(
-				'filters' => array
-				(
-					'options' => array
-					(
-						'=1' => 'Online',
-						'=0' => 'Offline'
-					)
-				),
+		parent::__construct($manager, $id, $options + [
 
-				'cell_renderer' => __NAMESPACE__ . '\IsOnlineCellRenderer'
-			)
-		);
+			'filters' => [
+
+				'options' => [
+
+					'=1' => 'Online',
+					'=0' => 'Offline'
+
+				]
+
+			],
+
+			'cell_renderer' => __NAMESPACE__ . '\IsOnlineCellRenderer'
+
+		]);
 	}
 }
 
@@ -327,15 +319,13 @@ class IsOnlineCellRenderer extends \Icybee\ManageBlock\BooleanCellRenderer
  */
 class TranslationsColumn extends Column
 {
-	public function __construct(\Icybee\ManageBlock $manager, $id, array $options=array())
+	public function __construct(\Icybee\ManageBlock $manager, $id, array $options=[])
 	{
-		parent::__construct
-		(
-			$manager, $id, $options + array
-			(
-				'orderable' => false
-			)
-		);
+		parent::__construct($manager, $id, $options + [
+
+			'orderable' => false
+
+		]);
 	}
 
 	public function alter_records(array $records)
@@ -353,8 +343,8 @@ class TranslationsColumn extends Column
 	{
 		global $core;
 
-		$translations = array();
-		$translations_by_records = array();
+		$translations = [];
+		$translations_by_records = [];
 
 		$site = $core->site;
 		$sites = $core->models['sites'];
@@ -365,7 +355,7 @@ class TranslationsColumn extends Column
 			return;
 		}
 
-		$site_translations_ids = array();
+		$site_translations_ids = [];
 
 		foreach ($site_translations as $site_translation)
 		{
@@ -389,7 +379,7 @@ class TranslationsColumn extends Column
 		}
 		else
 		{
-			$native_ids = array();
+			$native_ids = [];
 
 			foreach ($records as $record)
 			{
@@ -401,7 +391,11 @@ class TranslationsColumn extends Column
 				return;
 			}
 
-			$translations_raw = $core->models['nodes']->select('siteid, nativeid, language, nid')->where(array('nativeid' => $native_ids, 'siteid' => $site_translations_ids))->order('FIELD(siteid, ' . implode(',', $site_translations_ids) . ')')->all;
+			$translations_raw = $core->models['nodes']
+			->select('siteid, nativeid, language, nid')
+			->where([ 'nativeid' => $native_ids, 'siteid' => $site_translations_ids ])
+			->order('FIELD(siteid, ' . implode(',', $site_translations_ids) . ')')
+			->all;
 
 			if (!$translations_raw)
 			{
@@ -410,12 +404,13 @@ class TranslationsColumn extends Column
 
 			foreach ($translations_raw as $translation)
 			{
-				$translations_by_records[$translation['nativeid']][$translation['nid']] = array
-				(
+				$translations_by_records[$translation['nativeid']][$translation['nid']] = [
+
 					'site' => $sites[$translation['siteid']],
 					'siteid' => $translation['siteid'],
 					'language' => $translation['language']
-				);
+
+				];
 			}
 
 			$this->translations_by_records = $translations_by_records;
@@ -431,7 +426,11 @@ class TranslationsColumn extends Column
 		$translations = array_keys($translations);
 		$ids = implode(',', $translations);
 
-		$infos = $core->models['nodes']->select('siteid, language')->where('nid IN(' . $ids . ')')->order('FIELD(nid, ' . $ids . ')')->all;
+		$infos = $core->models['nodes']
+		->select('siteid, language')
+		->where('nid IN(' . $ids . ')')
+		->order('FIELD(nid, ' . $ids . ')')
+		->all;
 
 		$translations = array_combine($translations, $infos);
 

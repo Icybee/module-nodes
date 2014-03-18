@@ -53,7 +53,7 @@ class Hooks
 			return;
 		}
 
-		$event->errors['uid'] = I18n\t('The user %name is used by :count nodes.', array('name' => $operation->record->name, ':count' => $count));
+		$event->errors['uid'] = I18n\t('The user %name is used by :count nodes.', [ 'name' => $operation->record->name, ':count' => $count ]);
 	}
 
 	/**
@@ -160,11 +160,12 @@ class Hooks
 
 			$next = new A
 			(
-				\ICanBoogie\escape(\ICanBoogie\shorten($title, 48, 1)), $next_record->url, array
-				(
+				\ICanBoogie\escape(\ICanBoogie\shorten($title, 48, 1)), $next_record->url, [
+
 					'class' => "next",
-					'title' => I18n\t('Next: :title', array(':title' => $title))
-				)
+					'title' => I18n\t('Next: :title', [ ':title' => $title ])
+
+				]
 			);
 		}
 
@@ -174,11 +175,12 @@ class Hooks
 
 			$previous = new A
 			(
-				\ICanBoogie\escape(\ICanBoogie\shorten($title, 48, 1)), $previous_record->url, array
-				(
+				\ICanBoogie\escape(\ICanBoogie\shorten($title, 48, 1)), $previous_record->url, [
+
 					'class' => "previous",
-					'title' => I18n\t('Previous: :title', array(':title' => $title))
-				)
+					'title' => I18n\t('Previous: :title', [ ':title' => $title ])
+
+				]
 			);
 		}
 
@@ -210,12 +212,13 @@ class Hooks
 			return '<p class="nothing">' . I18n\t('No record yet') . '</p>';
 		}
 
-		$categories = array
-		(
-			'contents' => array(),
-			'resources' => array(),
-			'other' => array()
-		);
+		$categories = [
+
+			'contents' => [],
+			'resources' => [],
+			'other' => []
+
+		];
 
 		$default_category = 'other';
 
@@ -234,13 +237,10 @@ class Hooks
 				$category = $default_category;
 			}
 
-			$title = I18n\t($descriptor[Module::T_TITLE], array(), array('scope' => 'module_title'));
-			$title = I18n\t(strtr($constructor, '.', '_') . '.name.other', array(), array('default' => $title));
+			$title = I18n\t($descriptor[Module::T_TITLE], [], [ 'scope' => 'module_title' ]);
+			$title = I18n\t(strtr($constructor, '.', '_') . '.name.other', [], [ 'default' => $title ]);
 
-			$categories[$category][] = array
-			(
-				$title, $constructor, $count
-			);
+			$categories[$category][] = [ $title, $constructor, $count ];
 		}
 
 		$head = '';
@@ -249,7 +249,7 @@ class Hooks
 		foreach ($categories as $category => $entries)
 		{
 			$max_by_category = max($max_by_category, count($entries));
-			$head .= '<th>&nbsp;</th><th>' . I18n\t($category, array(), array('scope' => 'module_category')) . '</th>';
+			$head .= '<th>&nbsp;</th><th>' . I18n\t($category, [], [ 'scope' => 'module_category' ]) . '</th>';
 		}
 
 		$body = '';
@@ -296,7 +296,7 @@ EOT;
 		$model = $core->models['nodes'];
 
 		$entries = $model
-		->where('uid = ? AND (siteid = 0 OR siteid = ?)', array($core->user_id, $core->site_id))
+		->where('uid = ? AND (siteid = 0 OR siteid = ?)', [ $core->user_id, $core->site_id ])
 		->order('updated_at desc')
 		->limit(10)
 		->all;

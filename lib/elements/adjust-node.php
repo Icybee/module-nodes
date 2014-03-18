@@ -31,18 +31,16 @@ class AdjustNode extends Element
 		$document->js->add(DIR . 'public/module.js');
 	}
 
-	public function __construct(array $attributes=array())
+	public function __construct(array $attributes=[])
 	{
-		parent::__construct
-		(
-			'div', $attributes + array
-			(
-				self::T_CONSTRUCTOR => 'nodes',
-				self::WIDGET_CONSTRUCTOR => 'AdjustNode',
+		parent::__construct('div', $attributes + [
 
-				'data-adjust' => 'adjust-node'
-			)
-		);
+			self::T_CONSTRUCTOR => 'nodes',
+			self::WIDGET_CONSTRUCTOR => 'AdjustNode',
+
+			'data-adjust' => 'adjust-node'
+
+		]);
 	}
 
 	/**
@@ -50,22 +48,28 @@ class AdjustNode extends Element
 	 */
 	protected function alter_class_names(array $class_names)
 	{
-		return parent::alter_class_names($class_names) + array
-		(
+		return parent::alter_class_names($class_names) + [
+
 			'widget-adjust-node' => true
-		);
+
+		];
 	}
 
 	protected function render_inner_html()
 	{
-		$rc = new Element('input', array('type' => 'hidden', 'name' => $this['name'], 'value' => $this['value']))
-		. parent::render_inner_html();
+		$rc = new Element('input', [
+
+			'type' => 'hidden',
+			'name' => $this['name'],
+			'value' => $this['value']
+
+		]) . parent::render_inner_html();
 
 		$constructor = $this[self::T_CONSTRUCTOR];
 
 		$rc .= '<div class="search">';
-		$rc .= new Text(array('class' => 'search', 'placeholder' => I18n\t('Search')));
-		$rc .= $this->get_results(array('selected' => $this['value']), $constructor);
+		$rc .= new Text([ 'class' => 'search', 'placeholder' => I18n\t('Search') ]);
+		$rc .= $this->get_results([ 'selected' => $this['value'] ], $constructor);
 		$rc .= '</div>';
 
 		$this->dataset['constructor'] = $constructor;
@@ -73,14 +77,15 @@ class AdjustNode extends Element
 		return $rc;
 	}
 
-	public function get_results(array $options=array(), $constructor='nodes')
+	public function get_results(array $options=[], $constructor='nodes')
 	{
-		$options += array
-		(
+		$options += [
+
 			'page' => null,
 			'search' => null,
 			'selected' => null
-		);
+
+		];
 
 		list($records, $range) = $this->get_records($constructor, $options);
 
@@ -109,7 +114,7 @@ class AdjustNode extends Element
 		if ($search)
 		{
 			$conditions = '';
-			$conditions_args = array();
+			$conditions_args = [];
 			$words = explode(' ', trim($options['search']));
 			$words = array_map('trim', $words);
 
@@ -142,15 +147,13 @@ class AdjustNode extends Element
 			$records = $query->order('updated_at DESC')->limit($page * $limit, $limit)->all;
 		}
 
-		return array
-		(
-			$records, array
-			(
-				Pager::T_COUNT => $count,
-				Pager::T_LIMIT => $limit,
-				Pager::T_POSITION => $page
-			)
-		);
+		return [ $records, [
+
+			Pager::T_COUNT => $count,
+			Pager::T_LIMIT => $limit,
+			Pager::T_POSITION => $page
+
+		] ];
 	}
 
 	protected function render_records($records, array $range, array $options)
@@ -175,13 +178,7 @@ class AdjustNode extends Element
 
 		$rc .= '</ul>';
 
-		$rc .= new Element\Nodes\Pager
-		(
-			'div', $range + array
-			(
-
-			)
-		);
+		$rc .= new Element\Nodes\Pager('div', $range + []);
 
 		return $rc;
 	}
@@ -190,14 +187,12 @@ class AdjustNode extends Element
 	{
 		$recordid = $record->nid;
 
-		return new A
-		(
-			\ICanBoogie\shorten($record->title), '#', array
-			(
-				'data-nid' => $recordid,
-				'data-title' => $record->title
-			)
-		);
+		return new A(\ICanBoogie\shorten($record->title), '#', [
+
+			'data-nid' => $recordid,
+			'data-title' => $record->title
+
+		]);
 	}
 
 	protected function get_placeholder(array $options)
@@ -208,7 +203,7 @@ class AdjustNode extends Element
 
 		(
 			$search
-			? I18n\t('Aucun enregistrement ne correspond aux termes de recherche spécifiés (%search)', array('%search' => $search))
+			? I18n\t('Aucun enregistrement ne correspond aux termes de recherche spécifiés (%search)', [ '%search' => $search ])
 			: I18n\t("Il n'y a pas d'enregistrements")
 		)
 

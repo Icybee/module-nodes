@@ -27,11 +27,12 @@ class DeleteOperation extends \ICanBoogie\DeleteOperation
 		{
 			$this->response->message = new FormattedString
 			(
-				'%title has been deleted from %module.', array
-				(
+				'%title has been deleted from %module.', [
+
 					'title' => \ICanBoogie\shorten($title),
 					'module' => $this->module->title
-				)
+
+				]
 			);
 		}
 
