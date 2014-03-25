@@ -401,7 +401,11 @@ class TranslationsColumn extends Column
 				return;
 			}
 
-			$translations_raw = $core->models['nodes']->select('siteid, nativeid, language, nid')->where(array('nativeid' => $native_ids, 'siteid' => $site_translations_ids))->order('FIELD(siteid, ' . implode(',', $site_translations_ids) . ')')->all;
+			$translations_raw = $core->models['nodes']
+			->select('siteid, nativeid, language, nid')
+			->where(array('nativeid' => $native_ids, 'siteid' => $site_translations_ids))
+			->order('FIELD(siteid, ' . implode(',', $site_translations_ids) . ')')
+			->all;
 
 			if (!$translations_raw)
 			{
@@ -431,7 +435,11 @@ class TranslationsColumn extends Column
 		$translations = array_keys($translations);
 		$ids = implode(',', $translations);
 
-		$infos = $core->models['nodes']->select('siteid, language')->where('nid IN(' . $ids . ')')->order('FIELD(nid, ' . $ids . ')')->all;
+		$infos = $core->models['nodes']
+		->select('siteid, language')
+		->where('nid IN(' . $ids . ')')
+		->order('FIELD(nid, ' . $ids . ')')
+		->all;
 
 		$translations = array_combine($translations, $infos);
 

@@ -349,11 +349,14 @@ class Node extends \ICanBoogie\ActiveRecord implements \Brickrouge\CSSClassNames
 	 */
 	protected function get_css_class_names()
 	{
+		$nid = $this->nid;
+		$slug = $this->slug;
+
 		return array
 		(
 			'type' => 'node',
-			'id' => 'node-' . $this->nid,
-			'slug' => 'node-slug-' . $this->slug,
+			'id' => $nid ? "node-{$nid}" : null,
+			'slug' => $slug ? "node-slug-{$slug}" : null,
 			'constructor' => 'constructor-' . \ICanBoogie\normalize($this->constructor)
 		);
 	}

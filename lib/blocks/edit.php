@@ -48,8 +48,6 @@ class EditBlock extends \Icybee\EditBlock
 	 * Adds the `title`, `is_online`, `uid` and `siteid` elements.
 	 *
 	 * The `uid` and `siteid` elements are added according to the context.
-	 *
-	 * @see Icybee.EditBlock::get_children()
 	 */
 	protected function get_children()
 	{

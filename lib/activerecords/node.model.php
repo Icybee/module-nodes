@@ -13,6 +13,7 @@ namespace Icybee\Modules\Nodes;
 
 use ICanBoogie\ActiveRecord;
 use ICanBoogie\ActiveRecord\Query;
+use ICanBoogie\DateTime;
 use ICanBoogie\Exception;
 
 /**
@@ -37,10 +38,7 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 			$properties[Node::UID] = $core->user_id;
 		}
 
-		$properties += array
-		(
-			Node::MODIFIED => gmdate('Y-m-d H:i:s')
-		);
+		$properties += array(Node::MODIFIED => DateTime::now());
 
 		if (empty($properties[Node::SLUG]) && isset($properties[Node::TITLE]))
 		{

@@ -20,9 +20,9 @@
 	"require": {
 		"php": ">=5.3.0",
 		"icanboogie/module-installer": "*",
-		"icanboogie/activerecord": "*",
+		"icanboogie/activerecord": "1.x",
 		"brickrouge/css-class-names": "*",
-		"icybee/module-users": "*"
+		"icybee/module-users": "1.x"
 	},
 	"require-dev": {
 		"icanboogie/event": "*"

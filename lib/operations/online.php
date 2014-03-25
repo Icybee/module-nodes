@@ -40,8 +40,6 @@ class OnlineOperation extends Operation
 
 	/**
 	 * Changes the target record is_online property to true and updates the record.
-	 *
-	 * @see ICanBoogie.Operation::process()
 	 */
 	protected function process()
 	{
