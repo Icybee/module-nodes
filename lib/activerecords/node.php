@@ -129,14 +129,14 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	/**
 	 * Returns the slug of the node.
 	 *
-	 * This function is only called if the {@link slug} property was empty during construct.
+	 * This function is only invoked if the {@link slug} property was empty during construct.
 	 * By default it returns a normalized version of the {@link title} property.
 	 *
 	 * @return string
 	 */
 	protected function get_slug()
 	{
-		return \ICanBoogie\normalize($this->title);
+		return slugize($this->title, $this->language);
 	}
 
 	/**

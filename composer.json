@@ -30,7 +30,8 @@
 		"icybee/core": "*"
 	},
 	"autoload": {
-		"classmap": [ "lib" ]
+		"classmap": [ "lib" ],
+		"files": [ "helpers.php" ]
 	},
 	"scripts": {
 		"post-autoload-dump": "ICanBoogie\\AutoConfig\\Generator::on_autoload_dump"

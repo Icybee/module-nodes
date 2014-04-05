@@ -47,7 +47,7 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 
 		if (isset($properties[Node::SLUG]))
 		{
-			$properties[Node::SLUG] = \Icybee\slugize($properties[Node::SLUG]);
+			$properties[Node::SLUG] = slugize($properties[Node::SLUG], isset($properties[Node::LANGUAGE]) ? $properties[Node::LANGUAGE] : null);
 		}
 
 		return parent::save($properties, $key, $options);

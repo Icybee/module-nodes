@@ -88,6 +88,32 @@ category. The other displays a list of the last nodes updated by the user.
 
 
 
+
+## Patching
+
+Node titles are converted into slugs using the `slugize()` method of nodes.
+This method is actually a prototype method and as such can be overridden. The default method uses
+`normalize()`, but a third party might want to provide a better implementation, such as one
+removing stop words according the the language of the node.
+
+```php
+<?php
+
+use Icybee\Modules\Nodes\Node;
+
+$prototype = Prototype::from('Icybee\Modules\Nodes\Node');
+
+$prototype['slugize'] = function(Node $node, $str) {
+
+	return \ICanBoogie\normalize(remove_stop_words($str, $node->language));
+
+};
+```
+
+
+
+
+
 ----------
 
 
