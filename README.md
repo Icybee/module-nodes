@@ -99,15 +99,11 @@ removing stop words according the the language of the node.
 ```php
 <?php
 
-use Icybee\Modules\Nodes\Node;
+Icybee\Modules\Nodes\Helpers::patch('slugize', function($str, $language=null) {
 
-$prototype = Prototype::from('Icybee\Modules\Nodes\Node');
+	return \ICanBoogie\normalize(remove_stop_words($str, $language));
 
-$prototype['slugize'] = function(Node $node, $str) {
-
-	return \ICanBoogie\normalize(remove_stop_words($str, $node->language));
-
-};
+});
 ```
 
 

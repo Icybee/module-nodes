@@ -126,4 +126,29 @@ class NodeTest extends \PHPUnit_Framework_TestCase
 		$this->assertArrayHasKey('updated_at', $node->__sleep());
 		$this->assertArrayHasKey('updated_at', $node->to_array());
 	}
+
+	/**
+	 * @expectedException ICanBoogie\ActiveRecord\StatementInvalid
+	 */
+	public function test_save_empty()
+	{
+		$node = new Node;
+		$node->save();
+	}
+
+	public function test_save_with_title()
+	{
+		$node = new Node;
+		$node->title = 'example';
+		$node->save();
+	}
+
+	public function test_uuid()
+	{
+		$node = new Node;
+		$node->title = "example";
+		$this->assertNull($node->uuid);
+		$node->save();
+		$this->assertNotNull($node->uuid);
+	}
 }

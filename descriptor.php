@@ -21,6 +21,7 @@ return [
 					'uid' => 'foreign',
 					'siteid' => 'foreign',
 					'nativeid' => 'foreign',
+					'uuid' => [ 'char', 36, 'unique' => true, 'charset' => 'ascii/bin' ],
 					'constructor' => [ 'varchar', 64, 'indexed' => true ],
 					'title' => 'varchar',
 					'slug' => [ 'varchar', 80, 'indexed' => true ],

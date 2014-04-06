@@ -40,6 +40,7 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	const NID = 'nid';
 	const UID = 'uid';
 	const SITEID = 'siteid';
+	const UUID = 'uuid';
 	const TITLE = 'title';
 	const SLUG = 'slug';
 	const CONSTRUCTOR = 'constructor';
@@ -61,7 +62,7 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	 *
 	 * @var int
 	 */
-	public $uid;
+	public $uid = 0;
 
 	/**
 	 * Return the user owning the node.
@@ -90,7 +91,7 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	 *
 	 * @var int
 	 */
-	public $siteid;
+	public $siteid = 0;
 
 	/**
 	 * Returns the {@link Site} instance associated with the node.
@@ -111,6 +112,13 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	{
 		$this->siteid = $site->siteid;
 	}
+
+	/**
+	 * A v4 UUID.
+	 *
+	 * @var string
+	 */
+	public $uuid;
 
 	/**
 	 * Title of the node.
@@ -167,7 +175,7 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	 *
 	 * @var bool
 	 */
-	public $is_online;
+	public $is_online = false;
 
 	/**
 	 * Language of the node.
@@ -176,7 +184,7 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	 *
 	 * @var string
 	 */
-	public $language;
+	public $language = '';
 
 	/**
 	 * Returns the language for the page.
@@ -198,7 +206,7 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	 *
 	 * @var int
 	 */
-	public $nativeid;
+	public $nativeid = 0;
 
 	/**
 	 * Creates a Node instance.
@@ -244,6 +252,28 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 		}
 
 		return $value;
+	}
+
+	/**
+	 * Obtains a UUID from the model if the {@link $uuid} property is empty.
+	 */
+	public function save()
+	{
+		if (!$this->uuid)
+		{
+			$this->uuid = $this->model->obtain_uuid();
+		}
+
+		return parent::save();
+	}
+
+	protected function alter_persistent_properties(array $properties, \ICanBoogie\ActiveRecord\Model $model)
+	{
+		return parent::alter_persistent_properties($properties, $model) + [
+
+			'language' => ''
+
+		];
 	}
 
 	/**

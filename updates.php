@@ -11,13 +11,15 @@
 
 namespace Icybee\Modules\Nodes;
 
+use ICanBoogie\Updater\Update;
+
 /**
  * - Renames the `created` columns as `created_as`.
  * - Renames the `modified` columns as `updated_as`.
  *
  * @module nodes
  */
-class Update20131208 extends \ICanBoogie\Updater\Update
+class Update20131208 extends Update
 {
 	public function update_column_created_at()
 	{
@@ -31,5 +33,55 @@ class Update20131208 extends \ICanBoogie\Updater\Update
 		$this->module->model
 		->assert_has_column('modified')
 		->create_column('updated_at');
+	}
+}
+
+/**
+ * Adds the `uuid` column.
+ *
+ * @module nodes
+ */
+class Update20140405 extends Update
+{
+	public function update_column_uuid()
+	{
+		$this->module->model
+		->assert_not_has_column('uuid')
+		->create_column('uuid');
+
+		#
+		# Update records with UUID values.
+		#
+
+		$target = $this->module->model->target;
+		$tokens = $target->select('nid, NULL')->pairs;
+
+		foreach (array_keys($tokens) as $nid)
+		{
+			for (;;)
+			{
+				$token = \ICanBoogie\generate_v4_uuid();
+
+				if (!in_array($token, $tokens))
+				{
+					break;
+				}
+			}
+
+			$tokens[$nid] = $token;
+		}
+
+		$update = $target->prepare("UPDATE `{self}` SET `uuid` = ? WHERE `nid` = ?");
+
+		foreach ($tokens as $nid => $token)
+		{
+			$update($token, $nid);
+		}
+
+		#
+		# Create index.
+		#
+
+		$this->module->model->create_unique_index('uuid');
 	}
 }
