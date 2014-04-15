@@ -9,27 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use ICanBoogie\Core;
-use ICanBoogie\Errors;
-
-use Icybee\Modules\Sites\Site;
-use Icybee\Modules\Users\User;
-
-#
-# Create the repository for Vars
-#
-
-define('ICanBoogie\REPOSITORY', __DIR__ . DIRECTORY_SEPARATOR . 'repository' . DIRECTORY_SEPARATOR);
-
-if (!file_exists(\ICanBoogie\REPOSITORY))
-{
-	mkdir(\ICanBoogie\REPOSITORY);
-}
-
-if (!file_exists(\ICanBoogie\REPOSITORY . 'vars'))
-{
-	mkdir(\ICanBoogie\REPOSITORY . 'vars');
-}
+$_SERVER['DOCUMENT_ROOT'] = __DIR__;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -39,7 +19,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 global $core;
 
-$core = new Core(\ICanBoogie\array_merge_recursive(\ICanBoogie\get_autoconfig(), [
+$core = new \ICanBoogie\Core(\ICanBoogie\array_merge_recursive(\ICanBoogie\get_autoconfig(), [
 
 	'config-path' => [
 
@@ -49,7 +29,7 @@ $core = new Core(\ICanBoogie\array_merge_recursive(\ICanBoogie\get_autoconfig(),
 
 	'module-path' => [
 
-		__DIR__ . '/../'
+		realpath(__DIR__ . '/../')
 
 	]
 
@@ -61,7 +41,7 @@ $core();
 # Install modules
 #
 
-$errors = new Errors();
+$errors = new \ICanBoogie\Errors();
 
 foreach (array_keys($core->modules->enabled_modules_descriptors) as $module_id)
 {
@@ -74,12 +54,28 @@ foreach (array_keys($core->modules->enabled_modules_descriptors) as $module_id)
 	{
 		$core->modules[$module_id]->install($errors);
 	}
-	catch (\Exception $e) {}
+	catch (\Exception $e)
+	{
+		$errors[$module_id] = "Unable to install module: " . $e->getMessage();
+	}
+}
+
+if ($errors->count())
+{
+	foreach ($errors as $error)
+	{
+		echo "$module_id: $error\n";
+	}
+
+	exit(1);
 }
 
 #
 # Create a user
 #
+
+use Icybee\Modules\Users\User;
+use Icybee\Modules\Sites\Site;
 
 User::from([ 'username' => 'admin', 'email' => 'test@example.com' ])->save();
 Site::from([ 'title' => 'example' ])->save();

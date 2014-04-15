@@ -7,6 +7,7 @@ use ICanBoogie\Module;
 
 return [
 
+	Module::T_ID => 'nodes',
 	Module::T_CATEGORY => 'contents',
 	Module::T_DESCRIPTION => 'Centralized node system base',
 	Module::T_MODELS => [
