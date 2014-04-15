@@ -27,6 +27,7 @@
 	},
 	"require-dev": {
 		"icanboogie/icanboogie": "2.x",
+		"icanboogie/i18n": "2.x",
 		"icybee/core": "*"
 	},
 	"autoload": {

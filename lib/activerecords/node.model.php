@@ -46,8 +46,6 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 			}
 		}
 
-		$properties += [ Node::UPDATED_AT => DateTime::now() ];
-
 		if (empty($properties[Node::SLUG]) && isset($properties[Node::TITLE]))
 		{
 			$properties[Node::SLUG] = $properties[Node::TITLE];

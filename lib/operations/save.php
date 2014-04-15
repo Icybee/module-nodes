@@ -11,20 +11,16 @@
 
 namespace Icybee\Modules\Nodes;
 
+use ICanBoogie\DateTime;
 use ICanBoogie\I18n\FormattedString;
 
 /**
  * Saves a node.
- *
- * Adds the "display" save mode.
  */
 class SaveOperation extends \ICanBoogie\SaveOperation
 {
 	/**
 	 * Overrides the method to handle the following properties:
-	 *
-	 * `constructor`: In order to avoid misuse and errors, the constructor of the record is set by
-	 * the method.
 	 *
 	 * `uid`: Only users with the PERMISSION_ADMINISTER permission can choose the user of records.
 	 * If the user saving a record has no such permission, the Node::UID property is removed from
@@ -32,12 +28,24 @@ class SaveOperation extends \ICanBoogie\SaveOperation
 	 *
 	 * `siteid`: If the user is creating a new record or the user has no permission to choose the
 	 * record's site, the property is set to the value of the working site's id.
+	 *
+	 * Also, the following default values are used:
+	 *
+	 * - `uid`: 0
+	 * - `nativeid`: 0
+	 * - `language`: an empty string
 	 */
 	protected function lazy_get_properties()
 	{
 		global $core;
 
-		$properties = parent::lazy_get_properties();
+		$properties = parent::lazy_get_properties() + [
+
+			Node::UID => 0,
+			Node::NATIVEID => 0,
+			Node::LANGUAGE => ''
+
+		];
 
 		$user = $core->user;
 
@@ -51,12 +59,7 @@ class SaveOperation extends \ICanBoogie\SaveOperation
 			$properties[Node::SITEID] = $core->site_id;
 		}
 
-		/*
-		if (!empty($properties[Node::SITEID]))
-		{
-			$properties[Node::LANGUAGE] = $core->models['sites'][$properties[Node::SITEID]]->language;
-		}
-		*/
+		$properties[Node::UPDATED_AT] = DateTime::now();
 
 		return $properties;
 	}

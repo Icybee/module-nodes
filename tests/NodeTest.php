@@ -12,6 +12,7 @@
 namespace Icybee\Modules\Nodes;
 
 use Icybee\Modules\Sites\Site;
+use ICanBoogie\DateTime;
 
 class NodeTest extends \PHPUnit_Framework_TestCase
 {
@@ -114,6 +115,32 @@ class NodeTest extends \PHPUnit_Framework_TestCase
 		$this->assertArrayHasKey('created_at', $node->to_array());
 	}
 
+	public function test_create_at_MUST_be_modified_if_empty_during_save()
+	{
+		$node = new Node;
+		$node->title = "Example";
+		$node->save();
+
+		$now = DateTime::now()->utc;
+		$this->assertFalse($node->created_at->is_empty);
+		$this->assertEquals($now, $node->created_at);
+
+		$node->delete();
+	}
+
+	public function test_created_at_MUST_NOT_be_modified_if_not_empty_during_save()
+	{
+		$node = new Node;
+		$node->title = "Example";
+
+		$created_at = new DateTime('-2 week');
+		$node->created_at = $created_at;
+		$node->save();
+		$this->assertEquals($created_at->utc, $node->created_at->utc);
+
+		$node->delete();
+	}
+
 	public function test_updated_at()
 	{
 		$node = new Node;
@@ -125,6 +152,24 @@ class NodeTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertArrayHasKey('updated_at', $node->__sleep());
 		$this->assertArrayHasKey('updated_at', $node->to_array());
+	}
+
+	public function test_create_at_MUST_be_modified_during_save()
+	{
+		$node = new Node;
+		$node->title = "Example";
+		$this->assertTrue($node->updated_at->is_empty);
+		$node->save();
+
+		$now = DateTime::now()->utc;
+		$this->assertFalse($node->created_at->is_empty);
+		$this->assertEquals($now, $node->created_at);
+
+		$node->updated_at = '-2 week';
+		$node->save();
+		$this->assertEquals($now, $node->created_at);
+
+		$node->delete();
 	}
 
 	/**

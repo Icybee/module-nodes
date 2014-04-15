@@ -267,8 +267,21 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 		return parent::save();
 	}
 
+	/**
+	 * Sets {@link $created_at} to "now" if it is empty, and sets {@link $updated_at} to "now"
+	 * before passing the method to the parent class.
+	 *
+	 * Adds `language` if it is not defined.
+	 */
 	protected function alter_persistent_properties(array $properties, \ICanBoogie\ActiveRecord\Model $model)
 	{
+		if ($this->get_created_at()->is_empty)
+		{
+			$this->set_created_at('now');
+		}
+
+		$this->set_updated_at('now');
+
 		return parent::alter_persistent_properties($properties, $model) + [
 
 			'language' => ''
