@@ -16,6 +16,7 @@ use ICanBoogie\Event;
 use Brickrouge\Element;
 use Brickrouge\Form;
 use Brickrouge\Widget;
+use Icybee\Modules\Views\View;
 
 /**
  * Nodes module.
@@ -33,6 +34,7 @@ class Module extends \Icybee\Module
 
 			'view' => [
 
+				View::CLASSNAME => __NAMESPACE__ . '\View',
 				'title' => "Record detail",
 				'provider' => __NAMESPACE__ . '\ViewProvider',
 				'assets' => [],
@@ -42,6 +44,7 @@ class Module extends \Icybee\Module
 
 			'list' => [
 
+				View::CLASSNAME => __NAMESPACE__ . '\View',
 				'title' => "Records list",
 				'provider' => __NAMESPACE__ . '\ViewProvider',
 				'assets' => [],
@@ -51,6 +54,7 @@ class Module extends \Icybee\Module
 
 			'home' => [
 
+				View::CLASSNAME => __NAMESPACE__ . '\View',
 				'title' => "Records home",
 				'provider' => __NAMESPACE__ . '\ViewProvider',
 				'assets' => [],

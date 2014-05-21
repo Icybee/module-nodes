@@ -12,6 +12,7 @@
 namespace Icybee\Modules\Nodes;
 
 use ICanBoogie\ActiveRecord;
+use ICanBoogie\ActiveRecord\CriterionList;
 use ICanBoogie\ActiveRecord\Query;
 use ICanBoogie\DateTime;
 use ICanBoogie\Exception;
@@ -151,6 +152,19 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 	}
 
 	/**
+	 * Orders the records according to the date they were created.
+	 *
+	 * @param Query $query
+	 * @param int $direction
+	 *
+	 * @return Query
+	 */
+	protected function scope_ordered(Query $query, $direction=-1)
+	{
+		return $query->order('created_at ' . ($direction < 0 ? 'DESC' : 'ASC'));
+	}
+
+	/**
 	 * Finds the users the records belong to.
 	 *
 	 * The `user` property of the records is set to the user they belong to.
@@ -196,5 +210,33 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 				return $uuid;
 			}
 		}
+	}
+
+	/**
+	 * Return the criteria supported by the model as a {@link CriterionList} instance.
+	 *
+	 * @return \Icybee\Modules\Nodes\CriterionList
+	 *
+	 * TODO-20140521: I would prefer this outside of the model, in a config file
+	 */
+	protected function lazy_get_criterion_list()
+	{
+		return new CriterionList($this->get_criteria());
+	}
+
+	/**
+	 * TODO-20140521: I would prefer this outside of the model, in a config file
+	 *
+	 * @return array
+	 */
+	protected function get_criteria()
+	{
+		return [
+
+			Node::NID => __NAMESPACE__ . '\NidCriterion',
+			Node::SLUG => __NAMESPACE__ . '\SlugCriterion',
+			Node::IS_ONLINE => __NAMESPACE__ . '\IsOnlineCriterion'
+
+		];
 	}
 }
