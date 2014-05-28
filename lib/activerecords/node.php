@@ -264,6 +264,13 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 			$this->uuid = $this->model->obtain_uuid();
 		}
 
+		if ($this->get_created_at()->is_empty)
+		{
+			$this->set_created_at('now');
+		}
+
+		$this->set_updated_at('now');
+
 		return parent::save();
 	}
 
@@ -275,13 +282,6 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	 */
 	protected function alter_persistent_properties(array $properties, \ICanBoogie\ActiveRecord\Model $model)
 	{
-		if ($this->get_created_at()->is_empty)
-		{
-			$this->set_created_at('now');
-		}
-
-		$this->set_updated_at('now');
-
 		return parent::alter_persistent_properties($properties, $model) + [
 
 			'language' => ''

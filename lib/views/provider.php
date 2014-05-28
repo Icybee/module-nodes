@@ -14,100 +14,51 @@ namespace Icybee\Modules\Nodes;
 use ICanBoogie\ActiveRecord\Query;
 use ICanBoogie\Event;
 use ICanBoogie\Exception;
-use ICanBoogie\HTTP\HTTPError;
-use ICanBoogie\HTTP\NotFound;
 
-class ViewProvider extends \Icybee\Modules\Views\ActiveRecordProvider
+class ViewProvider extends \ICanBoogie\ActiveRecord\Fetcher
 {
 	/**
-	 * @throws a HTTPException with code 404 if no record matching the conditions could be found
-	 * and the view is of type "view".
-	 *
-	 * @throws a HTTPException with code 401 if the record is offline and user don't have access
-	 * permission and the view is of type "view".
+	 * Defaults the `order` modifier to "-created_at".
 	 */
-	public function __invoke()
+	public function __invoke(array $modifiers)
 	{
-		global $core;
+		return parent::__invoke($modifiers + [
 
-		$rc = parent::__invoke();
+			'order' => '-created_at'
 
-		if ($rc instanceof Node)
-		{
-			if (!$rc)
-			{
-				throw new NotFound('The requested record was not found.');
-			}
-
-			if (!$rc->is_online)
-			{
-				if (!$core->user->has_permission(\ICanBoogie\Module::PERMISSION_ACCESS, $rc->constructor))
-				{
-					throw new HTTPError('The requested record requires authentication.', 401);
-				}
-
-				$rc->title .= ' ✎';
-			}
-
-			$page = isset($core->request->context->page) ? $core->request->context->page : null;
-
-			if ($page)
-			{
-				$page->title = $rc->title;
-
-				if ($this->view->type == 'view')
-				{
-					$page->node = $rc;
-				}
-			}
-		}
-
-		return $rc;
+		]);
 	}
 
 	/**
-	 * Returns the conditions unaltered.
+	 * Alters the initial query with the following scopes:
+	 *
+	 * - `own`: @see \Icybee\Modules\Nodes\Model::scope_own
+	 * - `similar_site`: @see \Icybee\Modules\Nodes\Model::scope_similar_site
+	 * - `similar_language`: @see \Icybee\Modules\Nodes\Model::scope_similar_language
 	 */
-	protected function alter_conditions(array $conditions)
+	protected function create_initial_query()
 	{
-		return $conditions;
+		return parent::create_initial_query()
+		->own
+		->similar_site
+		->similar_language;
 	}
 
 	/**
-	 * Alters the query to search for records from the same constructor, a similar site and a
-	 * similar language.
+	 * If the `nid` conditions is defined, only this condition is kept.
 	 *
-	 * The method also alters the query if the `nid` or `slug` conditions are defined.
-	 *
-	 * Finaly if the return type is RETURN_MANY the query is altered to search for online nodes
-	 * only.
+	 * TODO-20140521: We might want to avoid this in the future because if conditions are extracted
+	 * form the URL we have no way of knowing that the URL is deprecated.
 	 */
-	protected function alter_query(Query $query, array $conditions)
+	public function alter_conditions(array &$conditions, array $modifiers)
 	{
-		$query->own->similar_site->similar_language;
+		parent::alter_conditions($conditions, $modifiers);
 
-		if (isset($conditions['nid']))
+		if (!empty($conditions['nid']))
 		{
-			$query->filter_by_nid($conditions['nid']);
-		}
-		else if (isset($conditions['slug']))
-		{
-			$query->filter_by_slug($conditions['slug']);
-		}
+			$conditions = [ 'nid' => $conditions['nid'] ];
 
-		if ($this->returns == self::RETURNS_MANY)
-		{
-			$query->filter_by_is_online(true);
+			return;
 		}
-
-		return parent::alter_query($query, $conditions)->order('created_at DESC');
-	}
-
-	/**
-	 * Returns the rendering context unaltered.
-	 */
-	protected function alter_context(\BlueTihi\Context $context, Query $query, array $conditions)
-	{
-		return $context;
 	}
 }
