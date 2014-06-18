@@ -12,6 +12,7 @@
 namespace Icybee\Modules\Nodes;
 
 use ICanBoogie\DateTime;
+use ICanBoogie\HTTP\HTTPError;
 use ICanBoogie\HTTP\Request;
 use ICanBoogie\Operation;
 
@@ -19,15 +20,22 @@ use Icybee\Modules\Nodes\SaveOperationTest\FakeSaveOperation;
 
 class SaveOperationTest extends \PHPUnit_Framework_TestCase
 {
+	/**
+	 * @var \Icybee\Modules\Users\User
+	 */
+	static private $user;
+
 	static public function setupBeforeClass()
 	{
 		global $core;
 
-		$core->models['users'][1]->login();
+		self::$user = $core->models['users'][1];
 	}
 
 	public function test_process()
 	{
+		self::$user->login();
+
 		$request = Request::from([
 
 			'is_post' => true,
@@ -47,6 +55,8 @@ class SaveOperationTest extends \PHPUnit_Framework_TestCase
 		$response = $operation($request);
 		$record = $operation->record;
 
+		self::$user->logout();
+
 		$this->assertEmpty($record->uid);
 		$this->assertEquals(1, $record->siteid);
 		$this->assertNotEmpty($record->uuid);
@@ -57,6 +67,37 @@ class SaveOperationTest extends \PHPUnit_Framework_TestCase
 		$this->assertEmpty($record->nativeid);
 		$this->assertEquals(DateTime::now()->utc, $record->created_at);
 		$this->assertEquals(DateTime::now()->utc, $record->updated_at);
+	}
+
+	public function test_failure_user_authentication()
+	{
+		$request = Request::from([
+
+			'is_post' => true,
+
+			'request_params' => [
+
+				Operation::DESTINATION => 'nodes',
+				Operation::NAME => 'save',
+
+				'title' => "My Example"
+
+			]
+
+		]);
+
+		$operation = new FakeSaveOperation;
+
+		try
+		{
+			$response = $operation($request);
+
+			$this->fail('Expected HTTPError.');
+		}
+		catch (HTTPError $e)
+		{
+			$this->assertEquals(401, $e->getCode());
+		}
 	}
 }
 
