@@ -22,12 +22,17 @@ class SaveOperation extends \ICanBoogie\SaveOperation
 	/**
 	 * Overrides the method to handle the following properties:
 	 *
-	 * `uid`: Only users with the PERMISSION_ADMINISTER permission can choose the user of records.
+	 * - `uid`: Only users with the PERMISSION_ADMINISTER permission can choose the user of a record.
 	 * If the user saving a record has no such permission, the Node::UID property is removed from
-	 * the properties created by the parent method.
+	 * the properties created by the parent method. If a record is created (the operation's key is
+	 * empty) the identifier of the current user is used.
 	 *
-	 * `siteid`: If the user is creating a new record or the user has no permission to choose the
+	 * - `siteid`: If the user is creating a new record or the user has no permission to choose the
 	 * record's site, the property is set to the value of the working site's id.
+	 *
+	 * - `created_at`: Is set to "now" for new records.
+	 *
+	 * - `updated_at`: Is set to "now".
 	 *
 	 * Also, the following default values are used:
 	 *
@@ -49,15 +54,40 @@ class SaveOperation extends \ICanBoogie\SaveOperation
 
 		$user = $core->user;
 
+		# uid
+
 		if (!$user->has_permission(Module::PERMISSION_ADMINISTER, $this->module))
 		{
 			unset($properties[Node::UID]);
 		}
 
+		if (empty($properties[Node::UID]))
+		{
+			if (!$this->key)
+			{
+				$properties[Node::UID] = $user->uid;
+			}
+			else
+			{
+				unset($properties[Node::UID]);
+			}
+		}
+
+		# siteid
+
 		if (!$this->key || !$user->has_permission(Module::PERMISSION_MODIFY_BELONGING_SITE))
 		{
 			$properties[Node::SITEID] = $core->site_id;
 		}
+
+		# created_at
+
+		if (!$this->key)
+		{
+			$properties[Node::CREATED_AT] = DateTime::now();
+		}
+
+		# updated_at
 
 		$properties[Node::UPDATED_AT] = DateTime::now();
 

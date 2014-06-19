@@ -32,19 +32,9 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 	 */
 	public function save(array $properties, $key=null, array $options=[])
 	{
-		global $core;
-
-		if (!$key)
+		if (!$key && empty($properties[Node::UUID]))
 		{
-			if (!array_key_exists(Node::UID, $properties)) // TODO-20121004: move this to operation
-			{
-				$properties[Node::UID] = $core->user_id;
-			}
-
-			if (empty($properties[Node::UUID]))
-			{
-				$properties[Node::UUID] = $this->obtain_uuid();
-			}
+			$properties[Node::UUID] = $this->obtain_uuid();
 		}
 
 		if (empty($properties[Node::SLUG]) && isset($properties[Node::TITLE]))
