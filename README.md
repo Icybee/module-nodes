@@ -91,10 +91,12 @@ category. The other displays a list of the last nodes updated by the user.
 
 ## Patching
 
-Node titles are converted into slugs using the `slugize()` method of nodes.
-This method is actually a prototype method and as such can be overridden. The default method uses
-`normalize()`, but a third party might want to provide a better implementation, such as one
-removing stop words according the the language of the node.
+Node slugs are created using the `slugize()` function. The default implementation uses
+`normalize()`, but one might want to provide a better implementation, such as one removing stop
+words according the the language of the node.
+
+The following example demonstrates how the `slugize()` function could be patched to use a
+`remove_stop_words()` function:
 
 ```php
 <?php
