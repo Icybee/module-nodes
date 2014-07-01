@@ -2,9 +2,7 @@
 
 The Nodes module (`nodes`) introduces the _Node_ content type to the CMS
 [Icybee](http://icybee.org). Most modules introducing content types inherit from it, this
-includes the [Contents](https://github.com/Icybee/Icybee/tree/master/modules/contents)
-module (`contents`) as well as the [Pages](https://github.com/Icybee/Icybee/tree/master/modules/pages)
-module (`pages`).
+includes the [Contents module][] (`contents`) as well as the [Pages module][] module (`pages`).
 
 
 
@@ -188,3 +186,10 @@ The package is continuously tested by [Travis CI](http://about.travis-ci.org/).
 ## License
 
 This package is licensed under the New BSD License - See the [LICENSE](LICENSE) file for details.
+
+
+
+
+
+[Contents module]: https://github.com/Icybee/module-contents/
+[Pages module]: https://github.com/Icybee/module-pages/
