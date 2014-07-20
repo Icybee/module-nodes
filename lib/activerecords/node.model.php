@@ -12,10 +12,7 @@
 namespace Icybee\Modules\Nodes;
 
 use ICanBoogie\ActiveRecord;
-use ICanBoogie\ActiveRecord\CriterionList;
 use ICanBoogie\ActiveRecord\Query;
-use ICanBoogie\DateTime;
-use ICanBoogie\Exception;
 
 /**
  * Nodes model.
@@ -61,7 +58,7 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 
 		if ($native_refs)
 		{
-			throw new Exception('Node record cannot be deleted because it is used as native source by the following records: \1', array(implode(', ', $native_refs)));
+			throw new \Exception(\ICanBoogie\format('Node record cannot be deleted because it is used as native source by the following records: {0}', [ implode(', ', $native_refs) ]));
 		}
 
 		return parent::delete($key);
