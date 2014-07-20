@@ -201,32 +201,4 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 			}
 		}
 	}
-
-	/**
-	 * Return the criteria supported by the model as a {@link CriterionList} instance.
-	 *
-	 * @return \Icybee\Modules\Nodes\CriterionList
-	 *
-	 * TODO-20140521: I would prefer this outside of the model, in a config file
-	 */
-	protected function lazy_get_criterion_list()
-	{
-		return new CriterionList($this->get_criteria());
-	}
-
-	/**
-	 * TODO-20140521: I would prefer this outside of the model, in a config file
-	 *
-	 * @return array
-	 */
-	protected function get_criteria()
-	{
-		return [
-
-			Node::NID => __NAMESPACE__ . '\NidCriterion',
-			Node::SLUG => __NAMESPACE__ . '\SlugCriterion',
-			Node::IS_ONLINE => __NAMESPACE__ . '\IsOnlineCriterion'
-
-		];
-	}
 }

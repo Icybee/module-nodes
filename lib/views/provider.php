@@ -11,24 +11,8 @@
 
 namespace Icybee\Modules\Nodes;
 
-use ICanBoogie\ActiveRecord\Query;
-use ICanBoogie\Event;
-use ICanBoogie\Exception;
-
 class ViewProvider extends \ICanBoogie\ActiveRecord\Fetcher
 {
-	/**
-	 * Defaults the `order` modifier to "-created_at".
-	 */
-	public function __invoke(array $modifiers)
-	{
-		return parent::__invoke($modifiers + [
-
-			'order' => '-created_at'
-
-		]);
-	}
-
 	/**
 	 * Alters the initial query with the following scopes:
 	 *
