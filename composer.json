@@ -30,6 +30,9 @@
 		"icanboogie/i18n": "2.x",
 		"icybee/core": "*"
 	},
+	"suggest": {
+		"icanboogie/facets": "Facets support"
+	},
 	"autoload": {
 		"classmap": [ "lib" ],
 		"files": [ "helpers.php" ]
