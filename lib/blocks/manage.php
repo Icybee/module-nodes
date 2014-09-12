@@ -13,7 +13,6 @@ namespace Icybee\Modules\Nodes;
 
 use ICanBoogie\ActiveRecord\Query;
 use ICanBoogie\I18n;
-use ICanBoogie\Route;
 
 use Brickrouge\A;
 use Brickrouge\Document;
