@@ -127,8 +127,9 @@ class TitleSlugCombo extends \Brickrouge\Widget
 				$url = $node->url;
 				$url_label = \ICanBoogie\shorten($url, 64);
 
-				$rc .= '<p class="small light">';
-				$rc .= '<strong>URL&nbsp;:</strong> ' . $url_label;
+				$rc .= <<<EOT
+<p class="small light"><strong>URL&nbsp;:</strong>$url_label</p>
+EOT;
 			}
 		}
 
