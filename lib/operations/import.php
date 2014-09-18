@@ -87,7 +87,7 @@ class ImportOperation extends Operation
 
 		if (!$data)
 		{
-			throw new \ICanBoogie\Exception("Failed to decode JSON: !json", [ 'json' => $json ]);
+			throw new \Exception(\ICanBoogie\format("Failed to decode JSON: !json", [ 'json' => $json ]));
 		}
 
 		return (array) $data->rc;
