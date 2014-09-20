@@ -2,24 +2,9 @@
 	width: 35%;
 }
 
-.cell--url,
-.cell--is-online {
-	width: 20px;
-	text-align: center;
-}
-
-.cell--url a {
+.listview .cell--url a {
 	text-decoration: none !important;
 	vertical-align: middle;
-}
-
-.cell--is-online .checkbox-wrapper {
-	margin: auto;
-}
-
-.cell--is-online .checkbox-wrapper.checked {
-	background-color: #cfc;
-	border-color: #9c9;
 }
 
 #manager span.translations {
