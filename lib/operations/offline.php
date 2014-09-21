@@ -44,7 +44,12 @@ class OfflineOperation extends Operation
 		$record->is_online = false;
 		$record->save();
 
-		$this->response->message = new FormattedString('!title is now offline', [ '!title' => $record->title ]);
+		$this->response->message = new FormattedString('%title is now offline', [
+
+			'title' => \ICanBoogie\shorten($this->record->title)
+
+		]);
+
 
 		return true;
 	}

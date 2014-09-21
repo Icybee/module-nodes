@@ -64,6 +64,38 @@ return [
 	'module_category.other' => 'Autre',
 	'module_title.nodes' => 'Nœuds',
 
+	'offline.operation' => [
+
+		'title' => "Dépublier des enregistrements",
+		'short_title' => "Dépublier",
+		'continue' => "Dépublier",
+		'cancel' => "Ne pas dépublier",
+
+		'confirm' => [
+
+			'one' => "Êtes-vous sûr de vouloir dépublier l'enregistrement sélectionné ?",
+			'other' => "Êtes-vous sûr de vouloir dépublier les :count enregistrements sélectionnés ?"
+
+		]
+
+	],
+
+	'online.operation' => [
+
+		'title' => "Publier des enregistrements",
+		'short_title' => "Publier",
+		'continue' => "Publier",
+		'cancel' => "Ne pas publier",
+
+		'confirm' => [
+
+			'one' => "Êtes-vous sûr de vouloir publier l'enregistrement sélectionné ?",
+			'other' => "Êtes-vous sûr de vouloir publier les :count enregistrements sélectionnés ?"
+
+		]
+
+	],
+
 	'option' => [
 
 		'save_mode_display' => 'Enregistrer et afficher'
@@ -90,6 +122,8 @@ return [
 
 	'%title has been updated in :module.' => '%title a été mis à jour dans :module.',
 	'%title has been created in :module.' => '%title a été créé dans :module.',
+	"%title is now online" => "%title est maintenant publié",
+	"%title is now offline" => "%title est maintenant dépublié",
 
 	'The requested record was not found.' => "L'enregistrement demandé n'a pu être trouvé.",
 	'Next: :title' => 'Suivant : :title', // il y a un espace non sécable ici

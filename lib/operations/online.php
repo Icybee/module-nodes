@@ -44,7 +44,11 @@ class OnlineOperation extends Operation
 		$record->is_online = true;
 		$record->save();
 
-		$this->response->message = new FormattedString('!title is now online', [ '!title' => $record->title ]);
+		$this->response->message = new FormattedString('%title is now online', [
+
+			'title' => \ICanBoogie\shorten($this->record->title)
+
+		]);
 
 		return true;
 	}
