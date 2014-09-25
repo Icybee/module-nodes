@@ -36,7 +36,7 @@ class AdjustNode extends Element
 		parent::__construct('div', $attributes + [
 
 			self::T_CONSTRUCTOR => 'nodes',
-			self::WIDGET_CONSTRUCTOR => 'AdjustNode',
+			self::IS => 'AdjustNode',
 
 			'data-adjust' => 'adjust-node'
 
