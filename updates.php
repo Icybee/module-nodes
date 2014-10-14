@@ -14,8 +14,8 @@ namespace Icybee\Modules\Nodes;
 use ICanBoogie\Updater\Update;
 
 /**
- * - Renames the `created` columns as `created_as`.
- * - Renames the `modified` columns as `updated_as`.
+ * - Renames the `created` columns as `created_at`.
+ * - Renames the `modified` columns as `updated_at`.
  *
  * @module nodes
  */
@@ -32,7 +32,7 @@ class Update20131208 extends Update
 	{
 		$this->module->model
 		->assert_has_column('modified')
-		->create_column('updated_at');
+		->rename_column('modified', 'updated_at');
 	}
 }
 
