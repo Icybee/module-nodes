@@ -31,7 +31,8 @@
 		"icybee/core": "*"
 	},
 	"suggest": {
-		"icanboogie/facets": "Facets support"
+		"icanboogie/facets": "Facets support",
+		"icybee/modules-registry": "Support for metas data"
 	},
 	"autoload": {
 		"classmap": [ "lib" ],
