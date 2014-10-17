@@ -14,6 +14,7 @@ namespace Icybee\Modules\Nodes;
 use ICanBoogie\ActiveRecord\RecordNotFound;
 use ICanBoogie\Event;
 use ICanBoogie\I18n;
+use ICanBoogie\Module\Descriptor;
 use ICanBoogie\Operation\BeforeProcessEvent;
 
 use Brickrouge\A;
@@ -230,14 +231,14 @@ class Hooks
 			}
 
 			$descriptor = $core->modules->descriptors[$constructor];
-			$category = $descriptor[Module::T_CATEGORY];
+			$category = $descriptor[Descriptor::CATEGORY];
 
 			if (!isset($categories[$category]))
 			{
 				$category = $default_category;
 			}
 
-			$title = I18n\t($descriptor[Module::T_TITLE], [], [ 'scope' => 'module_title' ]);
+			$title = I18n\t($descriptor[Descriptor::TITLE], [], [ 'scope' => 'module_title' ]);
 			$title = I18n\t(strtr($constructor, '.', '_') . '.name.other', [], [ 'default' => $title ]);
 
 			$categories[$category][] = [ $title, $constructor, $count ];
