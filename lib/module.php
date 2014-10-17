@@ -17,7 +17,7 @@ use Brickrouge\Element;
 use Brickrouge\Form;
 use Brickrouge\Widget;
 
-use Icybee\Modules\Views\View;
+use Icybee\Modules\Views\ViewOptions;
 
 /**
  * Nodes module.
@@ -35,31 +35,25 @@ class Module extends \Icybee\Module
 
 			'view' => [
 
-				View::CLASSNAME => __NAMESPACE__ . '\View',
-				'title' => "Record detail",
-				'provider' => __NAMESPACE__ . '\ViewProvider',
-				'assets' => [],
-				'renders' => \Icybee\Modules\Views\View::RENDERS_ONE
+				ViewOptions::TITLE => "Record detail",
+				ViewOptions::PROVIDER_CLASSNAME => ViewOptions::PROVIDER_CLASSNAME_AUTO,
+				ViewOptions::RENDERS => ViewOptions::RENDERS_ONE
 
 			],
 
 			'list' => [
 
-				View::CLASSNAME => __NAMESPACE__ . '\View',
-				'title' => "Records list",
-				'provider' => __NAMESPACE__ . '\ViewProvider',
-				'assets' => [],
-				'renders' => \Icybee\Modules\Views\View::RENDERS_MANY
+				ViewOptions::TITLE => "Records list",
+				ViewOptions::PROVIDER_CLASSNAME => ViewOptions::PROVIDER_CLASSNAME_AUTO,
+				ViewOptions::RENDERS => ViewOptions::RENDERS_MANY
 
 			],
 
 			'home' => [
 
-				View::CLASSNAME => __NAMESPACE__ . '\View',
-				'title' => "Records home",
-				'provider' => __NAMESPACE__ . '\ViewProvider',
-				'assets' => [],
-				'renders' => \Icybee\Modules\Views\View::RENDERS_MANY
+				ViewOptions::TITLE => "Records home",
+				ViewOptions::PROVIDER_CLASSNAME => ViewOptions::PROVIDER_CLASSNAME_AUTO,
+				ViewOptions::RENDERS => ViewOptions::RENDERS_MANY
 
 			]
 
