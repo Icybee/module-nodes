@@ -11,7 +11,6 @@
 
 namespace Icybee\Modules\Nodes;
 
-use ICanBoogie\Events;
 use ICanBoogie\HTTP\Request;
 use ICanBoogie\Operation;
 

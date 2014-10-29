@@ -114,9 +114,12 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 	 */
 	protected function scope_similar_site(Query $query, $siteid=null)
 	{
-		global $core;
+		if ($siteid === null)
+		{
+			$siteid = $this->app->site->siteid;
+		}
 
-		return $query->where('siteid = 0 OR siteid = ?', $siteid !== null ? $siteid : $core->site->siteid);
+		return $query->where('siteid = 0 OR siteid = ?', $siteid);
 	}
 
 	/**
@@ -133,9 +136,12 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 	 */
 	protected function scope_similar_language(Query $query, $language=null)
 	{
-		global $core;
+		if ($language === null)
+		{
+			$language = $this->app->site->language;
+		}
 
-		return $query->where('language = "" OR language = ?', $language !== null ? $language : $core->site->language);
+		return $query->where('language = "" OR language = ?', $language);
 	}
 
 	/**
