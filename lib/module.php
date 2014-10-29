@@ -11,12 +11,6 @@
 
 namespace Icybee\Modules\Nodes;
 
-use ICanBoogie\Event;
-
-use Brickrouge\Element;
-use Brickrouge\Form;
-use Brickrouge\Widget;
-
 use Icybee\Modules\Views\ViewOptions;
 
 /**
@@ -91,8 +85,6 @@ class Module extends \Icybee\Module
 
 			];
 
-// 			\ICanBoogie\log("create default routes for $module_id");
-
 			# manage (index)
 
 			$routes["admin:$module_id"] = [
@@ -154,8 +146,6 @@ class Module extends \Icybee\Module
 		}
 
 		new Module\CreateDefaultRoutesEvent($modules['nodes'], [ 'routes' => &$routes ]);
-
-// 		var_dump($routes);
 
 		$export = var_export($routes,true);
 

@@ -163,7 +163,6 @@ use ICanBoogie\ActiveRecord\Query;
 use ICanBoogie\I18n;
 
 use Icybee\ManageBlock\Column;
-use Icybee\ManageBlock\FilterDecorator;
 
 class EditDecorator extends \Icybee\ManageBlock\EditDecorator
 {

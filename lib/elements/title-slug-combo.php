@@ -44,8 +44,6 @@ class TitleSlugCombo extends \Brickrouge\Widget
 
 		];
 
-		$label = $attributes[Element::LABEL];
-
 		parent::__construct('div', $attributes + [
 
 			Element::CHILDREN => [

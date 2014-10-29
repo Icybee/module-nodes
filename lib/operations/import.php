@@ -61,21 +61,9 @@ class ImportOperation extends Operation
 
 		});
 
-		/*
-		$siteid = $core->site_id;
-		$keys = $core->models['nodes']->select('nid')->filter_by_siteid($siteid)->all(\PDO::FETCH_COLUMN);
-
-		if ($keys)
-		{
-			$core->models['nodes']->where([ 'nid' => $keys ])->delete();
-			$core->models['pages']->where([ 'nid' => $keys ])->delete();
-			$core->models['pages/contents']->where([ 'pageid' => $keys ])->delete();
-		}
-		*/
-
 		$this->import($data, $save);
 
-		$this->response->message = "Records were successfuly imported.";
+		$this->response->message = "Records were successfully imported.";
 
 		return true;
 	}

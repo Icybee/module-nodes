@@ -18,7 +18,6 @@ use ICanBoogie\Module\Descriptor;
 use ICanBoogie\Operation\BeforeProcessEvent;
 
 use Brickrouge\A;
-use Brickrouge\Element;
 
 class Hooks
 {
@@ -280,7 +279,7 @@ EOT;
 			$body .= '</tr>';
 		}
 
-		return $rc = <<<EOT
+		return <<<EOT
 <table>
 	<thead><tr>$head</tr></thead>
 	<tbody>$body</tbody>
