@@ -35,9 +35,4 @@ class ExportBlock extends Form
 
 		]);
 	}
-
-	protected function render_inner_html()
-	{
-		return "ouic" . parent::render_inner_html();
-	}
 }

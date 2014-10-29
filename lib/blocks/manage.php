@@ -82,32 +82,6 @@ class ManageBlock extends \Icybee\ManageBlock
 		]);
 	}
 
-	/*
-	protected function parseColumns($columns)
-	{
-		$translations = $this->model->where('constructor = ? AND nativeid != 0', (string) $this->module)->count();
-
-		if ($translations)
-		{
-			$expanded = array();
-
-			foreach ($columns as $identifier => $column)
-			{
-				$expanded[$identifier] = $column;
-
-				if ($identifier == 'is_online')
-				{
-					$expanded['translations'] = __CLASS__ . '\TranslationsColumn';
-				}
-			}
-
-			$columns = $expanded;
-		}
-
-		return parent::parseColumns($columns);
-	}
-	*/
-
 	/**
 	 * Alters the query with the 'is_online' and 'uid' filters. Also adds a condition on the
 	 * siteid, which must be the same as the current site or zero.

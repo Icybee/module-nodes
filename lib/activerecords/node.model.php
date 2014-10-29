@@ -120,7 +120,7 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 	}
 
 	/**
-	 * Alerts the query to match recors of a similar language.
+	 * Alerts the query to match records of a similar language.
 	 *
 	 * A record is considered of a similar language when it doesn't have a language defined
 	 * (`language` = "") or it matches the specified language.
