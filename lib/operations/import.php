@@ -49,7 +49,7 @@ class ImportOperation extends Operation
 		# override form
 		#
 
-		$core->events->attach(function(Operation\GetFormEvent $event, SaveOperation $operation) use($save) {
+		$this->app->events->attach(function(Operation\GetFormEvent $event, SaveOperation $operation) use($save) {
 
 			if ($event->request !== $save)
 			{
@@ -82,9 +82,7 @@ class ImportOperation extends Operation
 
 	protected function parse_data(array $data)
 	{
-		global $core;
-
-		$site = $core->site;
+		$site = $this->app->site;
 		$siteid = $site->siteid;
 		$language = $site->language;
 

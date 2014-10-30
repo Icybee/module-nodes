@@ -31,9 +31,7 @@ class ExportOperation extends Operation
 
 	protected function process()
 	{
-		global $core;
-
-		$records = $this->module->model->filter_by_siteid($core->site_id)->own->all(\PDO::FETCH_OBJ);
+		$records = $this->module->model->filter_by_siteid($this->app->site_id)->own->all(\PDO::FETCH_OBJ);
 
 		foreach ($records as $record)
 		{

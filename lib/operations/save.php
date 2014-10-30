@@ -44,8 +44,6 @@ class SaveOperation extends \ICanBoogie\SaveOperation
 	 */
 	protected function lazy_get_properties()
 	{
-		global $core;
-
 		$properties = parent::lazy_get_properties() + [
 
 			Node::UID => 0,
@@ -54,7 +52,7 @@ class SaveOperation extends \ICanBoogie\SaveOperation
 
 		];
 
-		$user = $core->user;
+		$user = $this->app->user;
 		$key = $this->key;
 
 		# uid
@@ -80,7 +78,7 @@ class SaveOperation extends \ICanBoogie\SaveOperation
 
 		if (!$key || !$user->has_permission(Module::PERMISSION_MODIFY_BELONGING_SITE))
 		{
-			$properties[Node::SITEID] = $core->site_id;
+			$properties[Node::SITEID] = $this->app->site_id;
 		}
 
 		if (!$key)
