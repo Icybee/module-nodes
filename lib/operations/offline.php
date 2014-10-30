@@ -11,10 +11,7 @@
 
 namespace Icybee\Modules\Nodes;
 
-use ICanBoogie\I18n\FormattedString;
-use ICanBoogie\Operation;
-
-class OfflineOperation extends Operation
+class OfflineOperation extends \ICanBoogie\Operation
 {
 	/**
 	 * Controls for the operation: permission(maintain), record and ownership.
@@ -44,12 +41,11 @@ class OfflineOperation extends Operation
 		$record->is_online = false;
 		$record->save();
 
-		$this->response->message = new FormattedString('%title is now offline', [
+		$this->response->message = $this->format('%title is now offline', [
 
 			'title' => \ICanBoogie\shorten($this->record->title)
 
 		]);
-
 
 		return true;
 	}

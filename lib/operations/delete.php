@@ -11,8 +11,6 @@
 
 namespace Icybee\Modules\Nodes;
 
-use ICanBoogie\I18n\FormattedString;
-
 class DeleteOperation extends \ICanBoogie\DeleteOperation
 {
 	/**
@@ -25,15 +23,12 @@ class DeleteOperation extends \ICanBoogie\DeleteOperation
 
 		if ($rc)
 		{
-			$this->response->message = new FormattedString
-			(
-				'%title has been deleted from %module.', [
+			$this->response->message = $this->format('%title has been deleted from %module.', [
 
-					'title' => \ICanBoogie\shorten($title),
-					'module' => $this->module->title
+				'title' => \ICanBoogie\shorten($title),
+				'module' => $this->module->title
 
-				]
-			);
+			]);
 		}
 
 		return $rc;

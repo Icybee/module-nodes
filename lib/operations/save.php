@@ -12,7 +12,6 @@
 namespace Icybee\Modules\Nodes;
 
 use ICanBoogie\DateTime;
-use ICanBoogie\I18n\FormattedString;
 
 /**
  * Saves a node.
@@ -129,14 +128,12 @@ class SaveOperation extends \ICanBoogie\SaveOperation
 	{
 		$rc = parent::process();
 
-		$this->response->message = new FormattedString
-		(
-			$rc['mode'] == 'update' ? '%title has been updated in :module.' : '%title has been created in :module.', array
-			(
-				'title' => \ICanBoogie\shorten($this->record->title),
-				'module' => $this->module->title
-			)
-		);
+		$this->response->message = $this->format($rc['mode'] == 'update' ? '%title has been updated in :module.' : '%title has been created in :module.', [
+
+			'title' => \ICanBoogie\shorten($this->record->title),
+			'module' => $this->module->title
+
+		]);
 
 		return $rc;
 	}
