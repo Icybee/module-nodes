@@ -99,16 +99,28 @@ class SaveOperationTest extends \PHPUnit_Framework_TestCase
 			$this->assertEquals(401, $e->getCode());
 		}
 	}
+
+	public function test_get_uuid()
+	{
+		$operation = new FakeSaveOperation;
+		$uuid = $operation->uuid;
+
+		$this->assertNotEmpty($uuid);
+		$this->assertSame($uuid, $operation->uuid);
+	}
 }
 
 namespace Icybee\Modules\Nodes\SaveOperationTest;
 
-use ICanBoogie\HTTP\Request;
-
-use Icybee\Modules\Nodes\SaveOperation;
-
-class FakeSaveOperation extends SaveOperation
+class FakeSaveOperation extends \Icybee\Modules\Nodes\SaveOperation
 {
+	public function __construct()
+	{
+		global $core;
+
+		$this->module = $core->modules['nodes'];
+	}
+
 	protected function get_controls()
 	{
 		return [
@@ -116,14 +128,5 @@ class FakeSaveOperation extends SaveOperation
 			self::CONTROL_FORM => false
 
 		] + parent::get_controls();
-	}
-
-	public function __invoke(Request $request)
-	{
-		global $core;
-
-		$this->module = $core->modules['nodes'];
-
-		return parent::__invoke($request);
 	}
 }

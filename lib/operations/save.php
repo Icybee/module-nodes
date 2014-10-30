@@ -16,6 +16,8 @@ use ICanBoogie\I18n\FormattedString;
 
 /**
  * Saves a node.
+ *
+ * @property string $uuid A v4 UUID suitable for a new record.
  */
 class SaveOperation extends \ICanBoogie\SaveOperation
 {
@@ -53,6 +55,7 @@ class SaveOperation extends \ICanBoogie\SaveOperation
 		];
 
 		$user = $core->user;
+		$key = $this->key;
 
 		# uid
 
@@ -63,7 +66,7 @@ class SaveOperation extends \ICanBoogie\SaveOperation
 
 		if (empty($properties[Node::UID]))
 		{
-			if (!$this->key)
+			if (!$key)
 			{
 				$properties[Node::UID] = $user->uid;
 			}
@@ -75,16 +78,15 @@ class SaveOperation extends \ICanBoogie\SaveOperation
 
 		# siteid
 
-		if (!$this->key || !$user->has_permission(Module::PERMISSION_MODIFY_BELONGING_SITE))
+		if (!$key || !$user->has_permission(Module::PERMISSION_MODIFY_BELONGING_SITE))
 		{
 			$properties[Node::SITEID] = $core->site_id;
 		}
 
-		# created_at
-
-		if (!$this->key)
+		if (!$key)
 		{
 			$properties[Node::CREATED_AT] = DateTime::now();
+			$properties[Node::UUID] = $this->uuid;
 		}
 
 		# updated_at
@@ -110,6 +112,16 @@ class SaveOperation extends \ICanBoogie\SaveOperation
 		$block = $this->module->getBlock('edit', $this->key);
 
 		return $block->element;
+	}
+
+	/**
+	 * Return a v4 UUID suitable for a new record.
+	 *
+	 * @return string
+	 */
+	protected function lazy_get_uuid()
+	{
+		return $this->module->model->obtain_uuid();
 	}
 
 	/**
