@@ -39,16 +39,24 @@ class Module extends \Icybee\Module
 
 				ViewOptions::TITLE => "Records list",
 				ViewOptions::PROVIDER_CLASSNAME => ViewOptions::PROVIDER_CLASSNAME_AUTO,
-				ViewOptions::RENDERS => ViewOptions::RENDERS_MANY
+				ViewOptions::RENDERS => ViewOptions::RENDERS_MANY,
+				ViewOptions::DEFAULT_CONDITIONS => [
 
+					'order' => '-created_at'
+
+				]
 			],
 
 			'home' => [
 
 				ViewOptions::TITLE => "Records home",
 				ViewOptions::PROVIDER_CLASSNAME => ViewOptions::PROVIDER_CLASSNAME_AUTO,
-				ViewOptions::RENDERS => ViewOptions::RENDERS_MANY
+				ViewOptions::RENDERS => ViewOptions::RENDERS_MANY,
+				ViewOptions::DEFAULT_CONDITIONS => [
 
+					'order' => '-created_at'
+
+				]
 			]
 
 		]);

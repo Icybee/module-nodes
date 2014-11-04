@@ -15,18 +15,6 @@ use ICanBoogie\HTTP\HTTPError;
 
 class View extends \Icybee\Modules\Views\View
 {
-	/**
-	 * Defaults the `order` modifier to "-created_at".
-	 */
-	protected function get_default_conditions()
-	{
-		return [
-
-			'order' => '-created_at'
-
-		] + parent::get_default_conditions();
-	}
-
 	protected function get_important_conditions()
 	{
 		$conditions = parent::get_important_conditions();
