@@ -79,7 +79,7 @@ class Module extends \Icybee\Module
 
 		foreach ($modules->enabled_modules_descriptors as $module_id => $descriptor)
 		{
-			if ($module_id == 'nodes' || $module_id == 'contents' || !$modules->is_extending($module_id, 'nodes'))
+			if ($module_id == 'nodes' || $module_id == 'contents' || !$modules->is_inheriting($module_id, 'nodes'))
 			{
 				continue;
 			}
@@ -103,7 +103,7 @@ class Module extends \Icybee\Module
 
 			] + $common;
 
-			if ($module_id == 'contents' || $modules->is_extending($module_id, 'contents') || $module_id == 'files' || $modules->is_extending($module_id, 'files'))
+			if ($module_id == 'contents' || $modules->is_inheriting($module_id, 'contents') || $module_id == 'files' || $modules->is_inheriting($module_id, 'files'))
 			{
 				# config'
 

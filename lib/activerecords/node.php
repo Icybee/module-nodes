@@ -20,6 +20,7 @@ use Icybee\Modules\Users\User;
 /**
  * A node representation.
  *
+ * @property-read Model $model
  * @property DateTime $created_at The date and time at which the node was created.
  * @property DateTime $updated_at The date and time at which the node was updated.
  * @property Node $native
@@ -36,6 +37,8 @@ use Icybee\Modules\Users\User;
 class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 {
 	use \Brickrouge\CSSClassNamesProperty;
+
+	const MODEL_ID = 'nodes';
 
 	const NID = 'nid';
 	const UID = 'uid';
@@ -217,6 +220,8 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	 * - {@link constructor}: Defaults to the model identifier. {@link get_constructor}.
 	 * - {@link language}: Defaults to the associated site's language. {@link get_language}.
 	 * - {@link slug}: Defaults to a normalize title. {@link get_slug}.
+	 *
+	 * @inheritdoc
 	 */
 	public function __construct($model='nodes')
 	{
@@ -241,6 +246,8 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	/**
 	 * Fires {@link \Brickrouge\AlterCSSClassNamesEvent} after the {@link $css_class_names} property
 	 * was get.
+	 *
+	 * @inheritdoc
 	 */
 	public function __get($property)
 	{
@@ -256,6 +263,8 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 
 	/**
 	 * Obtains a UUID from the model if the {@link $uuid} property is empty.
+	 *
+	 * @inheritdoc
 	 */
 	public function save()
 	{
@@ -279,6 +288,8 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	 * before passing the method to the parent class.
 	 *
 	 * Adds `language` if it is not defined.
+	 *
+	 * @inheritdoc
 	 */
 	protected function alter_persistent_properties(array $properties, \ICanBoogie\ActiveRecord\Model $model)
 	{

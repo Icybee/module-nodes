@@ -78,10 +78,7 @@ class EditBlock extends \Icybee\EditBlock
 	/**
 	 * Returns the control for the user of the node.
 	 *
-	 * @param array $properties
-	 * @param array $attributes
-	 *
-	 * @return void|\Brickrouge\Element
+	 * @return Element|null
 	 */
 	protected function get_control__user()
 	{
@@ -114,10 +111,7 @@ class EditBlock extends \Icybee\EditBlock
 	/**
 	 * Returns control for the site the node belongs to.
 	 *
-	 * @param array $properties
-	 * @param array $attributes
-	 *
-	 * @return void|\Brickrouge\Element
+	 * @return Element|null
 	 */
 	protected function get_control__site()
 	{

@@ -45,6 +45,8 @@ class AdjustNode extends Element
 
 	/**
 	 * Adds the `widget-adjust-node` class name.
+	 *
+	 * @inheritdoc
 	 */
 	protected function alter_class_names(array $class_names)
 	{

@@ -11,7 +11,9 @@
 
 namespace Icybee\Modules\Nodes;
 
-use ICanBoogie\HTTP\HTTPError;
+use ICanBoogie\AuthenticationRequired;
+
+use Icybee\Modules\Views\ViewOptions;
 
 class View extends \Icybee\Modules\Views\View
 {
@@ -19,7 +21,7 @@ class View extends \Icybee\Modules\Views\View
 	{
 		$conditions = parent::get_important_conditions();
 
-		if ($this->renders == self::RENDERS_MANY)
+		if ($this->renders == ViewOptions::RENDERS_MANY)
 		{
 			$conditions['is_online'] = true;
 		}
@@ -28,8 +30,9 @@ class View extends \Icybee\Modules\Views\View
 	}
 
 	/**
-	 * @throws HTTPError with code 401 if the record is offline and the user don't have access
-	 * permission to the module.
+	 * @throws AuthenticationRequired
+	 *
+	 * @inheritdoc
 	 */
 	protected function provide($provider, array $conditions)
 	{
@@ -43,7 +46,7 @@ class View extends \Icybee\Modules\Views\View
 			{
 				if (!$app->user->has_permission(\ICanBoogie\Module::PERMISSION_ACCESS, $rc->constructor))
 				{
-					throw new HTTPError('The requested record requires authentication.', 401);
+					throw new AuthenticationRequired;
 				}
 
 				$rc->title .= ' ✎';

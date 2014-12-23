@@ -33,6 +33,8 @@ class ViewProvider extends \ICanBoogie\ActiveRecord\Fetcher
 	 *
 	 * TODO-20140521: We might want to avoid this in the future because if conditions are extracted
 	 * form the URL we have no way of knowing that the URL is deprecated.
+	 *
+	 * @inheritdoc
 	 */
 	public function alter_conditions(array &$conditions, array $modifiers)
 	{

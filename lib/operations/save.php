@@ -123,6 +123,8 @@ class SaveOperation extends \ICanBoogie\SaveOperation
 
 	/**
 	 * Overrides the method to provide a nicer log message.
+	 *
+	 * @inheritdoc
 	 */
 	protected function process()
 	{

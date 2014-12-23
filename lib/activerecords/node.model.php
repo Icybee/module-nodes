@@ -16,6 +16,13 @@ use ICanBoogie\ActiveRecord\Query;
 
 /**
  * Nodes model.
+ *
+ * @property-read Query $online A query scope for online records.
+ * @property-read Query $offline A query scope for offline records.
+ * @property-read Query $similar_site A query scope for records of a similar site.
+ * @property-read Query $similar_language A query scope for records of a similar language.
+ * @property-read Query $visible A query scope that combines `online`, `similar_site`, and `similar_language`.
+ * @property-read Query $ordered A query scope that orders records according to their creation date.
  */
 class Model extends \Icybee\ActiveRecord\Model\Constructor
 {
@@ -26,6 +33,8 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 	 * defined its value is used.
 	 *
 	 * The {@link Node:$slug} property is always slugized.
+	 *
+	 * @inheritdoc
 	 */
 	public function save(array $properties, $key=null, array $options=[])
 	{
@@ -51,6 +60,8 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 	 * Makes sure the node to delete is not used as a native target by other nodes.
 	 *
 	 * @throws Exception if the node to delete is the native target of another node.
+	 *
+	 * @inheritdoc
 	 */
 	public function delete($key)
 	{
@@ -107,19 +118,19 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 	 * (`siteid = 0') or it matches the specified website.
 	 *
 	 * @param Query $query
-	 * @param int $siteid The identifier of the website to match. If the identifier is `null` the
+	 * @param int $site_id The identifier of the website to match. If the identifier is `null` the
 	 * current website identifier is used instead.
 	 *
 	 * @return Query
 	 */
-	protected function scope_similar_site(Query $query, $siteid=null)
+	protected function scope_similar_site(Query $query, $site_id=null)
 	{
-		if ($siteid === null)
+		if ($site_id === null)
 		{
-			$siteid = $this->app->site->siteid;
+			$site_id = $this->app->site->siteid;
 		}
 
-		return $query->where('siteid = 0 OR siteid = ?', $siteid);
+		return $query->and('siteid = 0 OR siteid = ?', $site_id);
 	}
 
 	/**
@@ -141,7 +152,7 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 			$language = $this->app->site->language;
 		}
 
-		return $query->where('language = "" OR language = ?', $language);
+		return $query->and('language = "" OR language = ?', $language);
 	}
 
 	/**
