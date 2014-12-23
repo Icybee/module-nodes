@@ -33,7 +33,7 @@ class View extends \Icybee\Modules\Views\View
 	 */
 	protected function provide($provider, array $conditions)
 	{
-		global $core;
+		$app = $this->app;
 
 		$rc = parent::provide($provider, $conditions);
 
@@ -41,7 +41,7 @@ class View extends \Icybee\Modules\Views\View
 		{
 			if (!$rc->is_online)
 			{
-				if (!$core->user->has_permission(\ICanBoogie\Module::PERMISSION_ACCESS, $rc->constructor))
+				if (!$app->user->has_permission(\ICanBoogie\Module::PERMISSION_ACCESS, $rc->constructor))
 				{
 					throw new HTTPError('The requested record requires authentication.', 401);
 				}
@@ -49,7 +49,7 @@ class View extends \Icybee\Modules\Views\View
 				$rc->title .= ' ✎';
 			}
 
-			$page = isset($core->request->context->page) ? $core->request->context->page : null;
+			$page = isset($app->request->context->page) ? $app->request->context->page : null;
 
 			if ($page)
 			{

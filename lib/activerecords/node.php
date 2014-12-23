@@ -319,13 +319,12 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 
 	protected function lazy_get_translations_keys()
 	{
-		global $core;
-
-		$native_language = $this->siteid ? $this->site->native->language : $core->language;
+		$app = $this->app;
+		$native_language = $this->siteid ? $this->site->native->language : $app->language;
 
 		if (!self::$translations_keys)
 		{
-			$groups = $core->models['nodes']->select('nativeid, nid, language')->where('nativeid != 0')->order('language')->all(\PDO::FETCH_GROUP | \PDO::FETCH_NUM);
+			$groups = $app->models['nodes']->select('nativeid, nid, language')->where('nativeid != 0')->order('language')->all(\PDO::FETCH_GROUP | \PDO::FETCH_NUM);
 			$keys = [];
 
 			foreach ($groups as $native_id => $group)
@@ -362,18 +361,16 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	 * translation can be found.
 	 *
 	 * @param string $language The language for the translation. If the language is empty, the
-	 * current language (as defined by `$core->language`) is used.
+	 * current language (as defined by `$app->language`) is used.
 	 *
 	 * @return Node The translation for the record, or the record itself if
 	 * no translation could be found.
 	 */
 	public function translation($language=null)
 	{
-		global $core;
-
 		if (!$language)
 		{
-			$language = $core->language;
+			$language = $this->app->language;
 		}
 
 		$translations = $this->translations_keys;

@@ -73,10 +73,9 @@ class Module extends \Icybee\Module
 
 	static public function create_default_routes()
 	{
-		global $core;
-
 		$routes = [];
-		$modules = $core->modules;
+		$app = \ICanBoogie\app();
+		$modules = $app->modules;
 
 		foreach ($modules->enabled_modules_descriptors as $module_id => $descriptor)
 		{
@@ -157,7 +156,7 @@ class Module extends \Icybee\Module
 
 		$export = var_export($routes,true);
 
-		$core->vars['default_nodes_routes'] = "<?php\n\nreturn " . $export . ';';
+		$app->vars['default_nodes_routes'] = "<?php\n\nreturn " . $export . ';';
 	}
 }
 

@@ -96,9 +96,7 @@ class AdjustNode extends Element
 
 	protected function get_records($constructor, array $options, $limit=10)
 	{
-		global $core;
-
-		$model = $core->models[$constructor];
+		$model = $this->app->models[$constructor];
 
 		if ($constructor == 'nodes')
 		{

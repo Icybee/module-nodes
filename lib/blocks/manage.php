@@ -96,13 +96,14 @@ class ManageBlock extends \Icybee\ManageBlock
 	// TODO-20130629: refactor this
 	protected function __deprecated__render_cell_title($record, $property)
 	{
-		global $core;
 		static $languages;
 		static $languages_count;
 
+		$app = $this->app;
+
 		if ($languages === null)
 		{
-			$languages = $core->models['sites']->count('language');
+			$languages = $app->models['sites']->count('language');
 			$languages_count = count($languages);
 		}
 
@@ -135,7 +136,7 @@ class ManageBlock extends \Icybee\ManageBlock
 
 		$language = $record->language;
 
-		if ($languages_count > 1 && $language != $core->site->language)
+		if ($languages_count > 1 && $language != $app->site->language)
 		{
 			$metas .= ', <span class="language">' . ($language ? $language : 'multilingue') . '</span>';
 		}
@@ -313,13 +314,12 @@ class TranslationsColumn extends Column
 
 	protected function resolve_translations(array $records)
 	{
-		global $core;
-
 		$translations = [];
 		$translations_by_records = [];
 
-		$site = $core->site;
-		$sites = $core->models['sites'];
+		$app = \ICanBoogie\app();
+		$site = $app->site;
+		$sites = $app->models['sites'];
 		$site_translations = $site->translations;
 
 		if (!$site_translations)
@@ -363,7 +363,7 @@ class TranslationsColumn extends Column
 				return;
 			}
 
-			$translations_raw = $core->models['nodes']
+			$translations_raw = $app->models['nodes']
 			->select('siteid, nativeid, language, nid')
 			->where([ 'nativeid' => $native_ids, 'siteid' => $site_translations_ids ])
 			->order('FIELD(siteid, ' . implode(',', $site_translations_ids) . ')')
@@ -398,7 +398,7 @@ class TranslationsColumn extends Column
 		$translations = array_keys($translations);
 		$ids = implode(',', $translations);
 
-		$infos = $core->models['nodes']
+		$infos = $app->models['nodes']
 		->select('siteid, language')
 		->where('nid IN(' . $ids . ')')
 		->order('FIELD(nid, ' . $ids . ')')

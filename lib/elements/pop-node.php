@@ -51,8 +51,6 @@ class PopNode extends \Brickrouge\Widget
 
 	protected function render_inner_html()
 	{
-		global $core;
-
 		$rc = parent::render_inner_html();
 
 		$constructor = $this[self::T_CONSTRUCTOR];
@@ -61,7 +59,7 @@ class PopNode extends \Brickrouge\Widget
 
 		if ($value)
 		{
-			$model = $core->models[$constructor];
+			$model = $this->app->models[$constructor];
 
 			try
 			{

@@ -85,14 +85,14 @@ class EditBlock extends \Icybee\EditBlock
 	 */
 	protected function get_control__user()
 	{
-		global $core;
+		$app = $this->app;
 
-		if (!$core->user->has_permission(Module::PERMISSION_ADMINISTER, $this->module))
+		if (!$app->user->has_permission(Module::PERMISSION_ADMINISTER, $this->module))
 		{
 			return;
 		}
 
-		$users = $core->models['users']->select('uid, username')->order('username')->pairs;
+		$users = $app->models['users']->select('uid, username')->order('username')->pairs;
 
 		if (count($users) < 2)
 		{
@@ -104,7 +104,7 @@ class EditBlock extends \Icybee\EditBlock
 			Form::LABEL => 'User',
 			Element::OPTIONS => [ null => '' ] + $users,
 			Element::REQUIRED => true,
-			Element::DEFAULT_VALUE => $core->user->uid,
+			Element::DEFAULT_VALUE => $app->user->uid,
 			Element::GROUP => 'admin',
 			Element::DESCRIPTION => 'user'
 
@@ -121,18 +121,18 @@ class EditBlock extends \Icybee\EditBlock
 	 */
 	protected function get_control__site()
 	{
-		global $core;
+		$app = $this->app;
 
-		if (!$core->user->has_permission(Module::PERMISSION_MODIFY_BELONGING_SITE, $this->module))
+		if (!$app->user->has_permission(Module::PERMISSION_MODIFY_BELONGING_SITE, $this->module))
 		{
 			return;
 		}
 
-		$sites = $core->models['sites']->select('siteid, IF(admin_title != "", admin_title, concat(title, ":", language))')->order('admin_title, title')->pairs;
+		$sites = $app->models['sites']->select('siteid, IF(admin_title != "", admin_title, concat(title, ":", language))')->order('admin_title, title')->pairs;
 
 		if (count($sites) < 2)
 		{
-			$this->attributes[Form::HIDDENS][Node::SITEID] = $core->site_id;
+			$this->attributes[Form::HIDDENS][Node::SITEID] = $app->site_id;
 
 			return;
 		}

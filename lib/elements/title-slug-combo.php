@@ -102,8 +102,6 @@ class TitleSlugCombo extends \Brickrouge\Widget
 
 	protected function render_inner_html()
 	{
-		global $core;
-
 		$slug = $this->slug_el['value'];
 
 		$tease = '<strong>Slug&nbsp;:</strong> ';
@@ -118,7 +116,7 @@ class TitleSlugCombo extends \Brickrouge\Widget
 
 		if ($nid)
 		{
-			$node = $core->models['nodes'][$nid];
+			$node = $this->app->models['nodes'][$nid];
 
 			if ($node && $node->url && $node->url[0] != '#')
 			{

@@ -27,9 +27,7 @@ class SaveOperationTest extends \PHPUnit_Framework_TestCase
 
 	static public function setupBeforeClass()
 	{
-		global $core;
-
-		self::$user = $core->models['users'][1];
+		self::$user = \ICanBoogie\app()->models['users'][1];
 	}
 
 	public function test_process()
@@ -116,9 +114,7 @@ class FakeSaveOperation extends \Icybee\Modules\Nodes\SaveOperation
 {
 	public function __construct()
 	{
-		global $core;
-
-		$this->module = $core->modules['nodes'];
+		$this->module = \ICanBoogie\app()->modules['nodes'];
 	}
 
 	protected function get_controls()

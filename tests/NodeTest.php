@@ -64,7 +64,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
 
 	public function provide_test_get_property()
 	{
-		global $core;
+		$app = \ICanBoogie\app();
 
 		return [
 
@@ -74,30 +74,26 @@ class NodeTest extends \PHPUnit_Framework_TestCase
 			[ 'css_class', [ 'nid' => 13, 'slug' => 'quick-brown-fox', 'constructor' => 'news' ], 'node node-13 node-slug-quick-brown-fox constructor-news' ],
 
 			[ 'site', [], null ],
-			[ 'site', [ 'siteid' => 1 ], $core->models['sites'][1] ],
+			[ 'site', [ 'siteid' => 1 ], $app->models['sites'][1] ],
 
 			[ 'user', [], null ],
-			[ 'user', [ 'uid' => 1 ], $core->models['users'][1] ]
+			[ 'user', [ 'uid' => 1 ], $app->models['users'][1] ]
 
 		];
 	}
 
 	public function test_set_site()
 	{
-		global $core;
-
 		$node = new Node;
-		$node->site = $core->models['sites'][1];
+		$node->site = \ICanBoogie\app()->models['sites'][1];
 		$this->assertInstanceOf('Icybee\Modules\Sites\Site', $node->site);
 		$this->assertEquals(1, $node->siteid);
 	}
 
 	public function test_set_user()
 	{
-		global $core;
-
 		$node = new Node;
-		$node->user = $core->models['users'][1];
+		$node->user = \ICanBoogie\app()->models['users'][1];
 		$this->assertInstanceOf('Icybee\Modules\Users\User', $node->user);
 		$this->assertEquals(1, $node->uid);
 	}

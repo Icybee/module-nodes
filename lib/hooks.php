@@ -43,10 +43,8 @@ class Hooks
 	 */
 	static public function before_delete_user(BeforeProcessEvent $event, \Icybee\Modules\Users\DeleteOperation $operation)
 	{
-		global $core;
-
 		$uid = $operation->key;
-		$count = $core->models['nodes']->filter_by_uid($uid)->count;
+		$count = \ICanBoogie\app()->models['nodes']->filter_by_uid($uid)->count;
 
 		if (!$count)
 		{
@@ -64,9 +62,8 @@ class Hooks
 	 */
 	static public function on_user_collect_dependencies(\ICanBoogie\ActiveRecord\CollectDependenciesEvent $event, \Icybee\Modules\Users\User $target)
 	{
-		global $core;
-
-		$nodes = $core->models['nodes']
+		$nodes = \ICanBoogie\app()
+		->models['nodes']
 		->select('nid, constructor, title')
 		->filter_by_uid($target->uid)
 		->order('created_at DESC')
@@ -103,8 +100,6 @@ class Hooks
 	 */
 	static public function markup_node(array $args, \Patron\Engine $patron, $template)
 	{
-		global $core;
-
 		$record = null;
 		$constructor = $args['constructor'] ?: 'nodes';
 		$select = $args['select'];
@@ -114,13 +109,15 @@ class Hooks
 			$select = substr($select, 1);
 		}
 
+		$app = \ICanBoogie\app();
+
 		if (is_numeric($select))
 		{
-			$record = $core->models[$constructor][$select];
+			$record = $app->models[$constructor][$select];
 		}
 		else
 		{
-			$record = $core->models[$constructor]->filter_by_slug($select)->ordered->own->one;
+			$record = $app->models[$constructor]->filter_by_slug($select)->ordered->own->one;
 		}
 
 		if (!$record)
@@ -133,9 +130,7 @@ class Hooks
 
 	static public function markup_node_navigation(array $args, \Patron\Engine $patron, $template)
 	{
-		global $core;
-
-		$core->document->css->add(DIR . 'public/page.css');
+		\ICanBoogie\app()->document->css->add(DIR . 'public/page.css');
 
 		$record = $patron->context['this'];
 
@@ -201,11 +196,10 @@ class Hooks
 
 	static public function dashboard_now()
 	{
-		global $core, $document;
+		$app = \ICanBoogie\app();
+		$app->document->css->add(DIR . 'public/dashboard.css');
 
-		$document->css->add(DIR . 'public/dashboard.css');
-
-		$counts = $core->models['nodes']->similar_site->count('constructor');
+		$counts = $app->models['nodes']->similar_site->count('constructor');
 
 		if (!$counts)
 		{
@@ -224,12 +218,12 @@ class Hooks
 
 		foreach ($counts as $constructor => $count)
 		{
-			if (!isset($core->modules[$constructor]))
+			if (!isset($app->modules[$constructor]))
 			{
 				continue;
 			}
 
-			$descriptor = $core->modules->descriptors[$constructor];
+			$descriptor = $app->modules->descriptors[$constructor];
 			$category = $descriptor[Descriptor::CATEGORY];
 
 			if (!isset($categories[$category]))
@@ -253,7 +247,7 @@ class Hooks
 		}
 
 		$body = '';
-		$path = $core->site->path;
+		$path = $app->site->path;
 
 		for ($i = 0 ; $i < $max_by_category ; $i++)
 		{
@@ -289,14 +283,13 @@ EOT;
 
 	static public function dashboard_user_modified()
 	{
-		global $core, $document;
+		$app = \ICanBoogie\app();
+		$app->document->css->add(DIR . 'public/dashboard.css');
 
-		$document->css->add(DIR . 'public/dashboard.css');
-
-		$model = $core->models['nodes'];
+		$model = $app->models['nodes'];
 
 		$entries = $model
-		->where('uid = ? AND (siteid = 0 OR siteid = ?)', [ $core->user_id, $core->site_id ])
+		->where('uid = ? AND (siteid = 0 OR siteid = ?)', [ $app->user_id, $app->site_id ])
 		->order('updated_at desc')
 		->limit(10)
 		->all;
@@ -307,7 +300,7 @@ EOT;
 		}
 
 		$last_date = null;
-		$context = $core->site->path;
+		$context = $app->site->path;
 
 		$rc = '<table>';
 
