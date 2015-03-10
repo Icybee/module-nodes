@@ -1,10 +1,4 @@
-.buildpath
-.idea/
-.project
-.README.md.html
-.settings/
 composer.lock
-composer.phar
 docs
 public/module-uncompressed.css
 public/module-uncompressed.js
