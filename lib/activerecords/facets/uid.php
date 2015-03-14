@@ -11,7 +11,7 @@
 
 namespace Icybee\Modules\Nodes;
 
-class UserCriterion extends \ICanBoogie\ActiveRecord\Criterion
+class UserCriterion extends \ICanBoogie\Facets\Criterion
 {
 	public function __construct($id, array $options=[])
 	{

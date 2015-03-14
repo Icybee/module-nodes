@@ -32,11 +32,8 @@ return [
 					'is_online' => [ 'boolean', 'indexed' => true ]
 
 				]
-
 			]
-
 		]
-
 	],
 
 	Descriptor::NS => __NAMESPACE__,

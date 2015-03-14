@@ -18,7 +18,7 @@ return [
 	'api:nodes/online' => [
 
 		'pattern' => '/api/:constructor/<nid:\d+>/is_online',
-		'controller' =>__NAMESPACE__ . '\OnlineOperation',
+		'controller' => OnlineOperation::class,
 		'via' => 'PUT',
 		'param_translation_list' => [
 
@@ -31,7 +31,7 @@ return [
 	'api:nodes/offline' => [
 
 		'pattern' => '/api/:constructor/<nid:\d+>/is_online',
-		'controller' =>__NAMESPACE__ . '\OfflineOperation',
+		'controller' => OfflineOperation::class,
 		'via' => 'DELETE',
 		'param_translation_list' => [
 

@@ -11,7 +11,7 @@
 
 namespace Icybee\Modules\Nodes;
 
-use ICanBoogie\ActiveRecord\Criterion;
+use ICanBoogie\Facets\Criterion;
 
 class TitleCriterion extends Criterion
 {

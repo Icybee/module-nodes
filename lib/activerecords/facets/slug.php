@@ -11,7 +11,7 @@
 
 namespace Icybee\Modules\Nodes;
 
-class SlugCriterion extends \ICanBoogie\ActiveRecord\Criterion
+class SlugCriterion extends \ICanBoogie\Facets\Criterion
 {
 
 }

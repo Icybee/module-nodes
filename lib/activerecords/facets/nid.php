@@ -11,7 +11,7 @@
 
 namespace Icybee\Modules\Nodes;
 
-class NidCriterion extends \ICanBoogie\ActiveRecord\Criterion
+class NidCriterion extends \ICanBoogie\Facets\Criterion
 {
 
 }

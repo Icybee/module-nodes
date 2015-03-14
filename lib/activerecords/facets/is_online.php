@@ -11,7 +11,7 @@
 
 namespace Icybee\Modules\Nodes;
 
-class IsOnlineCriterion extends \ICanBoogie\ActiveRecord\Criterion
+class IsOnlineCriterion extends \ICanBoogie\Facets\Criterion
 {
 
 }
