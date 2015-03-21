@@ -86,14 +86,14 @@ class EditBlock extends \Icybee\EditBlock
 
 		if (!$app->user->has_permission(Module::PERMISSION_ADMINISTER, $this->module))
 		{
-			return;
+			return null;
 		}
 
 		$users = $app->models['users']->select('uid, username')->order('username')->pairs;
 
 		if (count($users) < 2)
 		{
-			return;
+			return null;
 		}
 
 		return new Element('select', [
@@ -119,7 +119,7 @@ class EditBlock extends \Icybee\EditBlock
 
 		if (!$app->user->has_permission(Module::PERMISSION_MODIFY_BELONGING_SITE, $this->module))
 		{
-			return;
+			return null;
 		}
 
 		$sites = $app->models['sites']->select('siteid, IF(admin_title != "", admin_title, concat(title, ":", language))')->order('admin_title, title')->pairs;
@@ -128,7 +128,7 @@ class EditBlock extends \Icybee\EditBlock
 		{
 			$this->attributes[Form::HIDDENS][Node::SITEID] = $app->site_id;
 
-			return;
+			return null;
 		}
 
 		return new Element('select', [

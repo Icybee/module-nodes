@@ -14,6 +14,8 @@ namespace Icybee\Modules\Nodes;
 use ICanBoogie\ActiveRecord;
 use ICanBoogie\ActiveRecord\Query;
 
+use Icybee\ConstructorModel;
+
 /**
  * Nodes model.
  *
@@ -24,7 +26,7 @@ use ICanBoogie\ActiveRecord\Query;
  * @property-read Query $visible A query scope that combines `online`, `similar_site`, and `similar_language`.
  * @property-read Query $ordered A query scope that orders records according to their creation date.
  */
-class Model extends \Icybee\ActiveRecord\Model\Constructor
+class Model extends ConstructorModel
 {
 	/**
 	 * If the {@link Node::$updated_at} property is not defined it is set to the current datetime.
@@ -59,13 +61,16 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 	/**
 	 * Makes sure the node to delete is not used as a native target by other nodes.
 	 *
-	 * @throws Exception if the node to delete is the native target of another node.
+	 * @throws \Exception if the node to delete is the native target of another node.
 	 *
 	 * @inheritdoc
 	 */
 	public function delete($key)
 	{
-		$native_refs = $this->select('nid')->filter_by_nativeid($key)->all(\PDO::FETCH_COLUMN);
+		$native_refs = $this
+			->select('nid')
+			->filter_by_nativeid($key)
+			->all(\PDO::FETCH_COLUMN);
 
 		if ($native_refs)
 		{
@@ -115,7 +120,7 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 	 * Alerts the query to match records of a similar site.
 	 *
 	 * A record is considered of a similar website when it doesn't belong to a website
-	 * (`siteid = 0') or it matches the specified website.
+	 * `(`siteid = 0')` or it matches the specified website.
 	 *
 	 * @param Query $query
 	 * @param int $site_id The identifier of the website to match. If the identifier is `null` the
@@ -123,7 +128,7 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 	 *
 	 * @return Query
 	 */
-	protected function scope_similar_site(Query $query, $site_id=null)
+	protected function scope_similar_site(Query $query, $site_id = null)
 	{
 		if ($site_id === null)
 		{
@@ -137,7 +142,7 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 	 * Alerts the query to match records of a similar language.
 	 *
 	 * A record is considered of a similar language when it doesn't have a language defined
-	 * (`language` = "") or it matches the specified language.
+	 * `(`language` = "")` or it matches the specified language.
 	 *
 	 * @param Query $query
 	 * @param string $language The language to match. If the language is `null` the current
@@ -145,7 +150,7 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 	 *
 	 * @return Query
 	 */
-	protected function scope_similar_language(Query $query, $language=null)
+	protected function scope_similar_language(Query $query, $language = null)
 	{
 		if ($language === null)
 		{
@@ -163,7 +168,7 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 	 *
 	 * @return Query
 	 */
-	protected function scope_ordered(Query $query, $direction=-1)
+	protected function scope_ordered(Query $query, $direction = -1)
 	{
 		return $query->order('created_at ' . ($direction < 0 ? 'DESC' : 'ASC'));
 	}
@@ -186,7 +191,7 @@ class Model extends \Icybee\ActiveRecord\Model\Constructor
 			$keys[$record->uid] = $record;
 		}
 
-		$users = ActiveRecord\get_model('users')->find_using_constructor(array_keys($keys));
+		$users = $this->models['users']->find_using_constructor(array_keys($keys));
 
 		/* @var $user \Icybee\Modules\Users\User */
 

@@ -13,6 +13,8 @@ namespace Icybee\Modules\Nodes;
 
 /**
  * A block used to confirm the deletion of a node.
+ *
+ * @property Node $record
  */
 class DeleteBlock extends \Icybee\DeleteBlock
 {

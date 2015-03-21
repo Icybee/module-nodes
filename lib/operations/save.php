@@ -17,6 +17,7 @@ use ICanBoogie\DateTime;
  * Saves a node.
  *
  * @property string $uuid A v4 UUID suitable for a new record.
+ * @property Node $record
  */
 class SaveOperation extends \ICanBoogie\SaveOperation
 {

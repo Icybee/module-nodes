@@ -19,6 +19,8 @@ use Brickrouge\Document;
 use Brickrouge\Element;
 
 use Icybee\ManageBlock\Column;
+use Icybee\ManageBlock\DateTimeColumn;
+use Icybee\Modules\Users\ManageBlock\UserColumn;
 
 /**
  * A block to manage nodes.
@@ -33,7 +35,7 @@ class ManageBlock extends \Icybee\ManageBlock
 		$document->js->add(DIR . 'public/module.js');
 	}
 
-	public function __construct(Module $module, array $attributes=[])
+	public function __construct(Module $module, array $attributes = [])
 	{
 		parent::__construct($module, $attributes + [
 
@@ -51,17 +53,19 @@ class ManageBlock extends \Icybee\ManageBlock
 	 * - `uid`: An instance of {@link \Icybee\Modules\Users\ManageBlock\UserColumn}.
 	 * - `created_at`: An instance of {@link \Icybee\ManageBlock\DateTimeColumn}.
 	 * - `updated_at`: An instance of {@link \Icybee\ManageBlock\DateTimeColumn}.
+	 *
+	 * @inheritdoc
 	 */
 	protected function get_available_columns()
 	{
 		return array_merge(parent::get_available_columns(), [
 
-			Node::TITLE => __CLASS__ . '\TitleColumn',
-			'url' => __CLASS__ . '\URLColumn',
-			Node::IS_ONLINE => __CLASS__ . '\IsOnlineColumn',
-			Node::UID => 'Icybee\Modules\Users\ManageBlock\UserColumn',
-			Node::CREATED_AT => 'Icybee\ManageBlock\DateTimeColumn',
-			Node::UPDATED_AT => 'Icybee\ManageBlock\DateTimeColumn'
+			Node::TITLE => ManageBlock::class . '\TitleColumn',
+			'url' => ManageBlock::class . '\URLColumn',
+			Node::IS_ONLINE => ManageBlock::class . '\IsOnlineColumn',
+			Node::UID => UserColumn::class,
+			Node::CREATED_AT => DateTimeColumn::class,
+			Node::UPDATED_AT => DateTimeColumn::class
 
 		]);
 	}
@@ -71,13 +75,15 @@ class ManageBlock extends \Icybee\ManageBlock
 	 *
 	 * - `online`: Set the selected records online.
 	 * - `offline`: Set the selected records offline.
+	 *
+	 * @inheritdoc
 	 */
 	protected function get_available_jobs()
 	{
 		return array_merge(parent::get_available_jobs(), [
 
-			'online' => I18n\t('online.operation.short_title'),
-			'offline' => I18n\t('offline.operation.short_title')
+			'online' => $this->t('online.operation.short_title'),
+			'offline' => $this->t('offline.operation.short_title')
 
 		]);
 	}
@@ -163,7 +169,9 @@ use Brickrouge\Element;
 use ICanBoogie\ActiveRecord\Query;
 use ICanBoogie\I18n;
 
+use Icybee\ManageBlock\BooleanColumn;
 use Icybee\ManageBlock\Column;
+use Icybee\Modules\Nodes\Node;
 
 class EditDecorator extends \Icybee\ManageBlock\EditDecorator
 {
@@ -194,7 +202,7 @@ class EditDecorator extends \Icybee\ManageBlock\EditDecorator
  */
 class TitleColumn extends Column
 {
-	public function __construct(\Icybee\ManageBlock $manager, $id, array $options=[])
+	public function __construct(\Icybee\ManageBlock $manager, $id, array $options = [])
 	{
 		parent::__construct($manager, $id, [
 
@@ -203,6 +211,11 @@ class TitleColumn extends Column
 		]);
 	}
 
+	/**
+	 * @param Node $record
+	 *
+	 * @inheritdoc
+	 */
 	public function render_cell($record)
 	{
 		return new EditDecorator($record->title, $record);
@@ -214,7 +227,7 @@ class TitleColumn extends Column
  */
 class URLColumn extends Column
 {
-	public function __construct(\Icybee\ManageBlock $manager, $id, array $options=[])
+	public function __construct(\Icybee\ManageBlock $manager, $id, array $options = [])
 	{
 		parent::__construct($manager, $id, [
 
@@ -225,18 +238,23 @@ class URLColumn extends Column
 		]);
 	}
 
+	/**
+	 * @param Node $record
+	 *
+	 * @inheritdoc
+	 */
 	public function render_cell($record)
 	{
 		$url = $record->url;
 
 		if (!$url || $url{0} == '#')
 		{
-			return;
+			return null;
 		}
 
 		return new A('', $url, [
 
-			'title' => $this->manager->t('View this entry on the website'),
+			'title' => $this->t('View this entry on the website'),
 			'class' => 'icon-external-link',
 			'target' => '_blank'
 
@@ -247,9 +265,9 @@ class URLColumn extends Column
 /**
  * Representation of the `is_online` column.
  */
-class IsOnlineColumn extends \Icybee\ManageBlock\BooleanColumn
+class IsOnlineColumn extends BooleanColumn
 {
-	public function __construct(\Icybee\ManageBlock $manager, $id, array $options=[])
+	public function __construct(\Icybee\ManageBlock $manager, $id, array $options = [])
 	{
 		parent::__construct($manager, $id, $options + [
 
@@ -292,7 +310,7 @@ class IsOnlineCellRenderer extends \Icybee\ManageBlock\BooleanCellRenderer
  */
 class TranslationsColumn extends Column
 {
-	public function __construct(\Icybee\ManageBlock $manager, $id, array $options=[])
+	public function __construct(\Icybee\ManageBlock $manager, $id, array $options = [])
 	{
 		parent::__construct($manager, $id, $options + [
 
@@ -301,6 +319,11 @@ class TranslationsColumn extends Column
 		]);
 	}
 
+	/**
+	 * @param Node[] $records
+	 *
+	 * @inheritdoc
+	 */
 	public function alter_records(array $records)
 	{
 		$records = parent::alter_records($records);
@@ -312,6 +335,9 @@ class TranslationsColumn extends Column
 
 	protected $translations_by_records;
 
+	/**
+	 * @param Node[] $records
+	 */
 	protected function resolve_translations(array $records)
 	{
 		$translations = [];
@@ -420,20 +446,25 @@ class TranslationsColumn extends Column
 		$this->translations_by_records = $translations_by_records;
 	}
 
+	/**
+	 * @param Node $record
+	 *
+	 * @inheritdoc
+	 */
 	public function render_cell($record)
 	{
 		if (empty($this->translations_by_records[$record->nid]))
 		{
-			return;
+			return null;
 		}
 
 		$translations = $this->translations_by_records[$record->nid];
 
 		$rc = '';
 
-		foreach ($translations as $nativeid => $translation)
+		foreach ($translations as $native_id => $translation)
 		{
-			$rc .= ', <a href="' . $translation['site']->url . '/admin/' . $record->constructor . '/' . $nativeid . '/edit">' . $translation['language'] . '</a>';
+			$rc .= ', <a href="' . $translation['site']->url . '/admin/' . $record->constructor . '/' . $native_id . '/edit">' . $translation['language'] . '</a>';
 		}
 
 		return '<span class="translations">' . substr($rc, 2) . '</span>';

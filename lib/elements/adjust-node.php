@@ -70,7 +70,7 @@ class AdjustNode extends Element
 		$constructor = $this[self::T_CONSTRUCTOR];
 
 		$rc .= '<div class="search">';
-		$rc .= new Text([ 'class' => 'search', 'placeholder' => I18n\t('Search') ]);
+		$rc .= new Text([ 'class' => 'search', 'placeholder' => $this->t('Search') ]);
 		$rc .= $this->get_results([ 'selected' => $this['value'] ], $constructor);
 		$rc .= '</div>';
 

@@ -18,7 +18,7 @@ use Brickrouge\Form;
 
 class ExportBlock extends Form
 {
-	public function __construct(Module $module, array $attributes=[])
+	public function __construct(Module $module, array $attributes = [])
 	{
 		parent::__construct($attributes + [
 

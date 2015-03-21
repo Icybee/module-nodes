@@ -11,6 +11,9 @@
 
 namespace Icybee\Modules\Nodes;
 
+/**
+ * @property Node $record
+ */
 class DeleteOperation extends \ICanBoogie\DeleteOperation
 {
 	/**

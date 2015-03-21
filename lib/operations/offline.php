@@ -11,6 +11,9 @@
 
 namespace Icybee\Modules\Nodes;
 
+/**
+ * @property Node $record
+ */
 class OfflineOperation extends \ICanBoogie\Operation
 {
 	/**

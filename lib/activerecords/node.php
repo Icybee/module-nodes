@@ -37,6 +37,8 @@ use Icybee\Modules\Users\User;
 class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 {
 	use \Brickrouge\CSSClassNamesProperty;
+	use ActiveRecord\CreatedAtProperty;
+	use ActiveRecord\UpdatedAtProperty;
 
 	const MODEL_ID = 'nodes';
 
@@ -74,7 +76,7 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	 */
 	protected function get_user()
 	{
-		return $this->uid ? ActiveRecord\get_model('users')->find($this->uid) : null;
+		return $this->uid ? $this->model->models['users']->find($this->uid) : null;
 	}
 
 	/**
@@ -103,7 +105,7 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	 */
 	protected function get_site()
 	{
-		return $this->siteid ? ActiveRecord\get_model('sites')->find($this->siteid) : null;
+		return $this->siteid ? $this->model->models['sites']->find($this->siteid) : null;
 	}
 
 	/**
@@ -169,9 +171,6 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	{
 		return $this->model_id;
 	}
-
-	use ActiveRecord\CreatedAtProperty;
-	use ActiveRecord\UpdatedAtProperty;
 
 	/**
 	 * Whether the node is online or not.
@@ -291,7 +290,7 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	 *
 	 * @inheritdoc
 	 */
-	protected function alter_persistent_properties(array $properties, \ICanBoogie\ActiveRecord\Model $model)
+	protected function alter_persistent_properties(array $properties, ActiveRecord\Model $model)
 	{
 		return parent::alter_persistent_properties($properties, $model) + [
 
@@ -335,8 +334,12 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 
 		if (!self::$translations_keys)
 		{
-			$groups = $app->models['nodes']->select('nativeid, nid, language')->where('nativeid != 0')->order('language')->all(\PDO::FETCH_GROUP | \PDO::FETCH_NUM);
 			$keys = [];
+			$groups = $this->model->models['nodes']
+				->select('nativeid, nid, language')
+				->where('nativeid != 0')
+				->order('language')
+				->all(\PDO::FETCH_GROUP | \PDO::FETCH_NUM);
 
 			foreach ($groups as $native_id => $group)
 			{
@@ -377,7 +380,7 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	 * @return Node The translation for the record, or the record itself if
 	 * no translation could be found.
 	 */
-	public function translation($language=null)
+	public function translation($language = null)
 	{
 		if (!$language)
 		{
@@ -410,7 +413,7 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 
 		if (!$translations)
 		{
-			return;
+			return [];
 		}
 
 		return $this->model->find(array_keys($translations));
