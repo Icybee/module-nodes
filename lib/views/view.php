@@ -52,12 +52,15 @@ class View extends \Icybee\Modules\Views\View
 				$rc->title .= ' ✎';
 			}
 
-			$page = isset($app->request->context->page) ? $app->request->context->page : null;
+			$context = $app->request->context;
+
+			$page = isset($context->page) ? $context->page : null;
 
 			if ($page)
 			{
 				$page->title = $rc->title;
-				$page->node = $rc;
+				$page->node = $rc; // COMPAT-20150324
+				$context->node = $rc;
 			}
 		}
 
