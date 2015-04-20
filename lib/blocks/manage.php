@@ -314,7 +314,9 @@ class TranslationsColumn extends Column
 	{
 		parent::__construct($manager, $id, $options + [
 
-			'orderable' => false
+			'title' => null,
+			'orderable' => false,
+			'class' => 'cell-fitted'
 
 		]);
 	}

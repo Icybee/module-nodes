@@ -117,7 +117,7 @@ class Hooks
 		}
 		else
 		{
-			$record = $app->models[$constructor]->filter_by_slug($select)->ordered->own->one;
+			$record = $app->models[$constructor]->filter_by_slug($select)->ordered->own->visible->one;
 		}
 
 		if (!$record)

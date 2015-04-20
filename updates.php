@@ -11,7 +11,42 @@
 
 namespace Icybee\Modules\Nodes;
 
+use ICanBoogie\Updater\AssertionFailed;
 use ICanBoogie\Updater\Update;
+
+/**
+ * - Renames table `system_nodes` as `nodes`.
+ * - Renames `tnid` column as `nativeid`.
+ *
+ * @module nodes
+ */
+class Update20111201 extends Update
+{
+	public function update_table_nodes()
+	{
+		$db = $this->app->db;
+
+		if (!$db->table_exists('system_nodes'))
+		{
+			throw new AssertionFailed('assert_table_exists', 'system_nodes');
+		}
+
+		$db("RENAME TABLE `system_nodes` TO `nodes`");
+	}
+
+	public function update_constructor_type()
+	{
+		$db = $this->app->db;
+		$db("UPDATE nodes SET constructor = 'nodes' WHERE constructor = 'system.nodes'");
+	}
+
+	public function update_column_nativeid()
+	{
+		$this->module->model
+		->assert_has_column('tnid')
+		->rename_column('tnid', 'nativeid');
+	}
+}
 
 /**
  * - Renames the `created` columns as `created_at`.
