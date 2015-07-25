@@ -11,6 +11,7 @@
 
 namespace Icybee\Modules\Nodes;
 
+use Icybee\Controller\EditController;
 use Icybee\Modules\Views\ViewOptions;
 
 /**
@@ -87,7 +88,7 @@ class Module extends \Icybee\Module
 			$common = [
 
 				'module' => $module_id,
-				'controller' => 'Icybee\BlockController',
+				'controller' => 'Icybee\Controller\BlockController',
 				'visibility' => 'visible'
 
 			];
@@ -132,7 +133,7 @@ class Module extends \Icybee\Module
 			$routes["admin:$module_id/edit"] = [
 
 				'pattern' => "/admin/$module_id/<\d+>/edit",
-				'controller' => 'Icybee\EditController',
+				'controller' => EditController::class,
 				'title' => '.edit',
 				'block' => 'edit',
 				'visibility' => 'auto'

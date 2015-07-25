@@ -15,7 +15,7 @@ use ICanBoogie\ActiveRecord\RecordNotFound;
 use ICanBoogie\Event;
 use ICanBoogie\I18n;
 use ICanBoogie\Module\Descriptor;
-use ICanBoogie\Operation\BeforeProcessEvent;
+use ICanBoogie\Operation;
 
 use Brickrouge\A;
 
@@ -27,21 +27,21 @@ class Hooks
 
 	static public function on_modules_activate(Event $event)
 	{
-		\Icybee\Modules\Nodes\Module::create_default_routes();
+		Module::create_default_routes();
 	}
 
 	static public function on_modules_deactivate(Event $event)
 	{
-		\Icybee\Modules\Nodes\Module::create_default_routes();
+		Module::create_default_routes();
 	}
 
 	/**
 	 * Checks if the user to be deleted has nodes.
 	 *
-	 * @param BeforeProcessEvent $event
+	 * @param Operation\BeforeProcessEvent $event
 	 * @param \Icybee\Modules\Users\DeleteOperation $operation
 	 */
-	static public function before_delete_user(BeforeProcessEvent $event, \Icybee\Modules\Users\DeleteOperation $operation)
+	static public function before_delete_user(Operation\BeforeProcessEvent $event, \Icybee\Modules\Users\DeleteOperation $operation)
 	{
 		$uid = $operation->key;
 		$count = \ICanBoogie\app()->models['nodes']->filter_by_uid($uid)->count;
@@ -51,7 +51,11 @@ class Hooks
 			return;
 		}
 
-		$event->errors['uid'] = I18n\t('The user %name is used by :count nodes.', [ 'name' => $operation->record->name, ':count' => $count ]);
+		$event->errors['uid'] = $event->errors->format('The user %name is used by :count nodes.', [
+
+			'name' => $operation->record->name, ':count' => $count
+
+		]);
 	}
 
 	/**
@@ -141,7 +145,7 @@ class Hooks
 
 		if ($list_url)
 		{
-			$list = '<div class="list"><a href="' . \ICanBoogie\escape($list_url) . '">' . I18n\t('All records') . '</a></div>';
+			$list = '<div class="list">' . new A("All records", $list_url) . '</div>';
 		}
 
 		$next = null;
@@ -155,7 +159,7 @@ class Hooks
 
 			$next = new A
 			(
-				\ICanBoogie\escape(\ICanBoogie\shorten($title, 48, 1)), $next_record->url, [
+				\ICanBoogie\shorten($title, 48, 1), $next_record->url, [
 
 					'class' => "next",
 					'title' => I18n\t('Next: :title', [ ':title' => $title ])
@@ -170,7 +174,7 @@ class Hooks
 
 			$previous = new A
 			(
-				\ICanBoogie\escape(\ICanBoogie\shorten($title, 48, 1)), $previous_record->url, [
+				\ICanBoogie\shorten($title, 48, 1), $previous_record->url, [
 
 					'class' => "previous",
 					'title' => I18n\t('Previous: :title', [ ':title' => $title ])
