@@ -222,7 +222,7 @@ class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
 	 *
 	 * @inheritdoc
 	 */
-	public function __construct($model='nodes')
+	public function __construct($model=null)
 	{
 		if (empty($this->constructor))
 		{

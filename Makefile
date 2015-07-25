@@ -1,6 +1,7 @@
 # customization
 
-MODULE_NAME = "Icybee/Modules/Nodes"
+PACKAGE_NAME = icybee/module-nodes
+PACKAGE_VERSION = 2.1.0
 
 # assets
 
@@ -54,18 +55,20 @@ autoload: vendor
 test: vendor
 	@phpunit
 
-doc: vendor
-	@mkdir -p "docs"
+test-coverage: vendor
+	@mkdir -p build/coverage
+	@phpunit --coverage-html build/coverage
 
-	@apigen \
-	--source ./ \
-	--destination docs/ --title $(MODULE_NAME) \
-	--exclude "*/composer/*" \
-	--exclude "*/tests/*" \
-	--template-config /usr/share/php/data/ApiGen/templates/bootstrap/config.neon
+doc: vendor
+	@mkdir -p build/docs
+	@apigen generate \
+	--source lib \
+	--destination build/docs/ \
+	--title "$(PACKAGE_NAME) v$(PACKAGE_VERSION)" \
+	--template-theme "bootstrap"
 
 clean:
-	@rm -fR docs
+	@rm -fR build
 	@rm -fR vendor
 	@rm -f composer.lock
-	@rm -f composer.phar
+

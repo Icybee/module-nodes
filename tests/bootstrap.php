@@ -9,6 +9,8 @@
  * file that was distributed with this source code.
  */
 
+namespace ICanBoogie;
+
 $_SERVER['DOCUMENT_ROOT'] = __DIR__;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -17,11 +19,11 @@ require __DIR__ . '/../vendor/autoload.php';
 # Create the _core_ instance used for the tests.
 #
 
-$app = new \ICanBoogie\Core(\ICanBoogie\array_merge_recursive(\ICanBoogie\get_autoconfig(), [
+$app = new Core(array_merge_recursive(get_autoconfig(), [
 
 	'config-path' => [
 
-		__DIR__ . DIRECTORY_SEPARATOR . 'config' => 10
+		__DIR__ . DIRECTORY_SEPARATOR . 'config' => Autoconfig\Config::CONFIG_WEIGHT_MODULE
 
 	],
 
@@ -34,16 +36,17 @@ $app = new \ICanBoogie\Core(\ICanBoogie\array_merge_recursive(\ICanBoogie\get_au
 ]));
 
 $app->boot();
+$app->locale = "en";
 
 #
 # Install modules
 #
 
-$errors = $app->modules->install(new \ICanBoogie\Errors());
+$errors = $app->modules->install();
 
 if ($errors->count())
 {
-	foreach ($errors as $error)
+	foreach ($errors as $module_id => $error)
 	{
 		echo "$module_id: $error\n";
 	}

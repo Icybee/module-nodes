@@ -2,16 +2,18 @@
 
 namespace Icybee\Modules\Nodes;
 
-$hooks = __NAMESPACE__ . '\Hooks::';
+use Icybee\Modules;
+
+$hooks = Hooks::class . '::';
 
 return [
 
 	'events' => [
 
-		'Icybee\Modules\Modules\ActivateOperation::process' => $hooks . 'on_modules_activate',
-		'Icybee\Modules\Modules\DeactivateOperation::process' => $hooks . 'on_modules_deactivate',
-		'Icybee\Modules\Users\DeleteOperation::process:before' => $hooks . 'before_delete_user',
-		'Icybee\Modules\Users\User::collect_dependencies' => $hooks . 'on_user_collect_dependencies',
+		Modules\Modules\ActivateOperation::class . '::process' => $hooks . 'on_modules_activate',
+		Modules\Modules\DeactivateOperation::class . '::process' => $hooks . 'on_modules_deactivate',
+		Modules\Users\DeleteOperation::class . '::process:before' => $hooks . 'before_delete_user',
+		Modules\Users\User::class . '::collect_dependencies' => $hooks . 'on_user_collect_dependencies',
 
 	],
 
