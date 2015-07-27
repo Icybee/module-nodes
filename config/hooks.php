@@ -10,8 +10,6 @@ return [
 
 	'events' => [
 
-		Modules\Modules\ActivateOperation::class . '::process' => $hooks . 'on_modules_activate',
-		Modules\Modules\DeactivateOperation::class . '::process' => $hooks . 'on_modules_deactivate',
 		Modules\Users\DeleteOperation::class . '::process:before' => $hooks . 'before_delete_user',
 		Modules\Users\User::class . '::collect_dependencies' => $hooks . 'on_user_collect_dependencies',
 

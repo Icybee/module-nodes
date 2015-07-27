@@ -4,15 +4,6 @@ namespace Icybee\Modules\Nodes;
 
 use ICanBoogie\Operation;
 
-$node_routes = [];
-
-$pathname = \ICanBoogie\REPOSITORY . 'vars/default_nodes_routes';
-
-if (file_exists($pathname))
-{
-	$node_routes = require $pathname;
-}
-
 return [
 
 	'api:nodes/online' => [
@@ -41,4 +32,4 @@ return [
 		]
 	]
 
-] + $node_routes;
+];

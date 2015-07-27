@@ -25,16 +25,6 @@ class Hooks
 	 * Events
 	 */
 
-	static public function on_modules_activate(Event $event)
-	{
-		Module::create_default_routes();
-	}
-
-	static public function on_modules_deactivate(Event $event)
-	{
-		Module::create_default_routes();
-	}
-
 	/**
 	 * Checks if the user to be deleted has nodes.
 	 *
