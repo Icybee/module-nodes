@@ -13,8 +13,12 @@ namespace Icybee\Modules\Nodes;
 
 use ICanBoogie\Operation;
 
+use Icybee\Binding\ObjectBindings;
+
 class ExportOperation extends Operation
 {
+	use ObjectBindings;
+
 	protected function get_controls()
 	{
 		return [
@@ -31,7 +35,12 @@ class ExportOperation extends Operation
 
 	protected function process()
 	{
-		$records = $this->module->model->filter_by_siteid($this->app->site_id)->own->all(\PDO::FETCH_OBJ);
+		$records = $this->module->model
+			->filter_by_siteid($this->app->site_id)
+			->own
+			->all(\PDO::FETCH_OBJ);
+
+		$by_id = [];
 
 		foreach ($records as $record)
 		{

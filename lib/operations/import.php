@@ -11,13 +11,17 @@
 
 namespace Icybee\Modules\Nodes;
 
+use ICanBoogie\Errors;
 use ICanBoogie\HTTP\Request;
 use ICanBoogie\Operation;
 
 use Brickrouge\Form;
+use Icybee\Binding\ObjectBindings;
 
 class ImportOperation extends Operation
 {
+	use ObjectBindings;
+
 	protected $keys_translations = [];
 
 	protected function get_controls()
@@ -29,7 +33,7 @@ class ImportOperation extends Operation
 		] + parent::get_controls();
 	}
 
-	protected function validate(\ICanboogie\Errors $errors)
+	protected function validate(Errors $errors)
 	{
 		return true;
 	}
@@ -108,6 +112,8 @@ class ImportOperation extends Operation
 		foreach ($data as $nid => $node)
 		{
 			$request->params = (array) $node;
+
+			/* @var $response \ICanBoogie\Operation\Response */
 
 			$response = $request->post();
 

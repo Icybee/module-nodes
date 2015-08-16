@@ -133,7 +133,7 @@ class ManageBlock extends \Icybee\ManageBlock
 			Element::INNER_HTML => $label,
 
 			'class' => 'edit',
-			'href' => \ICanBoogie\Routing\contextualize("/admin/{$record->constructor}/{$record->nid}/edit"),
+			'href' => $this->app->url_for("admin:{$record->constructor}:edit", $record),
 			'title' => $shortened ? $this->t('edit_named', [ ':title' => $title ? $title : 'unnamed' ]) : $this->t('edit'),
 
 		]);
@@ -183,7 +183,9 @@ class EditDecorator extends \Icybee\ManageBlock\EditDecorator
 	{
 		$element = parent::render();
 		$component = $this->component;
-		$html = $component ? \ICanBoogie\escape(\ICanBoogie\shorten($component, 52, .75, $shortened)) : I18n\t('<em>no title</em>');
+		$html = $component
+			? \ICanBoogie\escape(\ICanBoogie\shorten($component, 52, .75, $shortened))
+			: $this->app->translate('<em>no title</em>');
 
 		if (!$shortened)
 		{
@@ -191,7 +193,7 @@ class EditDecorator extends \Icybee\ManageBlock\EditDecorator
 		}
 
 		$element[Element::INNER_HTML] = str_replace('…', '<span class="light">…</span>', $html);
-		$element['title'] = I18n\t('manage.edit_named', [ ':title' => $component ? $component : 'unnamed' ]);
+		$element['title'] = $this->app->translate('manage.edit_named', [ ':title' => $component ? $component : 'unnamed' ]);
 
 		return $element;
 	}

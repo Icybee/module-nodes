@@ -124,7 +124,10 @@ class Hooks
 
 	static public function markup_node_navigation(array $args, \Patron\Engine $patron, $template)
 	{
-		\ICanBoogie\app()->document->css->add(DIR . 'public/page.css');
+		$app = self::app();
+		$app->document->css->add(DIR . 'public/page.css');
+
+		/* @var $record Node */
 
 		$record = $patron->context['this'];
 
@@ -152,7 +155,7 @@ class Hooks
 				\ICanBoogie\shorten($title, 48, 1), $next_record->url, [
 
 					'class' => "next",
-					'title' => I18n\t('Next: :title', [ ':title' => $title ])
+					'title' => $app->translate('Next: :title', [ ':title' => $title ])
 
 				]
 			);
@@ -167,7 +170,7 @@ class Hooks
 				\ICanBoogie\shorten($title, 48, 1), $previous_record->url, [
 
 					'class' => "previous",
-					'title' => I18n\t('Previous: :title', [ ':title' => $title ])
+					'title' => $app->translate('Previous: :title', [ ':title' => $title ])
 
 				]
 			);
@@ -190,14 +193,14 @@ class Hooks
 
 	static public function dashboard_now()
 	{
-		$app = \ICanBoogie\app();
+		$app = self::app();
 		$app->document->css->add(DIR . 'public/dashboard.css');
 
 		$counts = $app->models['nodes']->similar_site->count('constructor');
 
 		if (!$counts)
 		{
-			return '<p class="nothing">' . I18n\t('No record yet') . '</p>';
+			return '<p class="nothing">' . $app->translate('No record yet') . '</p>';
 		}
 
 		$categories = [
@@ -225,8 +228,8 @@ class Hooks
 				$category = $default_category;
 			}
 
-			$title = I18n\t($descriptor[Descriptor::TITLE], [], [ 'scope' => 'module_title' ]);
-			$title = I18n\t(strtr($constructor, '.', '_') . '.name.other', [], [ 'default' => $title ]);
+			$title = $app->translate($descriptor[Descriptor::TITLE], [], [ 'scope' => 'module_title' ]);
+			$title = $app->translate(strtr($constructor, '.', '_') . '.name.other', [], [ 'default' => $title ]);
 
 			$categories[$category][] = [ $title, $constructor, $count ];
 		}
@@ -237,7 +240,7 @@ class Hooks
 		foreach ($categories as $category => $entries)
 		{
 			$max_by_category = max($max_by_category, count($entries));
-			$head .= '<th>&nbsp;</th><th>' . I18n\t($category, [], [ 'scope' => 'module_category' ]) . '</th>';
+			$head .= '<th>&nbsp;</th><th>' . $app->translate($category, [], [ 'scope' => 'module_category' ]) . '</th>';
 		}
 
 		$body = '';
@@ -277,7 +280,7 @@ EOT;
 
 	static public function dashboard_user_modified()
 	{
-		$app = \ICanBoogie\app();
+		$app = self::app();
 		$app->document->css->add(DIR . 'public/dashboard.css');
 
 		$model = $app->models['nodes'];
@@ -290,7 +293,7 @@ EOT;
 
 		if (!$entries)
 		{
-			return '<p class="nothing">' . I18n\t('No record yet') . '</p>';
+			return '<p class="nothing">' . $app->translate('No record yet') . '</p>';
 		}
 
 		$last_date = null;
@@ -325,5 +328,17 @@ EOT;
 		$rc .= '</table>';
 
 		return $rc;
+	}
+
+	/*
+	 * Support
+	 */
+
+	/**
+	 * @return \ICanBoogie\Core|\Icybee\Binding\CoreBindings
+	 */
+	static private function app()
+	{
+		return \ICanBoogie\app();
 	}
 }

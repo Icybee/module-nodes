@@ -11,6 +11,8 @@
 
 namespace Icybee\Modules\Nodes;
 
+use ICanBoogie\Core;
+
 class ModelTest extends \PHPUnit_Framework_TestCase
 {
 	/**

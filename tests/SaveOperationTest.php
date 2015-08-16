@@ -12,7 +12,7 @@
 namespace Icybee\Modules\Nodes;
 
 use ICanBoogie\DateTime;
-use ICanBoogie\HTTP\HTTPError;
+use ICanBoogie\HTTP\Exception as HTTPError;
 use ICanBoogie\HTTP\Request;
 use ICanBoogie\Operation;
 

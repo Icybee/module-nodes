@@ -14,11 +14,21 @@ namespace Icybee\Modules\Nodes;
 use ICanBoogie\ActiveRecord;
 use ICanBoogie\DateTime;
 
+use Brickrouge\CSSClassNames;
+use Brickrouge\CSSClassNamesProperty;
+
+use Icybee\Binding\ObjectBindings as IcybeeBindings;
+use Icybee\Modules\Registry\Binding\NodeBindings as RegistryBindings;
+use Icybee\Modules\Sites\Binding\NodeBindings as SiteBindings;
 use Icybee\Modules\Sites\Site;
 use Icybee\Modules\Users\User;
 
 /**
  * A node representation.
+ *
+ * @method string url($type)
+ * @property-read string $url
+ * @property-read string $absolute_url
  *
  * @property-read Model $model
  * @property DateTime $created_at The date and time at which the node was created.
@@ -34,9 +44,13 @@ use Icybee\Modules\Users\User;
  * @property array[string]mixed $css_class_names {@see Node::get_css_class_names}.
  * @property string $css_class {@see Node::get_css_class}.
  */
-class Node extends ActiveRecord implements \Brickrouge\CSSClassNames
+class Node extends ActiveRecord implements CSSClassNames
 {
-	use \Brickrouge\CSSClassNamesProperty;
+	use IcybeeBindings;
+	use SiteBindings;
+	use RegistryBindings;
+
+	use CSSClassNamesProperty;
 	use ActiveRecord\CreatedAtProperty;
 	use ActiveRecord\UpdatedAtProperty;
 

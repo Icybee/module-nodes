@@ -25,7 +25,8 @@
 		"brickrouge/css-class-names": "^2.0.0",
 		"icybee/core": "^2.1.0",
 		"icybee/module-users": "^2.1.0",
-		"icybee/module-sites": "^2.1.0"
+		"icybee/module-sites": "^2.1.0",
+		"icybee/module-registry": "^2.1.0"
 	},
 	"require-dev": {
 		"icanboogie/bind-facets": "^0.2.0",
@@ -33,8 +34,7 @@
 		"icybee/module-views": "^2.1.0"
 	},
 	"suggest": {
-		"icanboogie/facets": "Facets support",
-		"icybee/modules-registry": "Support for metas data"
+		"icanboogie/facets": "Facets support"
 	},
 	"autoload": {
 		"classmap": [ "lib" ],

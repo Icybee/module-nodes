@@ -203,8 +203,8 @@ class AdjustNode extends Element
 
 		(
 			$search
-			? I18n\t('Aucun enregistrement ne correspond aux termes de recherche spécifiés (%search)', [ '%search' => $search ])
-			: I18n\t("Il n'y a pas d'enregistrements")
+			? $this->t('Aucun enregistrement ne correspond aux termes de recherche spécifiés (%search)', [ '%search' => $search ])
+			: $this->t("Il n'y a pas d'enregistrements")
 		)
 
 		. '</div>';

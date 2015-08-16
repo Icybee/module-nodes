@@ -15,9 +15,7 @@ $_SERVER['DOCUMENT_ROOT'] = __DIR__;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-#
-# Create the _core_ instance used for the tests.
-#
+/* @var $app Core|Binding\CLDR\CoreBindings|Module\CoreBindings */
 
 $app = new Core(array_merge_recursive(get_autoconfig(), [
 
