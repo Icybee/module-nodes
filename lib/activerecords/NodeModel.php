@@ -26,7 +26,7 @@ use Icybee\ConstructorModel;
  * @property-read Query $visible A query scope that combines `online`, `similar_site`, and `similar_language`.
  * @property-read Query $ordered A query scope that orders records according to their creation date.
  */
-class Model extends ConstructorModel
+class NodeModel extends ConstructorModel
 {
 	/**
 	 * If the {@link Node::$updated_at} property is not defined it is set to the current datetime.

@@ -66,7 +66,7 @@ class Module extends \Icybee\Module
 	{
 		return parent::resolve_model_tags($tags, 'primary') + [
 
-			Model::CONSTRUCTOR => $this->id
+			NodeModel::CONSTRUCTOR => $this->id
 
 		];
 	}

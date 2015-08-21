@@ -30,7 +30,7 @@ use Icybee\Modules\Users\User;
  * @property-read string $url
  * @property-read string $absolute_url
  *
- * @property-read Model $model
+ * @property-read NodeModel $model
  * @property DateTime $created_at The date and time at which the node was created.
  * @property DateTime $updated_at The date and time at which the node was updated.
  * @property Node $native

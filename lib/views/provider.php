@@ -18,9 +18,9 @@ class ViewProvider extends Fetcher
 	/**
 	 * Alters the initial query with the following scopes:
 	 *
-	 * - `own`: @see \Icybee\Modules\Nodes\Model::scope_own
-	 * - `similar_site`: @see \Icybee\Modules\Nodes\Model::scope_similar_site
-	 * - `similar_language`: @see \Icybee\Modules\Nodes\Model::scope_similar_language
+	 * - `own`: @see \Icybee\Modules\Nodes\NodeModel::scope_own
+	 * - `similar_site`: @see \Icybee\Modules\Nodes\NodeModel::scope_similar_site
+	 * - `similar_language`: @see \Icybee\Modules\Nodes\NodeModel::scope_similar_language
 	 */
 	protected function create_initial_query()
 	{
