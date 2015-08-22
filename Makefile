@@ -6,14 +6,14 @@ PACKAGE_VERSION = 2.1.0
 # assets
 
 JS_FILES = \
-	lib/elements/adjust-node.js \
-	lib/elements/pop-node.js \
-	lib/elements/title-slug-combo.js
+	lib/AdjustNode.js \
+	lib/PopNode.js \
+	lib/TitleSlugCombo.js
 
 CSS_FILES = \
-	lib/elements/adjust-node.css \
-	lib/elements/title-slug-combo.css \
-	lib/blocks/manage.css
+	lib/AdjustNode.css \
+	lib/TitleSlugCombo.css \
+	lib/ManageBlock.css
 
 JS_COMPRESSOR = curl -X POST -s --data-urlencode 'js_code@$^' --data-urlencode 'utf8=1' http://marijnhaverbeke.nl/uglifyjs
 #JS_COMPRESSOR = cat $^ # uncomment to produce uncompressed files
@@ -71,4 +71,3 @@ clean:
 	@rm -fR build
 	@rm -fR vendor
 	@rm -f composer.lock
-

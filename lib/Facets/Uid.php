@@ -9,11 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Nodes;
+namespace Icybee\Modules\Nodes\Facets;
 
 use ICanBoogie\Facets\Criterion;
 
-class ConstructorCriterion extends Criterion
+class UserCriterion extends Criterion
 {
+	public function __construct($id, array $options = [])
+	{
+		parent::__construct($id, $options + [
 
+			'column_name' => 'uid'
+
+		]);
+	}
 }

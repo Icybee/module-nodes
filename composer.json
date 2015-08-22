@@ -37,7 +37,9 @@
 		"icanboogie/facets": "Facets support"
 	},
 	"autoload": {
-		"classmap": [ "lib" ],
+		"psr-4": {
+			"Icybee\\Modules\\Nodes\\": "lib"
+		},
 		"files": [ "helpers.php" ]
 	},
 	"scripts": {

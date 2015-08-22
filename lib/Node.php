@@ -12,8 +12,8 @@
 namespace Icybee\Modules\Nodes;
 
 use ICanBoogie\ActiveRecord;
-use ICanBoogie\DateTime;
 
+use Brickrouge\AlterCSSClassNamesEvent;
 use Brickrouge\CSSClassNames;
 use Brickrouge\CSSClassNamesProperty;
 
@@ -31,17 +31,15 @@ use Icybee\Modules\Users\User;
  * @property-read string $absolute_url
  *
  * @property-read NodeModel $model
- * @property DateTime $created_at The date and time at which the node was created.
- * @property DateTime $updated_at The date and time at which the node was updated.
  * @property Node $native
  * @property User $user The user owning the node.
  * @property Site $site The site associated with the node.
  * @property-read Node $next
  * @property-read Node $previous
  * @property-read Node $translation
- * @property-read array[string]Node $translations
- * @property-read array[string]int $translations_keys
- * @property array[string]mixed $css_class_names {@see Node::get_css_class_names}.
+ * @property-read Node[] $translations
+ * @property-read array $translations_keys
+ * @property array $css_class_names {@see Node::get_css_class_names}.
  * @property string $css_class {@see Node::get_css_class}.
  */
 class Node extends ActiveRecord implements CSSClassNames
@@ -257,7 +255,7 @@ class Node extends ActiveRecord implements CSSClassNames
 	}
 
 	/**
-	 * Fires {@link \Brickrouge\AlterCSSClassNamesEvent} after the {@link $css_class_names} property
+	 * Fires {@link AlterCSSClassNamesEvent} after the {@link $css_class_names} property
 	 * was get.
 	 *
 	 * @inheritdoc
@@ -268,7 +266,7 @@ class Node extends ActiveRecord implements CSSClassNames
 
 		if ($property === 'css_class_names')
 		{
-			new \Brickrouge\AlterCSSClassNamesEvent($this, $value);
+			new AlterCSSClassNamesEvent($this, $value);
 		}
 
 		return $value;

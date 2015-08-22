@@ -9,9 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Nodes;
+namespace Icybee\Modules\Nodes\Facets;
 
-class IsOnlineCriterion extends \ICanBoogie\Facets\Criterion
+use ICanBoogie\Facets\Criterion;
+
+class ConstructorCriterion extends Criterion
 {
 
 }

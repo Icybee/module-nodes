@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Nodes;
+namespace Icybee\Modules\Nodes\Facets;
 
 use ICanBoogie\ActiveRecord\Query;
 use ICanBoogie\Facets\Criterion;
@@ -23,10 +23,9 @@ class UsernameCriterion extends Criterion
 			->select('uid, username');
 
 		$query->join($username_query, [ 'as' => 'username' ]);
-
-		TODO: Query tries content.uid = username.uid, but `uid` is only available in node
-
 		*/
+
+//		TODO: Query tries content.uid = username.uid, but `uid` is only available in node
 
 		$query->join('INNER JOIN (SELECT uid, username FROM {prefix}users) AS username ON (node.uid = username.uid)');
 

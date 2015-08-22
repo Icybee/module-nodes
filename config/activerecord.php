@@ -1,6 +1,8 @@
 <?php
 
-namespace Icybee\Modules\Nodes;
+namespace Icybee\Modules\Nodes\Facets;
+
+use Icybee\Modules\Nodes\Node;
 
 return [
 

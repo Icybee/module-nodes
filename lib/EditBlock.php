@@ -11,8 +11,6 @@
 
 namespace Icybee\Modules\Nodes;
 
-use Icybee\Modules\Nodes\Node;
-
 use Brickrouge\Element;
 use Brickrouge\Form;
 

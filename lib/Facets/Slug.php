@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Nodes;
+namespace Icybee\Modules\Nodes\Facets;
 
 use ICanBoogie\Facets\Criterion;
 
-class TitleCriterion extends Criterion
+class SlugCriterion extends Criterion
 {
 
 }

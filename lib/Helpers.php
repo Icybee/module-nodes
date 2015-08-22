@@ -36,7 +36,7 @@ class Helpers
 	 * Patches a patchable function.
 	 *
 	 * @param string $name Name of the function.
-	 * @param collable $callback Callback.
+	 * @param callable $callback Callback.
 	 *
 	 * @throws \RuntimeException is attempt to patch an undefined function.
 	 */
@@ -54,7 +54,7 @@ class Helpers
 	 * Default implementations
 	 */
 
-	static private function slugize($str, $language=null)
+	static private function slugize($str, $language = null)
 	{
 		return \ICanBoogie\normalize($str);
 	}
