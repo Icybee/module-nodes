@@ -8,13 +8,6 @@ $hooks = Hooks::class . '::';
 
 return [
 
-	'events' => [
-
-		Modules\Users\DeleteOperation::class . '::process:before' => $hooks . 'before_delete_user',
-		Modules\Users\User::class . '::collect_dependencies' => $hooks . 'on_user_collect_dependencies',
-
-	],
-
 	'patron.markups' => [
 
 		'node' => [
