@@ -19,12 +19,19 @@ use Icybee\ConstructorModel;
 /**
  * Nodes model.
  *
- * @property-read Query $online A query scope for online records.
+ * @method Query offline()
+ * @method Query online()
+ * @method Query ordered($direction = -1)
+ * @method Query similar_language($language = null)
+ * @method Query similar_site($site_id = null)
+ * @method Query visible()
+ *
  * @property-read Query $offline A query scope for offline records.
- * @property-read Query $similar_site A query scope for records of a similar site.
- * @property-read Query $similar_language A query scope for records of a similar language.
- * @property-read Query $visible A query scope that combines `online`, `similar_site`, and `similar_language`.
+ * @property-read Query $online A query scope for online records.
  * @property-read Query $ordered A query scope that orders records according to their creation date.
+ * @property-read Query $similar_language A query scope for records of a similar language.
+ * @property-read Query $similar_site A query scope for records of a similar site.
+ * @property-read Query $visible A query scope that combines `online`, `similar_site`, and `similar_language`.
  */
 class NodeModel extends ConstructorModel
 {
@@ -123,8 +130,8 @@ class NodeModel extends ConstructorModel
 	 * `(`siteid = 0')` or it matches the specified website.
 	 *
 	 * @param Query $query
-	 * @param int $site_id The identifier of the website to match. If the identifier is `null` the
-	 * current website identifier is used instead.
+	 * @param int|null $site_id The identifier of the website to match. If the identifier is
+	 * `null` the current website identifier is used instead.
 	 *
 	 * @return Query
 	 */

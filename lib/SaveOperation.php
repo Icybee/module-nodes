@@ -17,6 +17,7 @@ use Icybee\Binding\ObjectBindings;
 /**
  * Saves a node.
  *
+ * @property Module $module
  * @property string $uuid A v4 UUID suitable for a new record.
  * @property Node $record
  */

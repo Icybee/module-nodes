@@ -91,7 +91,7 @@ class PopNode extends \Brickrouge\Widget
 		return $rc;
 	}
 
-	protected function getEntry($model, $value)
+	protected function getEntry(NodeModel $model, $value)
 	{
 		return $model->where('title = ? OR slug = ?', $value, $value)->order('created_at DESC')->one;
 	}

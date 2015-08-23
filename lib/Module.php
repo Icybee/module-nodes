@@ -15,6 +15,8 @@ use Icybee\Modules\Views\ViewOptions;
 
 /**
  * Nodes module.
+ *
+ * @property-read NodeModel $model
  */
 class Module extends \Icybee\Module
 {

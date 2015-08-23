@@ -55,6 +55,8 @@ class TranslationsColumn extends Column
 		$translations = [];
 		$translations_by_records = [];
 
+		/* @var $app \ICanBoogie\Core|\Icybee\Binding\CoreBindings */
+
 		$app = \ICanBoogie\app();
 		$site = $app->site;
 		$sites = $app->models['sites'];
