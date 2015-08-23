@@ -169,7 +169,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @expectedException ICanBoogie\ActiveRecord\StatementNotValid
+	 * @expectedException \ICanBoogie\ActiveRecord\StatementNotValid
 	 */
 	public function test_save_empty()
 	{

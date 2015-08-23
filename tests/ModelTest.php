@@ -21,7 +21,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 	static private $app;
 
 	/**
-	 * @var Model
+	 * @var NodeModel
 	 */
 	static private $model;
 
