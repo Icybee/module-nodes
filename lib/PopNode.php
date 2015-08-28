@@ -12,6 +12,7 @@
 namespace Icybee\Modules\Nodes;
 
 use Brickrouge\Element;
+use ICanBoogie\ActiveRecord\Model;
 
 class PopNode extends \Brickrouge\Widget
 {
@@ -91,7 +92,15 @@ class PopNode extends \Brickrouge\Widget
 		return $rc;
 	}
 
-	protected function getEntry(NodeModel $model, $value)
+	/**
+	 * Returns the record from a model matching a value.
+	 *
+	 * @param Model|NodeModel $model
+	 * @param string $value
+	 *
+	 * @return Node
+	 */
+	protected function getEntry(Model $model, $value)
 	{
 		return $model->where('title = ? OR slug = ?', $value, $value)->order('created_at DESC')->one;
 	}

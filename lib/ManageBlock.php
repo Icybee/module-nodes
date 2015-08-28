@@ -79,8 +79,9 @@ class ManageBlock extends \Icybee\ManageBlock
 	{
 		return array_merge(parent::get_available_jobs(), [
 
-			'online' => $this->t('online.operation.short_title'),
-			'offline' => $this->t('offline.operation.short_title')
+			Module::OPERATION_ONLINE => $this->t(Module::OPERATION_ONLINE . '.operation.short_title'),
+			Module::OPERATION_OFFLINE => $this->t(Module::OPERATION_OFFLINE . '.operation.short_title'),
+			Module::OPERATION_CHANGE_USER => $this->t(Module::OPERATION_CHANGE_USER . '.operation.short_title')
 
 		]);
 	}

@@ -96,6 +96,22 @@ return [
 
 	],
 
+	'change_user.operation' => [
+
+		'title' => "Changer l'utilisateur d'enregistrements",
+		'short_title' => "Changer utilisateur",
+		'continue' => "Changer",
+		'cancel' => "Ne pas changer",
+
+		'confirm' => [
+
+			'one' => "Êtes-vous sûr de vouloir changer l'utilisaeur de l'enregistrement sélectionné ?",
+			'other' => "Êtes-vous sûr de vouloir changer l'utilisateur des :count enregistrements sélectionnés ?"
+
+		]
+
+	],
+
 	'option' => [
 
 		'save_mode_display' => 'Enregistrer et afficher'

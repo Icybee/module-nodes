@@ -18,6 +18,10 @@ namespace Icybee\Modules\Nodes;
  */
 class Module extends \Icybee\Module
 {
+	const OPERATION_ONLINE = 'online';
+	const OPERATION_OFFLINE = 'offline';
+	const OPERATION_CHANGE_USER = 'change_user';
+
 	const PERMISSION_MODIFY_BELONGING_SITE = 'modify belonging site';
 
 	protected function resolve_primary_model_tags($tags)

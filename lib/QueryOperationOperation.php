@@ -38,4 +38,19 @@ class QueryOperationOperation extends \Icybee\Operation\Module\QueryOperation
 
 		];
 	}
+
+	protected function query_change_user()
+	{
+		return [
+
+			'params' => [
+
+				'keys' => $this->request['keys']
+
+			],
+
+			'element_class' => QueryChangeUserOperationElement::class
+
+		];
+	}
 }

@@ -89,6 +89,22 @@ return [
 
 	],
 
+	'change_user.operation' => [
+
+		'title' => "Change records user",
+		'short_title' => "Change user",
+		'continue' => "Change",
+		'cancel' => "Don't change",
+
+		'confirm' => [
+
+			'one' => 'Are you sure you want to change the user of the selected record?',
+			'other' => 'Are you sure you want to change the user of the :count selected records?'
+
+		]
+
+	],
+
 	'option' => [
 
 		'save_mode_display' => 'Save and display'
