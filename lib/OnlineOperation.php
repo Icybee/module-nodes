@@ -11,13 +11,18 @@
 
 namespace Icybee\Modules\Nodes;
 
+use ICanBoogie\Errors;
+use ICanBoogie\Operation;
+
 /**
  * @property Node $record
  */
-class OnlineOperation extends \ICanBoogie\Operation
+class OnlineOperation extends Operation
 {
 	/**
 	 * Controls for the operation: permission(maintain), record and ownership.
+	 *
+	 * @inheritdoc
 	 */
 	protected function get_controls()
 	{
@@ -30,13 +35,18 @@ class OnlineOperation extends \ICanBoogie\Operation
 		] + parent::get_controls();
 	}
 
-	protected function validate(\ICanboogie\Errors $errors)
+	/**
+	 * @inheritdoc
+	 */
+	protected function validate(Errors $errors)
 	{
 		return true;
 	}
 
 	/**
 	 * Changes the target record is_online property to true and updates the record.
+	 *
+	 * @inheritdoc
 	 */
 	protected function process()
 	{
