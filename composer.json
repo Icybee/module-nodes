@@ -23,15 +23,15 @@
 		"php": ">=5.5.0",
 		"icanboogie/module-installer": "^1.2.3",
 		"brickrouge/css-class-names": "^2.0.0",
-		"icybee/core": "^2.1.0",
-		"icybee/module-users": "^2.1.0",
-		"icybee/module-sites": "^2.1.0",
-		"icybee/module-registry": "^2.1.0"
+		"icybee/core": "^3.0.0",
+		"icybee/module-users": "^3.0.0",
+		"icybee/module-sites": "^3.0.0",
+		"icybee/module-registry": "^3.0.0"
 	},
 	"require-dev": {
 		"icanboogie/bind-facets": "^0.2.0",
-		"icybee/module-modules": "^2.0.0",
-		"icybee/module-views": "^2.1.0"
+		"icybee/module-modules": "^3.0.0",
+		"icybee/module-views": "^3.0.0"
 	},
 	"suggest": {
 		"icanboogie/facets": "Facets support"
