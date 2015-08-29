@@ -9,12 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Nodes;
+namespace Icybee\Modules\Nodes\Operation;
+
+use ICanBoogie\Errors;
+use ICanBoogie\Module;
+use ICanBoogie\Operation;
+use Icybee\Modules\Nodes\Node;
 
 /**
  * @property Node $record
  */
-class OfflineOperation extends \ICanBoogie\Operation
+class OfflineOperation extends Operation
 {
 	/**
 	 * Controls for the operation: permission(maintain), record and ownership.
@@ -30,7 +35,7 @@ class OfflineOperation extends \ICanBoogie\Operation
 		] + parent::get_controls();
 	}
 
-	protected function validate(\ICanboogie\Errors $errors)
+	protected function validate(Errors $errors)
 	{
 		return true;
 	}

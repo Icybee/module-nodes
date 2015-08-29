@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Nodes;
+namespace Icybee\Modules\Nodes\Operation;
 
-class ConfigOperation extends \Icybee\ConfigOperation
+class ConfigOperation extends \Icybee\Operation\Module\ConfigOperation
 {
 
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Icybee\Modules\Nodes;
+namespace Icybee\Modules\Nodes\Element;
 
 use Brickrouge\Element;
 

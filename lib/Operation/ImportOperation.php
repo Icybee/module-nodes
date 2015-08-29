@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Nodes;
+namespace Icybee\Modules\Nodes\Operation;
 
 use ICanBoogie\Errors;
 use ICanBoogie\HTTP\Request;
+use ICanBoogie\Module;
 use ICanBoogie\Operation;
 
 use Brickrouge\Form;

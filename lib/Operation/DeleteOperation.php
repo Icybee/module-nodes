@@ -9,12 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Nodes;
+namespace Icybee\Modules\Nodes\Operation;
+
+use Icybee\Modules\Nodes\Node;
 
 /**
  * @property Node $record
  */
-class DeleteOperation extends \ICanBoogie\DeleteOperation
+class DeleteOperation extends \ICanBoogie\Module\Operation\DeleteOperation
 {
 	/**
 	 * Overrides the method to create a nicer log entry.

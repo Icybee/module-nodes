@@ -110,7 +110,7 @@ class SaveOperationTest extends \PHPUnit_Framework_TestCase
 
 namespace Icybee\Modules\Nodes\SaveOperationTest;
 
-class FakeSaveOperation extends \Icybee\Modules\Nodes\SaveOperation
+class FakeSaveOperation extends \Icybee\Modules\Nodes\Operation\SaveOperation
 {
 	public function __construct()
 	{

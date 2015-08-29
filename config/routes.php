@@ -4,6 +4,9 @@ namespace Icybee\Modules\Nodes;
 
 use ICanBoogie\Operation;
 
+use Icybee\Modules\Nodes\Operation\OfflineOperation;
+use Icybee\Modules\Nodes\Operation\OnlineOperation;
+
 return [
 
 	'api:nodes/online' => [

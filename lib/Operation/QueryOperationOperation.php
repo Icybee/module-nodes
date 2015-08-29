@@ -9,9 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Nodes;
+namespace Icybee\Modules\Nodes\Operation;
 
-class QueryOperationOperation extends \Icybee\Operation\Module\QueryOperation
+use Icybee\Modules\Nodes\Element\QueryChangeUserOperationElement;
+use Icybee\Operation\Module\QueryOperation;
+
+class QueryOperationOperation extends QueryOperation
 {
 	protected function query_online()
 	{

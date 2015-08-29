@@ -29,9 +29,9 @@ class Hooks
 	 * Checks if the user to be deleted has nodes.
 	 *
 	 * @param Operation\BeforeProcessEvent $event
-	 * @param \Icybee\Modules\Users\DeleteOperation $operation
+	 * @param \Icybee\Modules\Users\Operation\DeleteOperation $operation
 	 */
-	static public function before_delete_user(Operation\BeforeProcessEvent $event, \Icybee\Modules\Users\DeleteOperation $operation)
+	static public function before_delete_user(Operation\BeforeProcessEvent $event, \Icybee\Modules\Users\Operation\DeleteOperation $operation)
 	{
 		$uid = $operation->key;
 		$count = \ICanBoogie\app()->models['nodes']->filter_by_uid($uid)->count;

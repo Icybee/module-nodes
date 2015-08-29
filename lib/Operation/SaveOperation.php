@@ -9,10 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Nodes;
+namespace Icybee\Modules\Nodes\Operation;
 
 use ICanBoogie\DateTime;
+
 use Icybee\Binding\ObjectBindings;
+use Icybee\Modules\Nodes\Module;
+use Icybee\Modules\Nodes\Node;
 
 /**
  * Saves a node.
@@ -21,7 +24,7 @@ use Icybee\Binding\ObjectBindings;
  * @property string $uuid A v4 UUID suitable for a new record.
  * @property Node $record
  */
-class SaveOperation extends \ICanBoogie\SaveOperation
+class SaveOperation extends \ICanBoogie\Module\Operation\SaveOperation
 {
 	use ObjectBindings;
 

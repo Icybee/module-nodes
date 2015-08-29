@@ -1,12 +1,14 @@
 <?php
 
-namespace Icybee\Modules\Nodes;
+namespace Icybee\Modules\Nodes\Operation;
 
 use ICanBoogie\Errors;
 use ICanBoogie\HTTP\Request;
+use ICanBoogie\Module;
 use ICanBoogie\Operation;
 
 use Icybee\Binding\ObjectBindings;
+use Icybee\Modules\Nodes\Node;
 
 /**
  * Changes the user of a record for another.
