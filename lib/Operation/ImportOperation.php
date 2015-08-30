@@ -17,11 +17,11 @@ use ICanBoogie\Module;
 use ICanBoogie\Operation;
 
 use Brickrouge\Form;
-use Icybee\Binding\ObjectBindings;
+use Icybee\Binding\PrototypedBindings;
 
 class ImportOperation extends Operation
 {
-	use ObjectBindings;
+	use PrototypedBindings;
 
 	protected $keys_translations = [];
 

@@ -15,11 +15,11 @@ use ICanBoogie\Errors;
 use ICanBoogie\Module;
 use ICanBoogie\Operation;
 
-use Icybee\Binding\ObjectBindings;
+use Icybee\Binding\PrototypedBindings;
 
 class ExportOperation extends Operation
 {
-	use ObjectBindings;
+	use PrototypedBindings;
 
 	protected function get_controls()
 	{

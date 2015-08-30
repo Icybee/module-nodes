@@ -13,7 +13,7 @@ namespace Icybee\Modules\Nodes\Operation;
 
 use ICanBoogie\DateTime;
 
-use Icybee\Binding\ObjectBindings;
+use Icybee\Binding\PrototypedBindings;
 use Icybee\Modules\Nodes\Module;
 use Icybee\Modules\Nodes\Node;
 
@@ -26,7 +26,7 @@ use Icybee\Modules\Nodes\Node;
  */
 class SaveOperation extends \ICanBoogie\Module\Operation\SaveOperation
 {
-	use ObjectBindings;
+	use PrototypedBindings;
 
 	/**
 	 * Overrides the method to handle the following properties:

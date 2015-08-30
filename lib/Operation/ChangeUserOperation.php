@@ -7,7 +7,7 @@ use ICanBoogie\HTTP\Request;
 use ICanBoogie\Module;
 use ICanBoogie\Operation;
 
-use Icybee\Binding\ObjectBindings;
+use Icybee\Binding\PrototypedBindings;
 use Icybee\Modules\Nodes\Node;
 
 /**
@@ -17,7 +17,7 @@ use Icybee\Modules\Nodes\Node;
  */
 class ChangeUserOperation extends Operation
 {
-	use ObjectBindings;
+	use PrototypedBindings;
 
 	/**
 	 * Identifier of the new user.

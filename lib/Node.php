@@ -17,7 +17,7 @@ use Brickrouge\AlterCSSClassNamesEvent;
 use Brickrouge\CSSClassNames;
 use Brickrouge\CSSClassNamesProperty;
 
-use Icybee\Binding\ObjectBindings as IcybeeBindings;
+use Icybee\Binding\PrototypedBindings as IcybeeBindings;
 use Icybee\Modules\Registry\Binding\NodeBindings as RegistryBindings;
 use Icybee\Modules\Sites\Binding\NodeBindings as SiteBindings;
 use Icybee\Modules\Sites\Site;
