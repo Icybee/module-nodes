@@ -13,6 +13,7 @@ namespace Icybee\Modules\Nodes;
 
 use ICanBoogie\DateTime;
 use ICanBoogie\HTTP\Exception as HTTPError;
+use ICanBoogie\HTTP\PermissionRequired;
 use ICanBoogie\HTTP\Request;
 use ICanBoogie\Operation;
 
@@ -88,13 +89,17 @@ class SaveOperationTest extends \PHPUnit_Framework_TestCase
 
 		try
 		{
-			$response = $operation($request);
+			$operation($request);
 
-			$this->fail('Expected HTTPError.');
+			$this->fail("Expected Failure");
 		}
-		catch (HTTPError $e)
+		catch (Operation\Failure $e)
 		{
-			$this->assertEquals(401, $e->getCode());
+			$this->assertInstanceOf(PermissionRequired::class, $e->previous);
+		}
+		catch (\Exception $e)
+		{
+			$this->fail("Expected Failure");
 		}
 	}
 

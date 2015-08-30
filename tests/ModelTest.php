@@ -16,7 +16,7 @@ use ICanBoogie\Core;
 class ModelTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var Core
+	 * @var Core|\Icybee\Binding\Core\CoreBindings|\Icybee\Modules\Sites\Binding\CoreBindings
 	 */
 	static private $app;
 
@@ -29,11 +29,6 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 	{
 		self::$app = \ICanBoogie\app();
 		self::$model = self::$app->models['nodes'];
-	}
-
-	public function test_get_app()
-	{
-		$this->assertSame(\ICanBoogie\app(), self::$model->app);
 	}
 
 	public function test_scope_similar_site()

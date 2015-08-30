@@ -15,7 +15,7 @@ $_SERVER['DOCUMENT_ROOT'] = __DIR__;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-/* @var $app Core|Binding\CLDR\CoreBindings|Module\CoreBindings */
+/* @var $app Core|\Icybee\Binding\Core\CoreBindings */
 
 $app = new Core(array_merge_recursive(get_autoconfig(), [
 
@@ -35,25 +35,10 @@ $app = new Core(array_merge_recursive(get_autoconfig(), [
 
 $app->boot();
 $app->locale = "en";
+$app->modules->install();
 
 #
-# Install modules
-#
-
-$errors = $app->modules->install();
-
-if ($errors->count())
-{
-	foreach ($errors as $module_id => $error)
-	{
-		echo "$module_id: $error\n";
-	}
-
-	exit(1);
-}
-
-#
-# Create a user
+# Create user and website
 #
 
 use Icybee\Modules\Users\User;

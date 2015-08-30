@@ -96,9 +96,9 @@ class Node extends ActiveRecord implements CSSClassNames
 	 *
 	 * @param User $user
 	 */
-	protected function set_user(User $user)
+	protected function set_user(User $user = null)
 	{
-		$this->uid = $user->uid;
+		$this->uid = $user ? $user->uid : 0;
 	}
 
 	/**
@@ -125,9 +125,9 @@ class Node extends ActiveRecord implements CSSClassNames
 	 *
 	 * @param Site $site
 	 */
-	protected function set_site(Site $site)
+	protected function set_site(Site $site = null)
 	{
-		$this->siteid = $site->siteid;
+		$this->siteid = $site ? $site->siteid : 0;
 	}
 
 	/**
