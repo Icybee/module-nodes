@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Nodes\ManageBlock;
+namespace Icybee\Modules\Nodes\Block\ManageBlock;
 
-use Icybee\ManageBlock\BooleanCellRenderer;
+use Icybee\Block\ManageBlock\BooleanCellRenderer;
 use Icybee\Modules\Nodes\Node;
 
 /**

@@ -9,14 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Nodes;
+namespace Icybee\Modules\Nodes\Block;
+
+use Icybee\Modules\Nodes\Node;
 
 /**
  * A block used to confirm the deletion of a node.
  *
  * @property Node $record
  */
-class DeleteBlock extends \Icybee\DeleteBlock
+class DeleteBlock extends \Icybee\Block\DeleteBlock
 {
 	/**
 	 * Returns the title of the node.

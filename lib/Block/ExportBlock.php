@@ -9,12 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Nodes;
+namespace Icybee\Modules\Nodes\Block;
 
 use ICanBoogie\Operation;
 
 use Brickrouge\Button;
 use Brickrouge\Form;
+
+use Icybee\Modules\Nodes\Module;
 
 class ExportBlock extends Form
 {

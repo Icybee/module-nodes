@@ -9,27 +9,30 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Nodes;
+namespace Icybee\Modules\Nodes\Block;
 
 use ICanBoogie\ActiveRecord\Query;
 
 use Brickrouge\Document;
 use Brickrouge\Element;
 
-use Icybee\ManageBlock\DateTimeColumn;
-use Icybee\Modules\Users\ManageBlock\UserColumn;
+use Icybee\Block\ManageBlock\DateTimeColumn;
+use Icybee\Modules\Nodes as Root;
+use Icybee\Modules\Nodes\Module;
+use Icybee\Modules\Nodes\Node;
+use Icybee\Modules\Users\Block\ManageBlock\UserColumn;
 
 /**
  * A block to manage nodes.
  */
-class ManageBlock extends \Icybee\ManageBlock
+class ManageBlock extends \Icybee\Block\ManageBlock
 {
 	static protected function add_assets(Document $document)
 	{
 		parent::add_assets($document);
 
-		$document->css->add(DIR . 'public/module.css');
-		$document->js->add(DIR . 'public/module.js');
+		$document->css->add(Root\DIR . 'public/module.css');
+		$document->js->add(Root\DIR . 'public/module.js');
 	}
 
 	public function __construct(Module $module, array $attributes = [])
@@ -48,8 +51,8 @@ class ManageBlock extends \Icybee\ManageBlock
 	 * - `url`: An instance of {@link ManageBlock\URLColumn}.
 	 * - `is_online`: An instance of {@link ManageBlock\IsOnlineColumn}.
 	 * - `uid`: An instance of {@link \Icybee\Modules\Users\ManageBlock\UserColumn}.
-	 * - `created_at`: An instance of {@link \Icybee\ManageBlock\DateTimeColumn}.
-	 * - `updated_at`: An instance of {@link \Icybee\ManageBlock\DateTimeColumn}.
+	 * - `created_at`: An instance of {@link \Icybee\Block\ManageBlock\DateTimeColumn}.
+	 * - `updated_at`: An instance of {@link \Icybee\Block\ManageBlock\DateTimeColumn}.
 	 *
 	 * @inheritdoc
 	 */

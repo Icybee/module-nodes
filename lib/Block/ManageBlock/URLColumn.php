@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Nodes\ManageBlock;
+namespace Icybee\Modules\Nodes\Block\ManageBlock;
 
 use Brickrouge\A;
 
-use Icybee\ManageBlock\Column;
-use Icybee\Modules\Nodes\ManageBlock;
+use Icybee\Block\ManageBlock\Column;
+use Icybee\Modules\Nodes\Block\ManageBlock;
 use Icybee\Modules\Nodes\Node;
 
 /**

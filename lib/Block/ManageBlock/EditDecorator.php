@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Nodes\ManageBlock;
+namespace Icybee\Modules\Nodes\Block\ManageBlock;
 
 use Brickrouge\Element;
 
-class EditDecorator extends \Icybee\ManageBlock\EditDecorator
+class EditDecorator extends \Icybee\Block\ManageBlock\EditDecorator
 {
 	/**
 	 * The component is shortened if it's longer than 52 characters, in which case the title of

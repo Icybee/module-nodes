@@ -9,15 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Nodes;
+namespace Icybee\Modules\Nodes\Block;
 
 use Brickrouge\Element;
 use Brickrouge\Form;
 
+use Icybee\Modules\Nodes\Module;
+use Icybee\Modules\Nodes\Node;
+use Icybee\Modules\Nodes\TitleSlugCombo;
+
 /**
  * A block used to edit a node.
  */
-class EditBlock extends \Icybee\EditBlock
+class EditBlock extends \Icybee\Block\EditBlock
 {
 	/**
 	 * Adds the "Visibility" group.

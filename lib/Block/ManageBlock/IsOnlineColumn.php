@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Icybee\Modules\Nodes\ManageBlock;
+namespace Icybee\Modules\Nodes\Block\ManageBlock;
 
-use Icybee\ManageBlock\BooleanColumn;
-use Icybee\Modules\Nodes\ManageBlock;
+use Icybee\Block\ManageBlock\BooleanColumn;
+use Icybee\Modules\Nodes\Block\ManageBlock;
 
 /**
  * Representation of the `is_online` column.
