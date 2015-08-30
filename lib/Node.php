@@ -17,7 +17,7 @@ use Brickrouge\AlterCSSClassNamesEvent;
 use Brickrouge\CSSClassNames;
 use Brickrouge\CSSClassNamesProperty;
 
-use Icybee\Binding\PrototypedBindings as IcybeeBindings;
+use ICanBoogie\Binding\PrototypedBindings as CoreBindings;
 use Icybee\Modules\Registry\Binding\NodeBindings as RegistryBindings;
 use Icybee\Modules\Sites\Binding\NodeBindings as SiteBindings;
 use Icybee\Modules\Sites\Site;
@@ -44,7 +44,7 @@ use Icybee\Modules\Users\User;
  */
 class Node extends ActiveRecord implements CSSClassNames
 {
-	use IcybeeBindings;
+	use CoreBindings;
 	use SiteBindings;
 	use RegistryBindings;
 

@@ -15,7 +15,7 @@ use ICanBoogie\Errors;
 use ICanBoogie\Module;
 use ICanBoogie\Operation;
 
-use Icybee\Binding\PrototypedBindings;
+use Icybee\Binding\Core\PrototypedBindings;
 
 class ExportOperation extends Operation
 {

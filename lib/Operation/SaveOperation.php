@@ -13,7 +13,7 @@ namespace Icybee\Modules\Nodes\Operation;
 
 use ICanBoogie\DateTime;
 
-use Icybee\Binding\PrototypedBindings;
+use Icybee\Binding\Core\PrototypedBindings;
 use Icybee\Modules\Nodes\Module;
 use Icybee\Modules\Nodes\Node;
 
