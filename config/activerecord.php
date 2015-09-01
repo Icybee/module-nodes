@@ -14,7 +14,8 @@ return [
 			Node::SLUG => SlugCriterion::class,
 			Node::TITLE => TitleCriterion::class,
 			Node::CONSTRUCTOR => ConstructorCriterion::class,
-			Node::IS_ONLINE => IsOnlineCriterion::class
+			Node::IS_ONLINE => IsOnlineCriterion::class,
+			Node::CREATED_AT => CreatedAtCriterion::class
 
 		]
 	]
