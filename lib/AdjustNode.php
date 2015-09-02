@@ -18,6 +18,7 @@ use Brickrouge\A;
 use Brickrouge\Element;
 use Brickrouge\Pager;
 use Brickrouge\Text;
+use Icybee\Modules\Nodes\Element\Pagination;
 
 class AdjustNode extends Element
 {
@@ -178,7 +179,7 @@ class AdjustNode extends Element
 
 		$rc .= '</ul>';
 
-		$rc .= new Element\Nodes\Pager('div', $range + []);
+		$rc .= new Pagination('div', $range + []);
 
 		return $rc;
 	}
@@ -209,11 +210,4 @@ class AdjustNode extends Element
 
 		. '</div>';
 	}
-}
-
-namespace Brickrouge\Widget;
-
-class AdjustNode extends \Icybee\Modules\Nodes\AdjustNode
-{
-
 }

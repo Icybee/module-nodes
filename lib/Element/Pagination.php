@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Brickrouge\Element\Nodes;
+namespace Icybee\Modules\Nodes\Element;
 
-class Pager extends \Brickrouge\Pager
+class Pagination extends \Brickrouge\Pager
 {
 	public function __construct($type, array $attributes=[])
 	{
