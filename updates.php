@@ -31,13 +31,13 @@ class Update20111201 extends Update
 			throw new AssertionFailed('assert_table_exists', 'system_nodes');
 		}
 
-		$db("RENAME TABLE `system_nodes` TO `nodes`");
+		$db("RENAME TABLE `{prefix}system_nodes` TO `{prefix}nodes`");
 	}
 
 	public function update_constructor_type()
 	{
 		$db = $this->app->db;
-		$db("UPDATE nodes SET constructor = 'nodes' WHERE constructor = 'system.nodes'");
+		$db("UPDATE `{prefix}nodes` SET constructor = 'nodes' WHERE constructor = 'system.nodes'");
 	}
 
 	public function update_column_nativeid()
