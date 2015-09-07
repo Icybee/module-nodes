@@ -34,14 +34,14 @@ class Hooks
 	static public function before_delete_user(Operation\BeforeProcessEvent $event, \Icybee\Modules\Users\Operation\DeleteOperation $operation)
 	{
 		$uid = $operation->key;
-		$count = \ICanBoogie\app()->models['nodes']->filter_by_uid($uid)->count;
+		$count = self::app()->models['nodes']->filter_by_uid($uid)->count;
 
 		if (!$count)
 		{
 			return;
 		}
 
-		$event->errors['uid'] = $event->errors->format('The user %name is used by :count nodes.', [
+		$event->errors->add('uid', "The user %name is used by :count nodes.", [
 
 			'name' => $operation->record->name, ':count' => $count
 
@@ -56,7 +56,7 @@ class Hooks
 	 */
 	static public function on_user_collect_dependencies(\ICanBoogie\ActiveRecord\CollectDependenciesEvent $event, \Icybee\Modules\Users\User $target)
 	{
-		$nodes = \ICanBoogie\app()
+		$nodes = self::app()
 		->models['nodes']
 		->select('nid, constructor, title')
 		->filter_by_uid($target->uid)
@@ -103,7 +103,7 @@ class Hooks
 			$select = substr($select, 1);
 		}
 
-		$app = \ICanBoogie\app();
+		$app = self::app();
 
 		if (is_numeric($select))
 		{
@@ -116,7 +116,7 @@ class Hooks
 
 		if (!$record)
 		{
-			throw new RecordNotFound('Unable to find record with the provided arguments: ' . json_encode($args), array());
+			throw new RecordNotFound("Unable to find record with the provided arguments: " . json_encode($args), []);
 		}
 
 		return $patron($template, $record);
@@ -150,30 +150,24 @@ class Hooks
 		{
 			$title = $next_record->title;
 
-			$next = new A
-			(
-				\ICanBoogie\shorten($title, 48, 1), $next_record->url, [
+			$next = new A(\ICanBoogie\shorten($title, 48, 1), $next_record->url, [
 
-					'class' => "next",
-					'title' => $app->translate('Next: :title', [ ':title' => $title ])
+				'class' => "next",
+				'title' => $app->translate('Next: :title', [ ':title' => $title ])
 
-				]
-			);
+			]);
 		}
 
 		if ($previous_record)
 		{
 			$title = $previous_record->title;
 
-			$previous = new A
-			(
-				\ICanBoogie\shorten($title, 48, 1), $previous_record->url, [
+			$previous = new A(\ICanBoogie\shorten($title, 48, 1), $previous_record->url, [
 
-					'class' => "previous",
-					'title' => $app->translate('Previous: :title', [ ':title' => $title ])
+				'class' => "previous",
+				'title' => $app->translate('Previous: :title', [ ':title' => $title ])
 
-				]
-			);
+			]);
 		}
 
 		if ($next || $previous)
@@ -335,7 +329,7 @@ EOT;
 	 */
 
 	/**
-	 * @return \ICanBoogie\Core|\Icybee\Binding\CoreBindings
+	 * @return \ICanBoogie\Core|\Icybee\Binding\Core\CoreBindings
 	 */
 	static private function app()
 	{

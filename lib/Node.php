@@ -88,7 +88,7 @@ class Node extends ActiveRecord implements CSSClassNames
 	 */
 	protected function get_user()
 	{
-		return $this->uid ? $this->model->models['users']->find($this->uid) : null;
+		return $this->uid ? $this->model->models['users'][$this->uid] : null;
 	}
 
 	/**
@@ -117,7 +117,7 @@ class Node extends ActiveRecord implements CSSClassNames
 	 */
 	protected function get_site()
 	{
-		return $this->siteid ? $this->model->models['sites']->find($this->siteid) : null;
+		return $this->siteid ? $this->model->models['sites'][$this->siteid] : null;
 	}
 
 	/**
@@ -201,9 +201,9 @@ class Node extends ActiveRecord implements CSSClassNames
 	public $language = '';
 
 	/**
-	 * Returns the language for the page.
+	 * Returns the language for the site.
 	 *
-	 * This function is only called if the {@link language} property was empty during construct. By
+	 * This function is only invoked if the {@link language} property is inaccessible. By
 	 * default it returns the language of the {@link site} associated with the node.
 	 *
 	 * @return string
@@ -234,7 +234,7 @@ class Node extends ActiveRecord implements CSSClassNames
 	 *
 	 * @inheritdoc
 	 */
-	public function __construct($model=null)
+	public function __construct($model = self::MODEL_ID)
 	{
 		if (empty($this->constructor))
 		{
@@ -443,7 +443,7 @@ class Node extends ActiveRecord implements CSSClassNames
 	/**
 	 * Returns the CSS class names of the node.
 	 *
-	 * @return array[string]mixed
+	 * @return array
 	 */
 	protected function get_css_class_names()
 	{

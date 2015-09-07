@@ -14,15 +14,19 @@ namespace Icybee\Modules\Nodes;
 use ICanBoogie\I18n;
 
 use Brickrouge;
+use Brickrouge\Document;
 use Brickrouge\Element;
 use Brickrouge\Text;
+use Icybee\Binding\Core\PrototypedBindings;
 
 class TitleSlugCombo extends \Brickrouge\Widget
 {
+	use PrototypedBindings;
+
 	const T_NODEID = '#node-id';
 	const T_SLUG_NAME = '#slug-name';
 
-	static protected function add_assets(\Brickrouge\Document $document)
+	static protected function add_assets(Document $document)
 	{
 		parent::add_assets($document);
 
@@ -34,7 +38,7 @@ class TitleSlugCombo extends \Brickrouge\Widget
 	private $slug_tease;
 	private $slug_el;
 
-	public function __construct(array $attributes=[])
+	public function __construct(array $attributes = [])
 	{
 		$attributes += [
 
@@ -85,9 +89,12 @@ class TitleSlugCombo extends \Brickrouge\Widget
 		]);
 	}
 
-	public function offsetSet($offset, $value)
+	/**
+	 * @inheritdoc
+	 */
+	public function offsetSet($attributes, $value)
 	{
-		if ($offset == 'name')
+		if ($attributes === 'name')
 		{
 			$this->title_el['name'] = $value;
 
@@ -97,7 +104,7 @@ class TitleSlugCombo extends \Brickrouge\Widget
 			}
 		}
 
-		parent::offsetSet($offset, $value);
+		parent::offsetSet($attributes, $value);
 	}
 
 	protected function render_inner_html()

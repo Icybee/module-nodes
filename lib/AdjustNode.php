@@ -32,7 +32,7 @@ class AdjustNode extends Element
 		$document->js->add(DIR . 'public/module.js');
 	}
 
-	public function __construct(array $attributes=[])
+	public function __construct(array $attributes = [])
 	{
 		parent::__construct('div', $attributes + [
 
@@ -80,7 +80,7 @@ class AdjustNode extends Element
 		return $rc;
 	}
 
-	public function get_results(array $options=[], $constructor='nodes')
+	public function get_results(array $options = [], $constructor = 'nodes')
 	{
 		$options += [
 
@@ -97,7 +97,7 @@ class AdjustNode extends Element
 		return '<div class="results">' . $rc . '</div>';
 	}
 
-	protected function get_records($constructor, array $options, $limit=10)
+	protected function get_records($constructor, array $options, $limit = 10)
 	{
 		$model = $this->app->models[$constructor];
 
@@ -184,7 +184,7 @@ class AdjustNode extends Element
 		return $rc;
 	}
 
-	protected function render_record(\Icybee\Modules\Nodes\Node $record, $selected, array $range, array $options)
+	protected function render_record(Node $record, $selected, array $range, array $options)
 	{
 		$recordid = $record->nid;
 

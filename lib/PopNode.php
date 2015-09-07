@@ -11,14 +11,20 @@
 
 namespace Icybee\Modules\Nodes;
 
-use Brickrouge\Element;
 use ICanBoogie\ActiveRecord\Model;
+
+use Brickrouge\Document;
+use Brickrouge\Element;
+
+use Icybee\Binding\Core\PrototypedBindings;
 
 class PopNode extends \Brickrouge\Widget
 {
+	use PrototypedBindings;
+
 	const T_CONSTRUCTOR = '#popnode-constructor';
 
-	static protected function add_assets(\Brickrouge\Document $document)
+	static protected function add_assets(Document $document)
 	{
 		parent::add_assets($document);
 
@@ -102,7 +108,10 @@ class PopNode extends \Brickrouge\Widget
 	 */
 	protected function getEntry(Model $model, $value)
 	{
-		return $model->where('title = ? OR slug = ?', $value, $value)->order('created_at DESC')->one;
+		return $model
+			->where('title = ? OR slug = ?', $value, $value)
+			->order('created_at DESC')
+			->one;
 	}
 
 	protected function getPreview($entry)

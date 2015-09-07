@@ -61,7 +61,7 @@ class ImportOperation extends Operation
 				return;
 			}
 
-			$event->form = new Form();
+			$event->form = new Form;
 
 		});
 
@@ -88,14 +88,14 @@ class ImportOperation extends Operation
 	protected function parse_data(array $data)
 	{
 		$site = $this->app->site;
-		$siteid = $site->siteid;
+		$site_id = $site->siteid;
 		$language = $site->language;
 
 		$is_translating = true;
 
 		foreach ($data as $nid => $node)
 		{
-			$node->siteid = $siteid;
+			$node->siteid = $site_id;
 
 			if ($is_translating)
 			{
