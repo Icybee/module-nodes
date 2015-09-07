@@ -44,5 +44,6 @@ $app->modules->install();
 use Icybee\Modules\Users\User;
 use Icybee\Modules\Sites\Site;
 
-User::from([ 'username' => 'admin', 'email' => 'test@example.com' ])->save();
-Site::from([ 'title' => 'example' ])->save();
+User::from([ User::USERNAME => 'admin', User::EMAIL => 'test@example.com' ])->save();
+Site::from([ Site::TITLE => 'example:en', Site::LANGUAGE => 'en' ])->save();
+Site::from([ Site::TITLE => 'example:fr', Site::LANGUAGE => 'fr' ])->save();

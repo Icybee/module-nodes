@@ -38,14 +38,16 @@ class NodeTest extends \PHPUnit_Framework_TestCase
 
 	public function provide_test_fallback_properties()
 	{
+		$site_fr = \ICanBoogie\app()->models['sites'][2];
+
 		return [
 
 			[ 'constructor', [], 'nodes' ],
 			[ 'constructor', [ 'constructor' => 'images' ], 'images' ],
 
 			[ 'language', [ 'site' => null ], null ],
-			[ 'language', [ 'site' => Site::from([ 'language' => 'fr' ]) ], 'fr' ],
-			[ 'language', [ 'site' => Site::from([ 'language' => 'fr' ]), 'language' => 'en' ], 'en' ],
+			[ 'language', [ 'site' => $site_fr ], 'fr' ],
+			[ 'language', [ 'site' => $site_fr, 'language' => 'en' ], 'en' ],
 
 			[ 'slug', [], '' ],
 			[ 'slug', [ 'title' => 'The quick brown fox' ], 'the-quick-brown-fox' ],
