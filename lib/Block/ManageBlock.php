@@ -149,7 +149,7 @@ class ManageBlock extends \Icybee\Block\ManageBlock
 			$metas .= ', <span class="language">' . ($language ? $language : 'multilingue') . '</span>';
 		}
 
-		if (!$record->siteid)
+		if (!$record->site_id)
 		{
 			$metas .= ', multisite';
 		}

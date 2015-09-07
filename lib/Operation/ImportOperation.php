@@ -88,14 +88,14 @@ class ImportOperation extends Operation
 	protected function parse_data(array $data)
 	{
 		$site = $this->app->site;
-		$site_id = $site->siteid;
+		$site_id = $site->site_id;
 		$language = $site->language;
 
 		$is_translating = true;
 
 		foreach ($data as $nid => $node)
 		{
-			$node->siteid = $site_id;
+			$node->site_id = $site_id;
 
 			if ($is_translating)
 			{

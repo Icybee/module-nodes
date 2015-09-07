@@ -34,7 +34,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 	public function test_scope_similar_site()
 	{
 		$query = self::$model->similar_site;
-		$this->assertEquals('SELECT * FROM `nodes` `node` WHERE (siteid = 0 OR siteid = ?)', (string) $query);
+		$this->assertEquals('SELECT * FROM `nodes` `node` WHERE (site_id = 0 OR site_id = ?)', (string) $query);
 		$this->assertEquals([ self::$app->site_id ], $query->conditions_args);
 
 		$query = self::$model->similar_site(123);

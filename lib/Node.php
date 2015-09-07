@@ -56,7 +56,7 @@ class Node extends ActiveRecord implements CSSClassNames
 
 	const NID = 'nid';
 	const UID = 'uid';
-	const SITEID = 'siteid';
+	const SITE_ID = 'site_id';
 	const UUID = 'uuid';
 	const TITLE = 'title';
 	const SLUG = 'slug';
@@ -108,7 +108,7 @@ class Node extends ActiveRecord implements CSSClassNames
 	 *
 	 * @var int
 	 */
-	public $siteid = 0;
+	public $site_id = 0;
 
 	/**
 	 * Returns the {@link Site} instance associated with the node.
@@ -117,17 +117,17 @@ class Node extends ActiveRecord implements CSSClassNames
 	 */
 	protected function get_site()
 	{
-		return $this->siteid ? $this->model->models['sites'][$this->siteid] : null;
+		return $this->site_id ? $this->model->models['sites'][$this->site_id] : null;
 	}
 
 	/**
-	 * Updates the {@link $siteid} property using a {@link Site} instance.
+	 * Updates the {@link $site_id} property using a {@link Site} instance.
 	 *
 	 * @param Site $site
 	 */
 	protected function set_site(Site $site = null)
 	{
-		$this->siteid = $site ? $site->siteid : 0;
+		$this->site_id = $site ? $site->site_id : 0;
 	}
 
 	/**
@@ -342,7 +342,7 @@ class Node extends ActiveRecord implements CSSClassNames
 	protected function lazy_get_translations_keys()
 	{
 		$app = $this->app;
-		$native_language = $this->siteid ? $this->site->native->language : $app->language;
+		$native_language = $this->site_id ? $this->site->native->language : $app->language;
 
 		if (!self::$translations_keys)
 		{

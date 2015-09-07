@@ -71,7 +71,7 @@ class TranslationsColumn extends Column
 
 		foreach ($site_translations as $site_translation)
 		{
-			$site_translations_ids[] = $site_translation->siteid;
+			$site_translations_ids[] = $site_translation->site_id;
 		}
 
 		if ($site->nativeid)
@@ -104,9 +104,9 @@ class TranslationsColumn extends Column
 			}
 
 			$translations_raw = $app->models['nodes']
-				->select('siteid, nativeid, language, nid')
-				->where([ 'nativeid' => $native_ids, 'siteid' => $site_translations_ids ])
-				->order('FIELD(siteid, ' . implode(',', $site_translations_ids) . ')')
+				->select('site_id, nativeid, language, nid')
+				->where([ 'nativeid' => $native_ids, 'site_id' => $site_translations_ids ])
+				->order('FIELD(site_id, ' . implode(',', $site_translations_ids) . ')')
 				->all;
 
 			if (!$translations_raw)
@@ -118,8 +118,8 @@ class TranslationsColumn extends Column
 			{
 				$translations_by_records[$translation['nativeid']][$translation['nid']] = [
 
-					'site' => $sites[$translation['siteid']],
-					'siteid' => $translation['siteid'],
+					'site' => $sites[$translation['site_id']],
+					'site_id' => $translation['site_id'],
 					'language' => $translation['language']
 
 				];
@@ -139,7 +139,7 @@ class TranslationsColumn extends Column
 		$ids = implode(',', $translations);
 
 		$infos = $app->models['nodes']
-			->select('siteid, language')
+			->select('site_id, language')
 			->where('nid IN(' . $ids . ')')
 			->order('FIELD(nid, ' . $ids . ')')
 			->all;
@@ -151,7 +151,7 @@ class TranslationsColumn extends Column
 			foreach (array_keys($nt) as $nativeid)
 			{
 				$translation = $translations[$nativeid];
-				$translation['site'] = $sites[$translation['siteid']];
+				$translation['site'] = $sites[$translation['site_id']];
 
 				$translations_by_records[$nid][$nativeid] = $translation;
 			}

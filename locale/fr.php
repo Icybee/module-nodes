@@ -26,7 +26,7 @@ return [
 		est vide lors de l'enregistrement, le <q>slug</q> est automatiquement créé à partir du
 		titre.",
 
-		'siteid' => "Parce que vous en avez la permission, vous pouvez choisir le site
+		'site_id' => "Parce que vous en avez la permission, vous pouvez choisir le site
 		d'appartenance pour l'enregistrement. Un enregistrement appartenant à un site en hérite la
 		langue et n'est visible que sur ce site.",
 
@@ -46,7 +46,7 @@ return [
 	'label' => [
 
 		'is_online' => 'Publié',
-		'siteid' => "Site d'appartenance",
+		'site_id' => "Site d'appartenance",
 		'title' => 'Titre',
 		'user' => 'Utilisateur'
 

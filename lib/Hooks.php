@@ -280,7 +280,8 @@ EOT;
 		$model = $app->models['nodes'];
 
 		$entries = $model
-		->where('uid = ? AND (siteid = 0 OR siteid = ?)', [ $app->user_id, $app->site_id ])
+		->filter_by_uid($app->user_id)
+		->similar_site
 		->order('updated_at desc')
 		->limit(10)
 		->all;

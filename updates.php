@@ -120,3 +120,18 @@ class Update20140405 extends Update
 		$this->module->model->create_unique_index('uuid');
 	}
 }
+
+/**
+ * - Renames column `siteid` as `site_id`.
+ *
+ * @module nodes
+ */
+class Update20150908 extends Update
+{
+	public function update_column_site_id()
+	{
+		$this->module->model
+			->assert_has_column('siteid')
+			->rename_column('siteid', 'site_id');
+	}
+}

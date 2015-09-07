@@ -127,7 +127,7 @@ class NodeModel extends ConstructorModel
 	 * Alerts the query to match records of a similar site.
 	 *
 	 * A record is considered of a similar website when it doesn't belong to a website
-	 * `(`siteid = 0')` or it matches the specified website.
+	 * `(`site_id = 0')` or it matches the specified website.
 	 *
 	 * @param Query $query
 	 * @param int|null $site_id The identifier of the website to match. If the identifier is
@@ -139,10 +139,10 @@ class NodeModel extends ConstructorModel
 	{
 		if ($site_id === null)
 		{
-			$site_id = $this->app->site->siteid;
+			$site_id = $this->app->site->site_id;
 		}
 
-		return $query->and('siteid = 0 OR siteid = ?', $site_id);
+		return $query->and('site_id = 0 OR site_id = ?', $site_id);
 	}
 
 	/**

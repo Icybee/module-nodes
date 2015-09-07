@@ -17,7 +17,7 @@ return [
 		it contains only unaccentuated letters, numbers and hyphens. If empty when saving,
 		the <q>slug</q> is automatically created from the title.",
 
-		'siteid' => "Because you have permission, you can choose the belonging site for the
+		'site_id' => "Because you have permission, you can choose the belonging site for the
 		record. A record belonging to a site inherits its language and only appears on this
 		site.",
 
@@ -34,7 +34,7 @@ return [
 	'label' => [
 
 		'is_online' => 'Published',
-		'siteid' => 'Belonging site',
+		'site_id' => 'Belonging site',
 		'slug' => 'Slug',
 		'title' => 'Title',
 		'user' => 'User'

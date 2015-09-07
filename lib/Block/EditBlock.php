@@ -46,9 +46,9 @@ class EditBlock extends \Icybee\Block\EditBlock
 	}
 
 	/**
-	 * Adds the `title`, `is_online`, `uid` and `siteid` elements.
+	 * Adds the `title`, `is_online`, `uid` and `site_id` elements.
 	 *
-	 * The `uid` and `siteid` elements are added according to the context.
+	 * The `uid` and `site_id` elements are added according to the context.
 	 */
 	protected function lazy_get_children()
 	{
@@ -66,7 +66,7 @@ class EditBlock extends \Icybee\Block\EditBlock
 			]),
 
 			Node::UID => $this->get_control__user(),
-			Node::SITEID => $this->get_control__site(),	// TODO-20100906: this should be added by the "sites" modules using the alter event.
+			Node::SITE_ID => $this->get_control__site(),	// TODO-20100906: this should be added by the "sites" modules using the alter event.
 			Node::IS_ONLINE => new Element(Element::TYPE_CHECKBOX, [
 
 				Element::LABEL => 'is_online',
@@ -124,21 +124,21 @@ class EditBlock extends \Icybee\Block\EditBlock
 			return null;
 		}
 
-		$sites = $app->models['sites']->select('siteid, IF(admin_title != "", admin_title, concat(title, ":", language))')->order('admin_title, title')->pairs;
+		$sites = $app->models['sites']->select('site_id, IF(admin_title != "", admin_title, concat(title, ":", language))')->order('admin_title, title')->pairs;
 
 		if (count($sites) < 2)
 		{
-			$this->attributes[Form::HIDDENS][Node::SITEID] = $app->site_id;
+			$this->attributes[Form::HIDDENS][Node::SITE_ID] = $app->site_id;
 
 			return null;
 		}
 
 		return new Element('select', [
 
-			Form::LABEL => 'siteid',
+			Form::LABEL => 'site_id',
 			Element::OPTIONS => [ null => '' ] + $sites,
 			Element::GROUP => 'admin',
-			Element::DESCRIPTION => 'siteid'
+			Element::DESCRIPTION => 'site_id'
 
 		]);
 	}

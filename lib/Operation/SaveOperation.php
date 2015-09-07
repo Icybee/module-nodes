@@ -36,7 +36,7 @@ class SaveOperation extends \ICanBoogie\Module\Operation\SaveOperation
 	 * the properties created by the parent method. If a record is created (the operation's key is
 	 * empty) the identifier of the current user is used.
 	 *
-	 * - `siteid`: If the user is creating a new record or the user has no permission to choose the
+	 * - `site_id`: If the user is creating a new record or the user has no permission to choose the
 	 * record's site, the property is set to the value of the working site's id.
 	 *
 	 * - `created_at`: Is set to "now" for new records.
@@ -81,11 +81,11 @@ class SaveOperation extends \ICanBoogie\Module\Operation\SaveOperation
 			}
 		}
 
-		# siteid
+		# site_id
 
 		if (!$key || !$user->has_permission(Module::PERMISSION_MODIFY_BELONGING_SITE))
 		{
-			$properties[Node::SITEID] = $this->app->site_id;
+			$properties[Node::SITE_ID] = $this->app->site_id;
 		}
 
 		if (!$key)

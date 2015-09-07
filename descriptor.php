@@ -18,7 +18,7 @@ return [
 
 				'nid' => 'serial',
 				'uid' => 'foreign',
-				'siteid' => 'foreign',
+				'site_id' => 'foreign',
 				'nativeid' => 'foreign',
 				'uuid' => [ 'char', 36, 'unique' => true, 'charset' => 'ascii/bin' ],
 				'constructor' => [ 'varchar', 64, 'indexed' => true ],

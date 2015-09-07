@@ -57,7 +57,7 @@ class SaveOperationTest extends \PHPUnit_Framework_TestCase
 		self::$user->logout();
 
 		$this->assertNotEmpty($record->uid);
-		$this->assertEquals(1, $record->siteid);
+		$this->assertEquals(1, $record->site_id);
 		$this->assertNotEmpty($record->uuid);
 		$this->assertEquals("My Example", $record->title);
 		$this->assertEquals("my-example", $record->slug);

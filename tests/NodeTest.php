@@ -76,7 +76,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
 			[ 'css_class', [ 'nid' => 13, 'slug' => 'quick-brown-fox', 'constructor' => 'news' ], 'node node-13 node-slug-quick-brown-fox constructor-news' ],
 
 			[ 'site', [], null ],
-			[ 'site', [ 'siteid' => 1 ], $app->models['sites'][1] ],
+			[ 'site', [ 'site_id' => 1 ], $app->models['sites'][1] ],
 
 			[ 'user', [], null ],
 			[ 'user', [ 'uid' => 1 ], $app->models['users'][1] ]
@@ -89,7 +89,7 @@ class NodeTest extends \PHPUnit_Framework_TestCase
 		$node = new Node;
 		$node->site = \ICanBoogie\app()->models['sites'][1];
 		$this->assertInstanceOf('Icybee\Modules\Sites\Site', $node->site);
-		$this->assertEquals(1, $node->siteid);
+		$this->assertEquals(1, $node->site_id);
 	}
 
 	public function test_set_user()
