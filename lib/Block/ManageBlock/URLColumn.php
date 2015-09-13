@@ -13,8 +13,9 @@ namespace Icybee\Modules\Nodes\Block\ManageBlock;
 
 use Brickrouge\A;
 
+use Icybee\Block\ManageBlock;
 use Icybee\Block\ManageBlock\Column;
-use Icybee\Modules\Nodes\Block\ManageBlock;
+
 use Icybee\Modules\Nodes\Node;
 
 /**
