@@ -234,7 +234,7 @@ class Node extends ActiveRecord implements CSSClassNames
 	 *
 	 * @inheritdoc
 	 */
-	public function __construct($model = self::MODEL_ID)
+	public function __construct($model = null)
 	{
 		if (empty($this->constructor))
 		{
