@@ -29,7 +29,7 @@
 		"icybee/module-registry": "^3.0.0"
 	},
 	"require-dev": {
-		"icanboogie/bind-facets": "^0.2.0",
+		"icanboogie/bind-facets": "^1.0.0",
 		"icybee/module-modules": "^3.0.0",
 		"icybee/module-views": "^3.0.0"
 	},
