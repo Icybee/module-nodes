@@ -19,7 +19,7 @@ use Brickrouge\Element;
 use Brickrouge\Text;
 use Icybee\Binding\Core\PrototypedBindings;
 
-class TitleSlugCombo extends \Brickrouge\Widget
+class TitleSlugCombo extends Element
 {
 	use PrototypedBindings;
 
@@ -43,8 +43,12 @@ class TitleSlugCombo extends \Brickrouge\Widget
 		$attributes += [
 
 			self::T_SLUG_NAME => null,
+
+			Element::IS => 'TitleSlugCombo',
 			Element::LABEL => null,
-			Element::LABEL_POSITION => 'before'
+			Element::LABEL_POSITION => 'before',
+
+			'class' => 'widget-title-slug-combo'
 
 		];
 

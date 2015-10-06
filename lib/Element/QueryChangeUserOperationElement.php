@@ -5,7 +5,7 @@ namespace Icybee\Modules\Nodes\Element;
 use Brickrouge\Element;
 
 use Icybee\Modules\Users\Element\PickUser;
-use Icybee\QueryOperationElement;
+use Icybee\Element\QueryOperationElement;
 
 class QueryChangeUserOperationElement extends QueryOperationElement
 {
