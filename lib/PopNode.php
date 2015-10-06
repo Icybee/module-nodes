@@ -18,11 +18,24 @@ use Brickrouge\Element;
 
 use Icybee\Binding\Core\PrototypedBindings;
 
-class PopNode extends \Brickrouge\Widget
+/**
+ * @property-read string $widget_class_name
+ */
+class PopNode extends Element
 {
 	use PrototypedBindings;
 
 	const T_CONSTRUCTOR = '#popnode-constructor';
+
+	/**
+	 * Returns widget class name.
+	 *
+	 * @return string
+	 */
+	protected function get_widget_class_name()
+	{
+		return 'widget-' . \ICanBoogie\hyphenate($this[Element::IS]);
+	}
 
 	static protected function add_assets(Document $document)
 	{
@@ -54,6 +67,15 @@ class PopNode extends \Brickrouge\Widget
 			'placeholder' => $this['placeholder']
 
 		]);
+	}
+
+	protected function alter_class_names(array $class_names)
+	{
+		return parent::alter_class_names($class_names) + [
+
+			'widget-class' => $this->widget_class_name
+
+		];
 	}
 
 	protected function render_inner_html()
