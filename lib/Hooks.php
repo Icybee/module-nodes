@@ -292,7 +292,6 @@ EOT;
 		}
 
 		$last_date = null;
-		$context = $app->site->path;
 
 		$rc = '<table>';
 
@@ -311,11 +310,12 @@ EOT;
 
 			$title = \ICanBoogie\shorten($record->title, 48);
 			$title = \ICanBoogie\escape($title);
+			$href = $app->url_for("admin:$record->constructor:edit", $record);
 
 			$rc .= <<<EOT
 	<tr>
 	<td class="date light">$date</td>
-	<td class="title"><a href="$context/admin/{$record->constructor}/{$record->nid}/edit">{$title}</a></td>
+	<td class="title"><a href="$href">{$title}</a></td>
 	</tr>
 EOT;
 		}
@@ -330,7 +330,7 @@ EOT;
 	 */
 
 	/**
-	 * @return \ICanBoogie\Core|\Icybee\Binding\Core\CoreBindings
+	 * @return \ICanBoogie\Core|\Icybee\Binding\Core\CoreBindings|\Icybee\Modules\Users\Binding\CoreBindings
 	 */
 	static private function app()
 	{
