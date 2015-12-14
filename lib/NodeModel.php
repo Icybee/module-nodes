@@ -19,6 +19,7 @@ use Icybee\ConstructorModel;
 /**
  * Nodes model.
  *
+ * @method Query own()
  * @method Query offline()
  * @method Query online()
  * @method Query ordered($direction = -1)
@@ -26,6 +27,7 @@ use Icybee\ConstructorModel;
  * @method Query similar_site($site_id = null)
  * @method Query visible()
  *
+ * @property-read Query $own A query scope for records with the same constructor.
  * @property-read Query $offline A query scope for offline records.
  * @property-read Query $online A query scope for online records.
  * @property-read Query $ordered A query scope that orders records according to their creation date.
