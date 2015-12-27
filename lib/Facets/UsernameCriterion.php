@@ -12,9 +12,9 @@
 namespace Icybee\Modules\Nodes\Facets;
 
 use ICanBoogie\ActiveRecord\Query;
-use ICanBoogie\Facets\Criterion;
+use ICanBoogie\Facets\Criterion\BasicCriterion;
 
-class UsernameCriterion extends Criterion
+class UsernameCriterion extends BasicCriterion
 {
 	public function alter_query(Query $query)
 	{

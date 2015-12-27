@@ -11,9 +11,9 @@
 
 namespace Icybee\Modules\Nodes;
 
-use ICanBoogie\Facets\Fetcher;
+use ICanBoogie\Facets\Fetcher\BasicFetcher;
 
-class ViewProvider extends Fetcher
+class ViewProvider extends BasicFetcher
 {
 	/**
 	 * Alters the initial query with the following scopes:

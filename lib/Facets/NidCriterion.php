@@ -11,9 +11,9 @@
 
 namespace Icybee\Modules\Nodes\Facets;
 
-use ICanBoogie\Facets\Criterion;
+use ICanBoogie\Facets\Criterion\BasicCriterion;
 
-class NidCriterion extends Criterion
+class NidCriterion extends BasicCriterion
 {
 
 }

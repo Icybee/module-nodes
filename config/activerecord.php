@@ -11,9 +11,9 @@
 
 namespace Icybee\Modules\Nodes\Facets;
 
-use ICanBoogie\Facets\BooleanCriterion;
-use ICanBoogie\Facets\Criterion;
-use ICanBoogie\Facets\DateTimeCriterion;
+use ICanBoogie\Facets\Criterion\BooleanCriterion;
+use ICanBoogie\Facets\Criterion\BasicCriterion;
+use ICanBoogie\Facets\Criterion\DateCriterion;
 
 use Icybee\Modules\Nodes\Node;
 
@@ -25,14 +25,14 @@ return [
 
 			Node::NID => NidCriterion::class,
 			Node::UID => UserCriterion::class,
-			Node::UUID => Criterion::class,
-			Node::TITLE => Criterion::class,
-			Node::SLUG => Criterion::class,
-			Node::CONSTRUCTOR => Criterion::class,
-			Node::CREATED_AT => DateTimeCriterion::class,
-			Node::UPDATED_AT => DateTimeCriterion::class,
+			Node::UUID => BasicCriterion::class,
+			Node::TITLE => BasicCriterion::class,
+			Node::SLUG => BasicCriterion::class,
+			Node::CONSTRUCTOR => BasicCriterion::class,
+			Node::CREATED_AT => DateCriterion::class,
+			Node::UPDATED_AT => DateCriterion::class,
 			Node::IS_ONLINE => BooleanCriterion::class,
-			Node::LANGUAGE => Criterion::class,
+			Node::LANGUAGE => BasicCriterion::class,
 
 		]
 	]

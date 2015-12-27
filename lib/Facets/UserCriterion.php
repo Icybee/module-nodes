@@ -11,9 +11,9 @@
 
 namespace Icybee\Modules\Nodes\Facets;
 
-use ICanBoogie\Facets\Criterion;
+use ICanBoogie\Facets\Criterion\BasicCriterion;
 
-class UserCriterion extends Criterion
+class UserCriterion extends BasicCriterion
 {
 	public function __construct($id, array $options = [])
 	{
