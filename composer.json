@@ -20,18 +20,18 @@
 	"minimum-stability": "dev",
 
 	"require": {
-		"php": ">=5.5.0",
-		"icanboogie/module-installer": "^1.2.3",
-		"brickrouge/css-class-names": "^2.0.0",
+		"php": ">=5.5",
+		"icanboogie/module-installer": "^1.2",
+		"brickrouge/css-class-names": "^2.0",
 		"icybee/core": "^3.0.0",
-		"icybee/module-users": "^3.0.0",
-		"icybee/module-sites": "^3.0.0",
-		"icybee/module-registry": "^3.0.0"
+		"icybee/module-users": "^3.0",
+		"icybee/module-sites": "^3.0",
+		"icybee/module-registry": "^3.0"
 	},
 	"require-dev": {
-		"icanboogie/bind-facets": "^0.5.0",
-		"icybee/module-modules": "^3.0.0",
-		"icybee/module-views": "^3.0.0"
+		"icanboogie/bind-facets": "^0.6",
+		"icybee/module-modules": "^3.0",
+		"icybee/module-views": "^3.0"
 	},
 	"suggest": {
 		"icanboogie/facets": "Facets support"

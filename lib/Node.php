@@ -277,7 +277,7 @@ class Node extends ActiveRecord implements CSSClassNames
 	 *
 	 * @inheritdoc
 	 */
-	public function save()
+	public function save(array $options = [])
 	{
 		if (!$this->uuid)
 		{
@@ -291,7 +291,24 @@ class Node extends ActiveRecord implements CSSClassNames
 
 		$this->set_updated_at('now');
 
-		return parent::save();
+		return parent::save($options);
+	}
+
+	/**
+	 * @inheritdoc
+	 */
+	public function create_validation_rules()
+	{
+		return [
+
+			'uid' => 'required',
+			'uuid' => 'required',
+			'constructor' => 'required',
+			'title' => 'required',
+			'slug' => 'required|max-length:64',
+			'is_online' => 'boolean'
+
+		];
 	}
 
 	/**
