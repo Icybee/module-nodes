@@ -14,7 +14,7 @@ JS_FILES = \
 CSS_FILES = \
 	lib/AdjustNode.css \
 	lib/TitleSlugCombo.css \
-	lib/ManageBlock.css
+	lib/Block/ManageBlock.css
 
 JS_COMPRESSOR = curl -X POST -s --data-urlencode 'js_code@$^' --data-urlencode 'utf8=1' http://marijnhaverbeke.nl/uglifyjs
 #JS_COMPRESSOR = cat $^ # uncomment to produce uncompressed files
