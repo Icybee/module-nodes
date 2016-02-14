@@ -36,8 +36,9 @@ class AdjustNode extends Element
 	{
 		parent::__construct('div', $attributes + [
 
+			Element::IS => 'AdjustNode',
+
 			self::T_CONSTRUCTOR => 'nodes',
-			self::IS => 'AdjustNode',
 
 			'data-adjust' => 'adjust-node'
 
@@ -71,7 +72,7 @@ class AdjustNode extends Element
 		$constructor = $this[self::T_CONSTRUCTOR];
 
 		$rc .= '<div class="search">';
-		$rc .= new Text([ 'class' => 'search', 'placeholder' => $this->t('Search') ]);
+		$rc .= new Text([ 'class' => 'form-control search', 'placeholder' => $this->t('Search') ]);
 		$rc .= $this->get_results([ 'selected' => $this['value'] ], $constructor);
 		$rc .= '</div>';
 

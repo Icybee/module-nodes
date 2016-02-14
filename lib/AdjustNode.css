@@ -3,10 +3,10 @@
 }
 
 .widget-adjust-node .results {
-	margin-top: 10px;
+	margin-top: 1em;
 	background: #F6F6F6;
 	border: 1px solid #ccc;
-	border-radius: 3px;
+	border-radius: .25em;
 }
 
 .contrast .widget-adjust-node .results {
@@ -55,43 +55,39 @@
 /* pagination */
 
 .widget-adjust-node .pagination {
-	text-align: center;
-	margin: 0;
+	display: block;
 	position: relative;
+	margin: 0;
+	border-radius: 0;
 	line-height: 1em;
-	border-top: 1px solid #ccc;
+	text-align: center;
 }
 
 .widget-adjust-node .pagination ul {
 	list-style: none;
-	display: block;
+	display: table;
 	margin: 0;
 	padding: 0;
+	width: 100%;
 }
 
 .widget-adjust-node .pagination li {
-	display: inline-block;
+	display: table-cell;
+	border-left: 1px solid hsl(0, 0%, 14%);
+	width: 2ex;
 }
 
-.widget-adjust-node .pagination .previous {
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
-.widget-adjust-node .pagination .next {
-	position: absolute;
-	top: 0;
-	right: 0;
+.widget-adjust-node .pagination li:first-child {
+	border-left: 0;
 }
 
 .widget-adjust-node .pagination a {
 	text-decoration: none;
 	display: block;
 	line-height: 2em;
-	width: 2em;
 }
 
+/*
 .widget-adjust-node .pagination .previous a,
 .widget-adjust-node .pagination .page a {
 	border-right: 1px solid #ccc;
@@ -101,7 +97,7 @@
 .widget-adjust-node .pagination .previous + .page a {
 	border-left: 1px solid #ccc;
 }
-
+*/
 .widget-adjust-node .pagination .active a {
 	color: white;
 	background: #B2D3FF;
@@ -117,12 +113,13 @@
 	background: linear-gradient(to bottom, hsl(0, 0%, 13%), transparent);
 }
 
+/*
 .contrast .widget-adjust-node .pagination,
 .contrast .widget-adjust-node .pagination a,
 .contrast .widget-adjust-node .pagination .previous + .page a {
 	border-color: hsl(0, 0%, 14%);
 }
-
+*/
 .contrast .widget-adjust-node .pagination .disabled a[href] {
 	color: hsl(0, 0%, 27%);
 }

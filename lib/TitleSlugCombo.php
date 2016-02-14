@@ -19,13 +19,14 @@ use Brickrouge\Element;
 use Brickrouge\Text;
 use Icybee\Binding\Core\PrototypedBindings;
 
-class TitleSlugCombo extends Element
+class TitleSlugCombo extends Brickrouge\InputGroup
 {
 	use PrototypedBindings;
 
 	const T_NODEID = '#node-id';
 	const T_SLUG_NAME = '#slug-name';
 
+	/*
 	static protected function add_assets(Document $document)
 	{
 		parent::add_assets($document);
@@ -33,6 +34,7 @@ class TitleSlugCombo extends Element
 		$document->css->add(DIR . 'public/module.css');
 		$document->js->add(DIR . 'public/module.js');
 	}
+	*/
 
 	private $title_el;
 	private $slug_tease;
@@ -44,25 +46,35 @@ class TitleSlugCombo extends Element
 
 			self::T_SLUG_NAME => null,
 
-			Element::IS => 'TitleSlugCombo',
-			Element::LABEL => null,
-			Element::LABEL_POSITION => 'before',
+//			Element::IS => 'TitleSlugCombo',
+//			Element::LABEL => null,
+//			Element::LABEL_POSITION => 'before',
 
 			'class' => 'widget-title-slug-combo'
 
 		];
 
-		parent::__construct('div', $attributes + [
+		parent::__construct($attributes + [
 
 			Element::CHILDREN => [
 
 				$this->title_el = new Text([
 
-					Element::LABEL_POSITION => $attributes[Element::LABEL_POSITION],
+//					Element::LABEL_POSITION => $attributes[Element::LABEL_POSITION],
 					Element::REQUIRED => true
 
 				]),
 
+				"Slug",
+
+				$attributes[self::T_SLUG_NAME] => $this->slug_el = new Text([
+
+//					Element::LABEL => 'slug',
+//					Element::LABEL_POSITION => 'above',
+
+
+				])
+/*
 				$this->slug_tease = new Element('span', [
 
 					self::INNER_HTML => '&nbsp;',
@@ -86,7 +98,10 @@ class TitleSlugCombo extends Element
 				]),
 
 				'</div>'
+*/
 			],
+
+			Element::DESCRIPTION => 'slug',
 
 			'data-auto-label' => '<em>' . $this->t('auto', [], [ 'scope' => 'titleslugcombo.element' ]) . '</em>'
 
@@ -111,6 +126,7 @@ class TitleSlugCombo extends Element
 		parent::offsetSet($attributes, $value);
 	}
 
+	/*
 	protected function render_inner_html()
 	{
 		$slug = $this->slug_el['value'];
@@ -142,4 +158,5 @@ EOT;
 
 		return $rc;
 	}
+	*/
 }
