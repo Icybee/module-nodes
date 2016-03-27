@@ -11,7 +11,7 @@
 
 namespace Icybee\Modules\Nodes\Operation;
 
-use ICanBoogie\Errors;
+use ICanBoogie\ErrorCollection;
 use ICanBoogie\Module;
 use ICanBoogie\Operation;
 
@@ -41,9 +41,9 @@ class OnlineOperation extends Operation
 	/**
 	 * @inheritdoc
 	 */
-	protected function validate(Errors $errors)
+	protected function validate(ErrorCollection $errors)
 	{
-		return true;
+		return $errors;
 	}
 
 	/**

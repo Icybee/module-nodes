@@ -2,7 +2,7 @@
 
 namespace Icybee\Modules\Nodes\Operation;
 
-use ICanBoogie\Errors;
+use ICanBoogie\ErrorCollection;
 use ICanBoogie\HTTP\Request;
 use ICanBoogie\Operation;
 
@@ -43,7 +43,7 @@ class ChangeUserOperation extends Operation
 	/**
 	 * @inheritdoc
 	 */
-	protected function validate(Errors $errors)
+	protected function validate(ErrorCollection $errors)
 	{
 		$uid = $this->request['uid'];
 

@@ -11,7 +11,7 @@
 
 namespace Icybee\Modules\Nodes\Operation;
 
-use ICanBoogie\Errors;
+use ICanBoogie\ErrorCollection;
 use ICanBoogie\HTTP\Request;
 use ICanBoogie\Module;
 use ICanBoogie\Operation;
@@ -34,9 +34,12 @@ class ImportOperation extends Operation
 		] + parent::get_controls();
 	}
 
-	protected function validate(Errors $errors)
+	/**
+	 * @inheritdoc
+	 */
+	protected function validate(ErrorCollection $errors)
 	{
-		return true;
+		return $errors;
 	}
 
 	protected function process()
