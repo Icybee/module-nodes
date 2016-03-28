@@ -55,13 +55,18 @@ Site::from([
 
 	Site::TITLE => 'example:en',
 	Site::LANGUAGE => 'en',
-	Site::STATUS => Site::STATUS_OK
+	Site::STATUS => Site::STATUS_OK,
+	Site::EMAIL => 'person@example.tld',
+	Site::TIMEZONE => 'America/New_York'
+
 ])->save();
 
 Site::from([
 
 	Site::TITLE => 'example:fr',
 	Site::LANGUAGE => 'fr',
-	Site::STATUS => Site::STATUS_OK
+	Site::STATUS => Site::STATUS_OK,
+	Site::EMAIL => 'person@example.tld',
+	Site::TIMEZONE => 'Europe/Paris'
 
 ])->save();
