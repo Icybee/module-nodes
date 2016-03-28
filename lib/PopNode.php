@@ -50,8 +50,9 @@ class PopNode extends Element
 		parent::__construct('div', $attributes + [
 
 			self::T_CONSTRUCTOR => 'nodes',
+			Element::IS => 'PopNode',
 
-			'placeholder' => 'Sélectionner un enregistrement',
+			'placeholder' => "Select a record",
 			'class' => 'spinner',
 			'data-adjust' => 'adjust-node',
 			'tabindex' => 0

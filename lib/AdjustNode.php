@@ -201,7 +201,7 @@ class AdjustNode extends Element
 	{
 		$search = $options['search'];
 
-		return '<div class="no-response alert undismissable">' .
+		return '<div class="no-response alert">' .
 
 		(
 			$search
