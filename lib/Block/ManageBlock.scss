@@ -7,11 +7,13 @@
 	vertical-align: middle;
 }
 
-#manager span.translations {
-	color: #808080;
-	font-size: .8571em;
-}
+#manager {
+	span.translations {
+		color: #808080;
+		font-size: .8571em;
 
-#manager span.translations a {
-	color: #404040;
+		a {
+			color: #404040;
+		}
+	}
 }

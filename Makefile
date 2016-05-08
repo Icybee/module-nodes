@@ -11,10 +11,7 @@ JS_FILES = \
 	lib/PopNode.js \
 	lib/TitleSlugCombo.js
 
-CSS_FILES = \
-	lib/AdjustNode.css \
-	lib/TitleSlugCombo.css \
-	lib/Block/ManageBlock.css
+CSS_FILES = $(shell find ./lib -name *.scss)
 
 JS_COMPRESSOR = `which uglifyjs` $^ \
 	--compress \
@@ -25,9 +22,9 @@ JS_COMPRESSOR = `which uglifyjs` $^ \
 JS_COMPRESSED = public/module.js
 JS_UNCOMPRESSED = public/module-uncompressed.js
 
-CSS_COMPRESSOR = curl -X POST -s --data-urlencode 'input@$^' http://cssminifier.com/raw
+CSS_COMPILER = `which sass`
+CSS_COMPILER_OPTIONS = --style compressed   # comment to disable compression
 CSS_COMPRESSED = public/module.css
-CSS_UNCOMPRESSED = public/module-uncompressed.css
 
 all: $(JS_COMPRESSED) $(JS_UNCOMPRESSED) $(CSS_COMPRESSED) $(CSS_UNCOMPRESSED)
 
@@ -37,11 +34,8 @@ $(JS_COMPRESSED): $(JS_UNCOMPRESSED)
 $(JS_UNCOMPRESSED): $(JS_FILES)
 	cat $^ >$@
 
-$(CSS_COMPRESSED): $(CSS_UNCOMPRESSED)
-	$(CSS_COMPRESSOR) >$@
-
-$(CSS_UNCOMPRESSED): $(CSS_FILES)
-	cat $^ >$@
+$(CSS_COMPRESSED): $(CSS_FILES)
+	$(CSS_COMPILER) $(CSS_COMPILER_OPTIONS) lib/module.scss:$@
 
 # do not edit the following lines
 

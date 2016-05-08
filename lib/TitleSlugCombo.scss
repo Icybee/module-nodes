@@ -1,0 +1,23 @@
+.widget-title-slug-combo {
+	.slug-reminder,
+	a[href="#slug-collapse"] {
+		margin-left: 1ex;
+	}
+
+	a[href="#slug-collapse"],
+	div.slug {
+		display: none;
+	}
+
+	div.slug {
+		margin: 1em 0;
+	}
+
+	.slug-reminder span {
+		display: none;
+	}
+
+	p {
+		margin-top: .5em;
+	}
+}
