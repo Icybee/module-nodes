@@ -14,6 +14,7 @@ namespace Icybee\Modules\Nodes\Block;
 use Brickrouge\Element;
 use Brickrouge\Form;
 
+use Brickrouge\Group;
 use Icybee\Modules\Nodes\Module;
 use Icybee\Modules\Nodes\Node;
 use Icybee\Modules\Nodes\TitleSlugCombo;
@@ -100,7 +101,7 @@ class EditBlock extends \Icybee\Block\EditBlock
 
 		return new Element('select', [
 
-			Form::LABEL => 'User',
+			Group::LABEL => 'User',
 			Element::OPTIONS => [ null => '' ] + $users,
 			Element::REQUIRED => true,
 			Element::DEFAULT_VALUE => $app->user->uid,
