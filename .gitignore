@@ -1,4 +1,5 @@
 .sass-cache
+build
 composer.lock
 public/module-uncompressed.css
 public/module-uncompressed.js
