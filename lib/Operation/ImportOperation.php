@@ -11,13 +11,13 @@
 
 namespace Icybee\Modules\Nodes\Operation;
 
+use ICanBoogie\Binding\PrototypedBindings;
 use ICanBoogie\ErrorCollection;
 use ICanBoogie\HTTP\Request;
 use ICanBoogie\Module;
 use ICanBoogie\Operation;
 
 use Brickrouge\Form;
-use Icybee\Binding\Core\PrototypedBindings;
 
 class ImportOperation extends Operation
 {

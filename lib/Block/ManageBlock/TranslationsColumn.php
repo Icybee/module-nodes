@@ -11,6 +11,8 @@
 
 namespace Icybee\Modules\Nodes\Block\ManageBlock;
 
+use function ICanBoogie\app;
+
 use Icybee\Block\ManageBlock\Column;
 use Icybee\Modules\Nodes\Block\ManageBlock;
 use Icybee\Modules\Nodes\Node;
@@ -55,9 +57,7 @@ class TranslationsColumn extends Column
 		$translations = [];
 		$translations_by_records = [];
 
-		/* @var $app \ICanBoogie\Core|\Icybee\Binding\CoreBindings */
-
-		$app = \ICanBoogie\app();
+		$app = app();
 		$site = $app->site;
 		$sites = $app->models['sites'];
 		$site_translations = $site->translations;

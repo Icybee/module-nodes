@@ -11,9 +11,9 @@
 
 namespace Icybee\Modules\Nodes\Operation;
 
+use ICanBoogie\Binding\PrototypedBindings;
 use ICanBoogie\DateTime;
 
-use Icybee\Binding\Core\PrototypedBindings;
 use Icybee\Modules\Nodes\Module;
 use Icybee\Modules\Nodes\Node;
 

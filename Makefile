@@ -56,7 +56,7 @@ test: vendor
 
 test-coverage: vendor
 	@mkdir -p build/coverage
-	@phpunit --coverage-html build/coverage
+	@phpunit --coverage-html ../build/coverage
 
 doc: vendor
 	@mkdir -p build/docs

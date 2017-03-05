@@ -17,7 +17,7 @@ use Brickrouge\AlterCSSClassNamesEvent;
 use Brickrouge\CSSClassNames;
 use Brickrouge\CSSClassNamesProperty;
 
-use ICanBoogie\Binding\PrototypedBindings as CoreBindings;
+use ICanBoogie\Binding\PrototypedBindings;
 use Icybee\Modules\Registry\Binding\NodeBindings as RegistryBindings;
 use Icybee\Modules\Sites\Binding\NodeBindings as SiteBindings;
 use Icybee\Modules\Sites\Site;
@@ -44,13 +44,13 @@ use Icybee\Modules\Users\User;
  */
 class Node extends ActiveRecord implements CSSClassNames
 {
-	use CoreBindings;
+	use PrototypedBindings;
 	use SiteBindings;
 	use RegistryBindings;
 
 	use CSSClassNamesProperty;
-	use ActiveRecord\CreatedAtProperty;
-	use ActiveRecord\UpdatedAtProperty;
+	use ActiveRecord\Property\CreatedAtProperty;
+	use ActiveRecord\Property\UpdatedAtProperty;
 
 	const MODEL_ID = 'nodes';
 
@@ -319,9 +319,9 @@ class Node extends ActiveRecord implements CSSClassNames
 	 *
 	 * @inheritdoc
 	 */
-	protected function alter_persistent_properties(array $properties, ActiveRecord\Model $model)
+	protected function alter_persistent_properties(array $properties, ActiveRecord\Schema $schema)
 	{
-		return parent::alter_persistent_properties($properties, $model) + [
+		return parent::alter_persistent_properties($properties, $schema) + [
 
 			'language' => ''
 

@@ -11,29 +11,13 @@
 
 namespace ICanBoogie;
 
+chdir(__DIR__);
+
 $_SERVER['DOCUMENT_ROOT'] = __DIR__;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-/* @var $app Core|\Icybee\Binding\Core\CoreBindings */
-
-$app = new Core(array_merge_recursive(get_autoconfig(), [
-
-	'config-path' => [
-
-		__DIR__ . DIRECTORY_SEPARATOR . 'config' => Autoconfig\Config::CONFIG_WEIGHT_MODULE
-
-	],
-
-	'module-path' => [
-
-		realpath(__DIR__ . '/../')
-
-	]
-
-]));
-
-$app->boot();
+$app = boot();
 $app->locale = "en";
 $app->modules->install();
 
@@ -47,7 +31,8 @@ use Icybee\Modules\Sites\Site;
 User::from([
 
 	User::USERNAME => 'admin',
-	User::EMAIL => 'test@example.com'
+	User::EMAIL => 'test@example.com',
+	User::TIMEZONE => 'Europe/Paris' // this should be empty, need to update validation lib
 
 ])->save();
 

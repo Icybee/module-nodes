@@ -11,15 +11,11 @@
 
 namespace Icybee\Modules\Nodes\Operation;
 
+use ICanBoogie\Binding\PrototypedBindings;
 use ICanBoogie\ErrorCollection;
 use ICanBoogie\Module;
 use ICanBoogie\Operation;
 
-use Icybee\Binding\Core\PrototypedBindings;
-
-/**
- * @property-read \ICanBoogie\Core|\Icybee\Binding\Core\CoreBindings|\Icybee\Modules\Sites\Binding\CoreBindings $app
- */
 class ExportOperation extends Operation
 {
 	use PrototypedBindings;

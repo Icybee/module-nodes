@@ -15,8 +15,7 @@ use ICanBoogie\ActiveRecord\Model;
 
 use Brickrouge\Document;
 use Brickrouge\Element;
-
-use Icybee\Binding\Core\PrototypedBindings;
+use ICanBoogie\Binding\PrototypedBindings;
 
 /**
  * @property-read string $widget_class_name

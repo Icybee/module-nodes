@@ -2,5 +2,4 @@
 composer.lock
 public/module-uncompressed.css
 public/module-uncompressed.js
-tests/repository
 vendor

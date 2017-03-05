@@ -11,13 +11,11 @@
 
 namespace Icybee\Modules\Nodes;
 
-use ICanBoogie\I18n;
+use ICanBoogie\Binding\PrototypedBindings;
 
 use Brickrouge;
-use Brickrouge\Document;
 use Brickrouge\Element;
 use Brickrouge\Text;
-use Icybee\Binding\Core\PrototypedBindings;
 
 class TitleSlugCombo extends Brickrouge\InputGroup
 {
