@@ -85,5 +85,4 @@ clean:
 	@rm -fR vendor
 	@rm -f composer.lock
 
-.PHONY: all autoload doc clean \
-	test test-coverage test-coveralls test-dependencies update
+.PHONY: all autoload doc clean test test-coverage test-coveralls test-dependencies update
