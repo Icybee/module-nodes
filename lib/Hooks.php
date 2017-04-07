@@ -11,6 +11,7 @@
 
 namespace Icybee\Modules\Nodes;
 
+use function ICanBoogie\app;
 use ICanBoogie\ActiveRecord\RecordNotFound;
 use ICanBoogie\Event;
 use ICanBoogie\I18n;
@@ -34,7 +35,7 @@ class Hooks
 	static public function before_delete_user(Operation\BeforeProcessEvent $event, \Icybee\Modules\Users\Operation\DeleteOperation $operation)
 	{
 		$uid = $operation->key;
-		$count = self::app()->models['nodes']->filter_by_uid($uid)->count;
+		$count = app()->models['nodes']->filter_by_uid($uid)->count;
 
 		if (!$count)
 		{
@@ -56,7 +57,7 @@ class Hooks
 	 */
 	static public function on_user_collect_dependencies(\ICanBoogie\ActiveRecord\CollectDependenciesEvent $event, \Icybee\Modules\Users\User $target)
 	{
-		$nodes = self::app()
+		$nodes = app()
 		->models['nodes']
 		->select('nid, constructor, title')
 		->filter_by_uid($target->uid)
@@ -103,7 +104,7 @@ class Hooks
 			$select = substr($select, 1);
 		}
 
-		$app = self::app();
+		$app = app();
 
 		if (is_numeric($select))
 		{
@@ -124,7 +125,7 @@ class Hooks
 
 	static public function markup_node_navigation(array $args, \Patron\Engine $patron, $template)
 	{
-		$app = self::app();
+		$app = app();
 		$app->document->css->add(DIR . 'public/page.css');
 
 		/* @var $record Node */
@@ -187,7 +188,7 @@ class Hooks
 
 	static public function dashboard_now()
 	{
-		$app = self::app();
+		$app = app();
 		$app->document->css->add(DIR . 'public/dashboard.css');
 
 		$counts = $app->models['nodes']->similar_site->count('constructor');
@@ -274,7 +275,7 @@ EOT;
 
 	static public function dashboard_user_modified()
 	{
-		$app = self::app();
+		$app = app();
 		$app->document->css->add(DIR . 'public/dashboard.css');
 
 		$model = $app->models['nodes'];
@@ -323,17 +324,5 @@ EOT;
 		$rc .= '</table>';
 
 		return $rc;
-	}
-
-	/*
-	 * Support
-	 */
-
-	/**
-	 * @return \ICanBoogie\Application
-	 */
-	static private function app()
-	{
-		return \ICanBoogie\app();
 	}
 }

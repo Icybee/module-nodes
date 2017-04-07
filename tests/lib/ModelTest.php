@@ -11,12 +11,13 @@
 
 namespace Icybee\Modules\Nodes;
 
-use ICanBoogie\Core;
+use function ICanBoogie\app;
+use ICanBoogie\Application;
 
 class ModelTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var Core|\Icybee\Binding\Core\CoreBindings|\Icybee\Modules\Sites\Binding\CoreBindings
+	 * @var Application
 	 */
 	static private $app;
 
@@ -27,7 +28,7 @@ class ModelTest extends \PHPUnit_Framework_TestCase
 
 	static public function setupBeforeClass()
 	{
-		self::$app = \ICanBoogie\app();
+		self::$app = app();
 		self::$model = self::$app->models['nodes'];
 	}
 
