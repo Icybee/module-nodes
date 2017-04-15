@@ -41,7 +41,6 @@ return [
 
 	],
 
-	Descriptor::REQUIRED => true,
 	Descriptor::REQUIRES => [ 'sites', 'users', 'registry' ],
 	Descriptor::TITLE => "Nodes"
 
